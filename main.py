@@ -1,2 +1,2 @@
-print("hej")
-print ("Hello there")
+from classes import *
+from functions import *
