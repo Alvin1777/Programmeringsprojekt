@@ -6,7 +6,7 @@ while True:
 
     if main_menu_choice == 1:
         print("Play Placeholder\n")
-        #Play()
+        Play()
         break
     elif main_menu_choice == 2:
         print("How To Play Placeholder\n")
