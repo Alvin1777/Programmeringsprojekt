@@ -1,8 +1,14 @@
+import time
+
 def QuitGame():
     print("Game Shutting Down...")
+    time.sleep(2)
+    print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
+
 
 def MainMenu():
     while True:
+        print("\n\n\n")
         print("----------------------------------------\n")
         print("            1.    Play")
         print("            2. How To Play")
@@ -28,6 +34,8 @@ def MainMenu():
                 break
             else:
                 print("Please Use Numbers To Choose One Of The Options Above\n")
+                time.sleep(2)
         except:
             print("Please Use Numbers To Choose One Of The Options Above\n")
-MainMenu()
+            time.sleep(2)
+
