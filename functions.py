@@ -1,5 +1,9 @@
 import time
 
+def HowToPlay():
+    print("This Game Is Based On A Trun Based Fighting System Where You Travel The World By Choosing One Of The Actions Given By The Game To Progress Futher.")
+    print("As You Level You Will Encounter New Bosses And Story Events.")
+    input("")
 def ShowCredits():
     print("")
 
@@ -28,7 +32,7 @@ def MainMenu():
                 break
             elif main_menu_choice == 2:
                 print("How To Play Placeholder\n")
-                #HowToPlay()
+                HowToPlay()
             elif main_menu_choice == 3:
                 print("Credits Placeholder\n")
                 ShowCredits()
