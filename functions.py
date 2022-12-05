@@ -1,5 +1,8 @@
 import time
 
+def ShowCredits():
+    print("")
+
 def QuitGame():
     print("Game Shutting Down...")
     time.sleep(2)
@@ -28,7 +31,7 @@ def MainMenu():
                 #HowToPlay()
             elif main_menu_choice == 3:
                 print("Credits Placeholder\n")
-                #Credits()
+                ShowCredits()
             elif main_menu_choice == 4:
                 QuitGame()
                 break
@@ -38,4 +41,5 @@ def MainMenu():
         except:
             print("Please Use Numbers To Choose One Of The Options Above\n")
             time.sleep(2)
+
 
