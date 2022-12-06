@@ -1,5 +1,6 @@
 import time
 from texts import *
+from art import *
 
 def ChooseCharacter():
     print("What Is Your Name Explorer?")
@@ -70,7 +71,8 @@ def QuitGame():
 
 def MainMenu():
     while True:
-        print("\n\n\n")
+        print("\n\n\n\n            PROJECT WHALENUT")
+        
         print("----------------------------------------\n")
         print("            1.    Play")
         print("            2. How To Play")
