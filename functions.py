@@ -6,6 +6,7 @@ def ChooseCharacter():
     player_name = input("-> ")
 
     while True:
+        print("\n\n\n\n\n\n\n\n\n")
         print("You May Choose Between Three Different Character With Three Different Backgrounds...\n")
         print("      ----------------------------------------\n")
         print("       1.   Nobleman, Choose To Learn More...")
@@ -17,7 +18,9 @@ def ChooseCharacter():
         print("\n\n\n")
 
         if character_choice == "1":
-            print("Stats and Backstory backstory 1")
+            print("\n\n\n\n\n\n\n\n\n")
+            print_backstory_1()
+            print("\n")
 
             confirm_character = input("Want To Use This Character? y/n -> ")
             if confirm_character == "y":
@@ -26,7 +29,9 @@ def ChooseCharacter():
             else:
                 print("")
         elif character_choice == "2":
-            print("Stats and Backstory backstory 2")
+            print("\n\n\n\n\n\n\n\n\n")
+            print_backstory_2()
+            print("\n")
 
             confirm_character = input("Want To Use This Character? y/n -> ")
             if confirm_character == "y":
@@ -35,7 +40,9 @@ def ChooseCharacter():
             else:
                 print("")
         elif character_choice == "3":
-            print("Stats and Backstory backstory 3")
+            print("\n\n\n\n\n\n\n\n\n")
+            print_backstory_3()
+            print("\n")
 
             confirm_character = input("Want To Use This Character? y/n -> ")
             if confirm_character == "y":
