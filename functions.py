@@ -1,4 +1,5 @@
 import time
+from texts import *
 
 def ChooseCharacter():
     print("What Is Your Name Explorer?")
