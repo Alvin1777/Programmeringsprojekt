@@ -70,15 +70,15 @@ def QuitGame():
 
 
 def MainMenu():
-    while True:
-        print("\n\n\n\n            PROJECT WHALENUT")
-        
-        print("----------------------------------------\n")
-        print("            1.    Play")
-        print("            2. How To Play")
-        print("            3.   Credits")
-        print("            4.    Quit\n")
-        print("----------------------------------------\n")
+    while True:        
+        print('''
+                                          ----------------------------------------\n
+                                                       1.    Play
+                                                       2. How To Play
+                                                       3.   Credits
+                                                       4.    Quit\n
+                                          ----------------------------------------\n
+        ''')
 
         try:
             main_menu_choice = int(input("What Is Your Action? -> "))
