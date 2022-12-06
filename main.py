@@ -2,18 +2,18 @@ from classes import *
 from functions import *
 from art import *
 
+print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
 PrintTitleScreen()
+print("\n\n\n\n")
 time.sleep(3)
 
 while True:
     main_menu_choice = MainMenu()
 
     if main_menu_choice == 1:
-        print("Play Placeholder\n")
         Play()
         break
     elif main_menu_choice == 2:
-        print("How To Play Placeholder\n")
         HowToPlay()
     elif main_menu_choice == 3:
         print("Credits Placeholder\n")

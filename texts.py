@@ -1,9 +1,13 @@
+from classes import *
+from functions import *
+from art import *
+
 def print_backstory_1():
     print ('''\n
     -----------------------------------------------------------------------------------------------------------\n
     The Knight
 
-    Your name and title: Sir Name the Dragon Slayer
+    Your name and title: Sir name the Dragon Slayer
 
     The son of a rich nobleman. Knighted by the king and now serving in his personal guard. 
     Lives in his father's castle. The castle has access to a big sleeping-chamber where he can rest. 

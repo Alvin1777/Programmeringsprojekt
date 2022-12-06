@@ -3,6 +3,7 @@ from texts import *
 from art import *
 
 def ChooseCharacter():
+
     print("What Is Your Name Explorer?")
     player_name = input("-> ")
 
@@ -10,7 +11,7 @@ def ChooseCharacter():
         print("\n\n\n\n\n\n\n\n\n")
         print("You May Choose Between Three Different Character With Three Different Backgrounds...\n")
         print("      ----------------------------------------\n")
-        print("       1.   Nobleman, Choose To Learn More...")
+        print("       1.   Knight, Choose To Learn More...")
         print("       2.   Blacksmith, Choose To Learn More...")
         print("       3.   Farmer, Choose To Learn More...\n")
         print("      ----------------------------------------\n")
