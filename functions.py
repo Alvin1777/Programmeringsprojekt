@@ -5,8 +5,15 @@ def ChooseCharacter():
     player_name = input("-> ")
 
     while True:
-        print("You May Choose Between Three Different Character With Three Different Backgrounds...")
-        character_choice = input("",player_name,", Choose Backstory -> ")
+        print("You May Choose Between Three Different Character With Three Different Backgrounds...\n")
+        print("      ----------------------------------------\n")
+        print("       1.   Nobleman, Choose To Learn More...")
+        print("       2.   Blacksmith, Choose To Learn More...")
+        print("       3.   Farmer, Choose To Learn More...\n")
+        print("      ----------------------------------------\n")
+        character_choice = input("Choose Backstory -> ")
+
+        print("\n\n\n")
 
         if character_choice == "1":
             print("Stats and Backstory backstory 1")
@@ -69,5 +76,3 @@ def MainMenu():
         except:
             print("Please Use Numbers To Choose One Of The Options Above\n")
             time.sleep(2)
-
-
