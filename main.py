@@ -1,5 +1,9 @@
 from classes import *
 from functions import *
+from art import *
+
+PrintTitleScreen()
+time.sleep(3)
 
 while True:
     main_menu_choice = MainMenu()
