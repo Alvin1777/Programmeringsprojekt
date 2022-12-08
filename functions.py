@@ -57,12 +57,13 @@ def Play():
     ChooseCharacter()
 
 def HowToPlay():
-    print("This Game Is Based On A Turn Based Fighting System Where You Travel The World By Choosing One Of The Actions Given By The Game To Progress Futher.")
-    print("As You Level You Will Encounter New Bosses And Story Events.")
-    input("")
+    print("\n This Game Is Based On A Turn Based Fighting System Where You Travel The World By Choosing One Of The Actions Given By The Game To Progress Futher.")
+    print("As You Level You Will Encounter New Bosses And Story Events. \n")
+    input("Press Enter To Continue")
 
 def ShowCredits():
-    print("")
+    print("\n Created by \n \n Alvin Söderberg \n Marcus Broman \n Axel Österberg \n")
+    input("Press Enter To Continue")
 
 def QuitGame():
     print("Game Shutting Down...")

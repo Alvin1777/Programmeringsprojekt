@@ -16,7 +16,6 @@ while True:
     elif main_menu_choice == 2:
         HowToPlay()
     elif main_menu_choice == 3:
-        print("Credits Placeholder\n")
         ShowCredits()
     elif main_menu_choice == 4:
         QuitGame()
