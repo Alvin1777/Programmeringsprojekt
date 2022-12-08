@@ -1,9 +1,9 @@
 
 
 class Player():
-    def __init__(self, player_name, character_choise, player_house, player_health):
+    def __init__(self, player_name, character, player_house, player_health):
         self.player_name = player_name
-        self.character = character_choise
+        self.character = character
         self.player_house = player_house
         self.player_health = player_health
 
@@ -13,8 +13,8 @@ class weapons():
 
 
 class items():
-    def __init__(self, itemname):
-        self.item_name = itemname
+    def __init__(self, item_name):
+        self.item_name = item_name
 
 
 class enemy():
