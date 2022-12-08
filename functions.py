@@ -62,7 +62,15 @@ def HowToPlay():
     input("Press Enter To Continue")
 
 def ShowCredits():
-    print("\n Created by \n \n Alvin Söderberg \n Marcus Broman \n Axel Österberg \n")
+    print('''
+                                                        Created by:
+
+                                                        Alvin Söderberg
+                                                        Marcus Broman
+                                                        Axel Österberg
+
+    ''')
+
     input("Press Enter To Continue")
 
 def QuitGame():
@@ -74,12 +82,12 @@ def QuitGame():
 def MainMenu():
     while True:        
         print('''
-                                          ----------------------------------------\n
+                                          ----------------------------------------
                                                        1.    Play
                                                        2. How To Play
                                                        3.   Credits
-                                                       4.    Quit\n
-                                          ----------------------------------------\n
+                                                       4.    Quit
+                                          ----------------------------------------
         ''')
 
         try:
