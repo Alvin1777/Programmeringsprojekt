@@ -20,35 +20,48 @@ def ChooseCharacter():
         print("\n\n\n")
 
         if character_choice == "1":
+            character = "Knight"
+            player_house = "Castle"
             print("\n\n\n\n\n\n\n\n\n")
             print_backstory_1()
             print("\n")
 
             confirm_character = input("Want To Use This Character? y/n -> ")
             if confirm_character == "y":
+                player = Player(player_name, character, player_house)
+                player.print_info()
                 print("Character Confirmed...")
                 break
             else:
                 print("")
         elif character_choice == "2":
+            character = "Blacksmith"
+            player_house = "house"
             print("\n\n\n\n\n\n\n\n\n")
             print_backstory_2()
             print("\n")
 
             confirm_character = input("Want To Use This Character? y/n -> ")
             if confirm_character == "y":
+                player = Player(player_name, character, player_house)
+                player.print_info()
                 print("Character Confirmed...")
                 break
             else:
                 print("")
         elif character_choice == "3":
+            character = "Farmer"
+            player_house = "Barn"
             print("\n\n\n\n\n\n\n\n\n")
             print_backstory_3()
             print("\n")
 
             confirm_character = input("Want To Use This Character? y/n -> ")
             if confirm_character == "y":
+                player = Player(player_name, character, player_house)
+                player.print_info()
                 print("Character Confirmed...")
+                
                 break
             else:
                 print("")

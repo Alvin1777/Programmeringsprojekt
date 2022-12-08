@@ -1,11 +1,13 @@
 
 
 class Player():
-    def __init__(self, player_name, character, player_house, player_health):
+    def __init__(self, player_name, character, player_house):
         self.player_name = player_name
         self.character = character
         self.player_house = player_house
-        self.player_health = player_health
+
+    def print_info(self):
+        print("name: ",self.player_name,"character choise: ", self.character, "player house : ",self.player_house)
 
 class weapons():
     def __init__(self, weapon_name):
