@@ -113,7 +113,41 @@ def MainMenu():
             time.sleep(2)
 
 def GenerateRoom():
-    rand
+    random_room_int = rand.randint(2)
+
+    if random_room_int == 1:
+        print("Chest Room")
+        print("You recived an item.. *PLACEHOLDER* ")
+
+    elif random_room_int == 2:
+        print("Monster Room")
+        print("FIGHT MONSTER *PLACEHOLDER*")
+
+def ChooseDirection():
+    while True:
+        print("Where do you wanna go?")
+        print('''
+            1: Left 
+            2: Forward
+            3: Right
+            4: Go back
+            ''')
+
+        direction_choice = input("-> ")
+
+        if direction_choice == "1":
+            print("You choose to turn right...")
+            GenerateRoom()
+        elif direction_choice == "2":
+            print("You choose to go forward...")
+            GenerateRoom()
+        elif direction_choice == "3":
+            print("You choose to turn left...")
+            GenerateRoom()
+        elif direction_choice == "4":
+            print("Your turn back...")
+            break
+
 
 def MovePlayer():
     while True:
@@ -126,7 +160,8 @@ def MovePlayer():
 
         if action_to_do == "1":
             print("You choose to explore...")
-            GenerateRoom()
+            ChooseDirection()
         elif action_to_do == "2":
             print("You choose to go home...")
             Home()
+            break
