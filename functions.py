@@ -179,6 +179,7 @@ def MovePlayer():
 
 def Play():
     ChooseCharacter()
+    MovePlayer()
 
 def HowToPlay():
     print("\n This Game Is Based On A Turn Based Fighting System Where You Travel The World By Choosing One Of The Actions Given By The Game To Progress Futher.")
