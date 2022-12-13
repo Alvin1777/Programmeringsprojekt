@@ -37,7 +37,7 @@ def Home():
                 4. Go back out in the wild
                 ----------------------------------------        
         ''')
-        home_action_choise = input('''Decide what to do -->  ''')
+        home_action_choise = int(input('''Decide what to do -->  '''))
 
         if home_action_choise == 1:
             print ("PLACEHOLDER AT HOUSE")

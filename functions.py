@@ -77,7 +77,7 @@ def ChooseCharacter():
             input("An Error Was Detected. \nPress Enter To Try Again. ")
        
 def GenerateRoom():
-    random_room_int = rand.randint(2)
+    random_room_int = rand.randint(1, 3)
 
     if random_room_int == 1:
         print("Chest Room")
@@ -115,20 +115,20 @@ def ChooseDirection():
 Placeholder_House = "PLACEHOLDER_HOUSE"
 def Home():
 
-    #if  charachter == 1:
-    time.sleep(2)
-    at_home_castle()
-    time.sleep(2)
+    # #if  charachter == 1:
+    # time.sleep(2)
+    # at_home_castle()
+    # time.sleep(2)
 
-    #if charachter == 2
-    time.sleep(2)
-    at_home_house()
-    time.sleep(2)
+    # #if charachter == 2
+    # time.sleep(2)
+    # at_home_house()
+    # time.sleep(2)
 
-    #if charachter == 3
-    time.sleep(2)
-    at_home_village() 
-    time.sleep(2)
+    # #if charachter == 3
+    # time.sleep(2)
+    # at_home_village() 
+    # time.sleep(2)
 
 
     while True:
@@ -143,7 +143,7 @@ def Home():
                 4. Go back out in the wild
                 ----------------------------------------        
         ''')
-        home_action_choise = input('''Decide what to do -->  ''')
+        home_action_choise = int(input('''Decide what to do -->  '''))
 
         if home_action_choise == 1:
             print ("PLACEHOLDER AT HOUSE")
@@ -175,7 +175,7 @@ def MovePlayer():
         elif action_to_do == "2":
             print("You choose to go home...")
             Home()
-            break         
+                    
 
 def Play():
     ChooseCharacter()
