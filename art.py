@@ -13,3 +13,27 @@ def PrintTitleScreen():
                                                         BreezStudios®
     -------------------------------------------------------------------------------------------------------------------------------------
     ''')
+
+
+def at_home_castle():
+    print ('''
+    
+    CASTLE ARTWORK PLACEHOLDER
+    
+    ''')
+
+
+def at_home_house():
+    print('''
+    
+    HOUSE/TOWN ARTWORK PLACEHOLDER
+    
+    ''')
+
+
+def at_home_village():
+    print ('''
+    
+    VILLAGE ARTWORK PLACEHOLDER
+    
+    ''')
