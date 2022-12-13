@@ -76,52 +76,6 @@ def ChooseCharacter():
         except:
             input("An Error Was Detected. \nPress Enter To Try Again. ")
        
-            
-
-def Play():
-    ChooseCharacter()
-
-def HowToPlay():
-    print("\n This Game Is Based On A Turn Based Fighting System Where You Travel The World By Choosing One Of The Actions Given By The Game To Progress Futher.")
-    print("As You Level You Will Encounter New Bosses And Story Events. \n")
-    input("Press Enter To Continue")
-
-def ShowCredits():
-    print('''
-                                                        Created by:
-
-                                                        Alvin Söderberg
-                                                        Marcus Broman
-                                                        Axel Österberg
-
-    ''')
-
-    input("Press Enter To Continue")
-
-def QuitGame():
-    print("Game Shutting Down...")
-    time.sleep(2)
-    print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
-
-
-def MainMenu():
-    while True:        
-        print('''
-                                          ----------------------------------------
-                                                       1.    Play
-                                                       2. How To Play
-                                                       3.   Credits
-                                                       4.    Quit
-                                          ----------------------------------------
-        ''')
-
-        try:
-            main_menu_choice = int(input("What Is Your Action? -> "))
-            return main_menu_choice
-        except:
-            print("Please Use Numbers To Choose One Of The Options Above\n")
-            time.sleep(2)
-
 def GenerateRoom():
     random_room_int = rand.randint(2)
 
@@ -173,5 +127,51 @@ def MovePlayer():
             ChooseDirection()
         elif action_to_do == "2":
             print("You choose to go home...")
-            Home()
-            break
+            
+            break         
+
+def Play():
+    ChooseCharacter()
+
+def HowToPlay():
+    print("\n This Game Is Based On A Turn Based Fighting System Where You Travel The World By Choosing One Of The Actions Given By The Game To Progress Futher.")
+    print("As You Level You Will Encounter New Bosses And Story Events. \n")
+    input("Press Enter To Continue")
+
+def ShowCredits():
+    print('''
+                                                        Created by:
+
+                                                        Alvin Söderberg
+                                                        Marcus Broman
+                                                        Axel Österberg
+
+    ''')
+
+    input("Press Enter To Continue")
+
+def QuitGame():
+    print("Game Shutting Down...")
+    time.sleep(2)
+    print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
+
+
+def MainMenu():
+    while True:        
+        print('''
+                                          ----------------------------------------
+                                                       1.    Play
+                                                       2. How To Play
+                                                       3.   Credits
+                                                       4.    Quit
+                                          ----------------------------------------
+        ''')
+
+        try:
+            main_menu_choice = int(input("What Is Your Action? -> "))
+            return main_menu_choice
+        except:
+            print("Please Use Numbers To Choose One Of The Options Above\n")
+            time.sleep(2)
+
+
