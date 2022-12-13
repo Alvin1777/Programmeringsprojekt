@@ -7,6 +7,7 @@ import random as rand
 def ChooseCharacter():
     global player
     global player_name
+    global player_house
     print("What Is Your Name Explorer?")
     player_name = input("-> ")
 
@@ -113,7 +114,7 @@ def ChooseDirection():
             print("Your turn back...")
             break
 
-Placeholder_House = "PLACEHOLDER_HOUSE"
+
 def Home():
 
     if player.character == "Knight":
@@ -141,7 +142,7 @@ def Home():
 
     while True:
         print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
-        print("You are home at your ", Placeholder_House)
+        print("You are home at your", player_house)
         print ("\n\n")
         print('''You can now decide what to do at home...
                 ----------------------------------------
@@ -152,20 +153,20 @@ def Home():
                 5. Quit and save
                 ----------------------------------------        
         ''')
-        home_action_choise = int(input('''Decide what to do -->  '''))
+        home_action_choice = int(input('''Decide what to do -->  '''))
 
-        if home_action_choise == 1:
+        if home_action_choice == 1:
             print ("PLACEHOLDER AT HOUSE")
 
-        elif home_action_choise == 2:
+        elif home_action_choice == 2:
             print ("PLACEHOLDER AT BLACKSMITH")
 
-        elif home_action_choise == 3:
+        elif home_action_choice == 3:
             print ("PLACEHOLDER AT ITEM SHOP")
-        elif home_action_choise == 4:
+        elif home_action_choice == 4:
             print("Your going out")
             break
-        elif home_action_choise == 5:
+        elif home_action_choice == 5:
             QuitGame()
         else:
             print("")
@@ -173,17 +174,17 @@ def Home():
 
 def MovePlayer():
     while True:
-        print("What Is Your Action ",player_name,"?")
+        print("What Is Your Action", player_name,"?")
         print('''
             1. Explore the world.
             2. Go Home.
             ''')
-        action_to_do = input("-> ")
+        input_what_to_do = input("-> ")
 
-        if action_to_do == "1":
+        if input_what_to_do == "1":
             print("You choose to explore...")
             ChooseDirection()
-        elif action_to_do == "2":
+        elif input_what_to_do == "2":
             print("You choose to go home...")
             Home()
                     
@@ -204,7 +205,6 @@ def ShowCredits():
                                                         Alvin Söderberg
                                                         Marcus Broman
                                                         Axel Österberg
-
     ''')
 
     input("Press Enter To Continue")
