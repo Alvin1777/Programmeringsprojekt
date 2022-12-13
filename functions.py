@@ -149,6 +149,7 @@ def Home():
                 2. You can go to the blacksmith
                 3. You can go to the item shop
                 4. Go back out in the wild
+                5. Quit and save
                 ----------------------------------------        
         ''')
         home_action_choise = int(input('''Decide what to do -->  '''))
@@ -164,6 +165,8 @@ def Home():
         elif home_action_choise == 4:
             print("Your going out")
             break
+        elif home_action_choise == 5:
+            QuitGame()
         else:
             print("")
 
@@ -210,6 +213,7 @@ def QuitGame():
     print("Game Shutting Down...")
     time.sleep(2)
     print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
+    exit()
 
 
 def MainMenu():
