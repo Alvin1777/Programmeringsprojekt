@@ -34,6 +34,7 @@ def Home():
                 1. You can stay in your house and rest
                 2. You can go to the blacksmith
                 3. You can go to the item shop
+                4. Go back out in the wild
                 ----------------------------------------        
         ''')
         home_action_choise = input('''Decide what to do -->  ''')
@@ -46,7 +47,9 @@ def Home():
 
         elif home_action_choise == 3:
             print ("PLACEHOLDER AT ITEM SHOP")
-
+        elif home_action_choise == 4:
+            print("Your going out")
+            break
         else:
             print("")
     
