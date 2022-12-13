@@ -1,9 +1,11 @@
 import time
 from texts import *
 from art import *
+import random as rand
 
 
 def ChooseCharacter():
+    global player_name
     print("What Is Your Name Explorer?")
     player_name = input("-> ")
 
@@ -110,3 +112,21 @@ def MainMenu():
             print("Please Use Numbers To Choose One Of The Options Above\n")
             time.sleep(2)
 
+def GenerateRoom():
+    rand
+
+def MovePlayer():
+    while True:
+        print("What Is Your Action ",player_name,"?")
+        print('''
+            1. Explore the world.
+            2. Go Home.
+            ''')
+        action_to_do = input("-> ")
+
+        if action_to_do == "1":
+            print("You choose to explore...")
+            GenerateRoom()
+        elif action_to_do == "2":
+            print("You choose to go home...")
+            Home()
