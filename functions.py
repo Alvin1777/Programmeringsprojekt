@@ -2,8 +2,8 @@ import time
 from texts import *
 from art import *
 
-def ChooseCharacter():
 
+def ChooseCharacter():
     print("What Is Your Name Explorer?")
     player_name = input("-> ")
 
@@ -87,3 +87,4 @@ def MainMenu():
         except:
             print("Please Use Numbers To Choose One Of The Options Above\n")
             time.sleep(2)
+
