@@ -20,35 +20,48 @@ def ChooseCharacter():
         print("\n\n\n")
 
         if character_choice == "1":
+            character = "Knight"
+            player_house = "Castle"
             print("\n\n\n\n\n\n\n\n\n")
             print_backstory_1()
             print("\n")
 
             confirm_character = input("Want To Use This Character? y/n -> ")
             if confirm_character == "y":
+                player = Player(player_name, character, player_house)
+                player.print_info()
                 print("Character Confirmed...")
                 break
             else:
                 print("")
         elif character_choice == "2":
+            character = "Blacksmith"
+            player_house = "house"
             print("\n\n\n\n\n\n\n\n\n")
             print_backstory_2()
             print("\n")
 
             confirm_character = input("Want To Use This Character? y/n -> ")
             if confirm_character == "y":
+                player = Player(player_name, character, player_house)
+                player.print_info()
                 print("Character Confirmed...")
                 break
             else:
                 print("")
         elif character_choice == "3":
+            character = "Farmer"
+            player_house = "Barn"
             print("\n\n\n\n\n\n\n\n\n")
             print_backstory_3()
             print("\n")
 
             confirm_character = input("Want To Use This Character? y/n -> ")
             if confirm_character == "y":
+                player = Player(player_name, character, player_house)
+                player.print_info()
                 print("Character Confirmed...")
+                
                 break
             else:
                 print("")
@@ -57,12 +70,21 @@ def Play():
     ChooseCharacter()
 
 def HowToPlay():
-    print("This Game Is Based On A Turn Based Fighting System Where You Travel The World By Choosing One Of The Actions Given By The Game To Progress Futher.")
-    print("As You Level You Will Encounter New Bosses And Story Events.")
-    input("")
+    print("\n This Game Is Based On A Turn Based Fighting System Where You Travel The World By Choosing One Of The Actions Given By The Game To Progress Futher.")
+    print("As You Level You Will Encounter New Bosses And Story Events. \n")
+    input("Press Enter To Continue")
 
 def ShowCredits():
-    print("")
+    print('''
+                                                        Created by:
+
+                                                        Alvin Söderberg
+                                                        Marcus Broman
+                                                        Axel Österberg
+
+    ''')
+
+    input("Press Enter To Continue")
 
 def QuitGame():
     print("Game Shutting Down...")
@@ -73,12 +95,12 @@ def QuitGame():
 def MainMenu():
     while True:        
         print('''
-                                          ----------------------------------------\n
+                                          ----------------------------------------
                                                        1.    Play
                                                        2. How To Play
                                                        3.   Credits
-                                                       4.    Quit\n
-                                          ----------------------------------------\n
+                                                       4.    Quit
+                                          ----------------------------------------
         ''')
 
         try:
