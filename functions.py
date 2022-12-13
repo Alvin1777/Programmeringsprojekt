@@ -5,6 +5,7 @@ import random as rand
 
 
 def ChooseCharacter():
+    global player
     global player_name
     print("What Is Your Name Explorer?")
     player_name = input("-> ")
@@ -114,6 +115,13 @@ def ChooseDirection():
 
 Placeholder_House = "PLACEHOLDER_HOUSE"
 def Home():
+
+    if player.character == "Knight":
+        at_home_castle()
+    elif player.character == "Blacksmith":
+        at_home_house()
+    elif player.character == "Farmer":
+        at_home_village()
 
     # #if  charachter == 1:
     # time.sleep(2)
