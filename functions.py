@@ -4,6 +4,10 @@ from art import *
 import random as rand
 from classes import *
 
+# PLACEHOLDER VAL
+
+player_damage = 5
+
 #Objects
 
 SkeletonEnemy = enemy("Skeleton", 20, 5, False)
@@ -11,6 +15,7 @@ ZombieEnemy = enemy("Zombie", 30, 4, False)
 OrcEnemy = enemy("Orc", 10, 10, False)
 GoblinEnemy = enemy("Goblin", 15, 7, False)
 BatEnemy = enemy("Bat",2, 2, False )
+SpiderEnemy = enemy("Spider", 10, 5, False)
 
 #Functions
 
@@ -40,13 +45,15 @@ def ChooseCharacter():
             if character_choice == 1:
                 character = "Knight"
                 player_house = "Castle"
+                title = "Sir"
+                surname = "the Dragon Slayer"
                 print("\n\n\n\n\n\n\n\n\n")
                 print_backstory_1()
                 print("\n")
 
                 confirm_character = input("Want To Use This Character? y/n -> ")
                 if confirm_character == "y":
-                    player = Player(player_name, character, player_house)
+                    player = Player(player_name, character, player_house, title, surname, 30)
                     player.print_info()
                     print("Character Confirmed...")
                     break
@@ -55,13 +62,15 @@ def ChooseCharacter():
             elif character_choice == 2:
                 character = "Blacksmith"
                 player_house = "house"
+                title = ""
+                surname = "Ironhill"
                 print("\n\n\n\n\n\n\n\n\n")
                 print_backstory_2()
                 print("\n")
 
                 confirm_character = input("Want To Use This Character? y/n -> ")
                 if confirm_character == "y":
-                    player = Player(player_name, character, player_house)
+                    player = Player(player_name, character, player_house, title, surname, 30)
                     player.print_info()
                     print("Character Confirmed...")
                     break
@@ -70,13 +79,15 @@ def ChooseCharacter():
             elif character_choice == 3:
                 character = "Farmer"
                 player_house = "Barn"
+                title = ""
+                surname = "Fairbairns"
                 print("\n\n\n\n\n\n\n\n\n")
                 print_backstory_3()
                 print("\n")
 
                 confirm_character = input("Want To Use This Character? y/n -> ")
                 if confirm_character == "y":
-                    player = Player(player_name, character, player_house)
+                    player = Player(player_name, character, player_house, title, surname, 30)
                     player.print_info()
                     print("Character Confirmed...")
                     
@@ -88,6 +99,46 @@ def ChooseCharacter():
         except:
             input("An Error Was Detected. \nPress Enter To Try Again. ")
        
+def RandomMonster():
+    random_monster_int = rand.randint(1, 6)
+
+    if random_monster_int == 1:
+        return SkeletonEnemy
+    elif random_monster_int == 2:
+        return ZombieEnemy
+    elif random_monster_int == 3:
+        return OrcEnemy
+    elif random_monster_int == 4:
+        return GoblinEnemy
+    elif random_monster_int == 5:
+        return BatEnemy
+    elif random_monster_int == 6:
+        return SpiderEnemy
+
+def FightMonster():
+    monster_type = RandomMonster()
+    print("A ",monster_type.enemy_name," appeard!")
+
+    while True:
+        if monster_type.enemy_health > 0:
+            print("What is action",player.PrintPlayerName())
+            print("1. Strike, 2. Block, 3. Flee")
+            fight_input = int(input("-> "))
+
+            if fight_input == 1:
+                print("You strike the enemy!")
+                monster_type.enemy_health -= player_damage
+                
+            enemy_strike_int = rand.randint(1,2)
+
+            if enemy_strike_int == 1:
+                print("The enemy hit you!")
+                player.player_health -= monster_type.enemy_damage
+        else:
+            print("You Slain The Enemy!")
+            break
+
+
 def GenerateRoom():
     random_room_int = rand.randint(1, 3)
 
@@ -96,8 +147,11 @@ def GenerateRoom():
         print("You recived an item.. *PLACEHOLDER* ")
 
     elif random_room_int in (2, 3):
-        print("Monster Room")
-        print("FIGHT MONSTER *PLACEHOLDER*")
+        FightMonster()
+
+        
+
+
 
 def ChooseDirection():
     while True:
