@@ -85,7 +85,7 @@ def GenerateRoom():
         print("Chest Room")
         print("You recived an item.. *PLACEHOLDER* ")
 
-    elif random_room_int == 2:
+    elif random_room_int in (2, 3):
         print("Monster Room")
         print("FIGHT MONSTER *PLACEHOLDER*")
 
@@ -142,7 +142,7 @@ def Home():
 
     while True:
         print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
-        print("You are home at your", player_house)
+        print("You are home at your", player.player_house)
         print ("\n\n")
         print('''You can now decide what to do at home...
                 ----------------------------------------
