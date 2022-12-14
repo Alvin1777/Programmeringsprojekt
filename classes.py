@@ -7,7 +7,7 @@ class Player():
         self.player_house = player_house
 
     def print_info(self):
-        print("name: ",self.player_name,"character choise: ", self.character, "player house : ",self.player_house)
+        print("name: ",self.player_name,"character choice: ", self.character, "player house : ",self.player_house)
 
 class weapons():
     def __init__(self, weapon_name):
@@ -20,7 +20,9 @@ class items():
 
 
 class enemy():
-    def __init__(self, enemy_name, enemy_health):
+    def __init__(self, enemy_name, enemy_health, enemy_damage, is_boss):
         self.enemy_name = enemy_name
         self.enemy_health = enemy_health
+        self.enemy_damage = enemy_damage
+        self.enemy_is_boss = is_boss
         

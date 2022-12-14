@@ -2,7 +2,17 @@ import time
 from texts import *
 from art import *
 import random as rand
+from classes import *
 
+#Objects
+
+SkeletonEnemy = enemy("Skeleton", 20, 5, False)
+ZombieEnemy = enemy("Zombie", 30, 4, False)
+OrcEnemy = enemy("Orc", 10, 10, False)
+GoblinEnemy = enemy("Goblin", 15, 7, False)
+BatEnemy = enemy("Bat",2, 2, False )
+
+#Functions
 
 def ChooseCharacter():
     global player
