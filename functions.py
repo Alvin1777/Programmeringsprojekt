@@ -4,6 +4,7 @@ from art import *
 import random as rand
 from classes import *
 
+
 # PLACEHOLDER VAL
 
 player_damage = 5
@@ -231,6 +232,7 @@ def Home():
             print("Your going out")
             break
         elif home_action_choice == 5:
+            
             QuitGame()
         else:
             print("")
