@@ -5,11 +5,6 @@ import random as rand
 from classes import *
 
 
-# PLACEHOLDER VAL
-
-player_damage = 5
-inventory = ["hands"]
-equippedItem = "hands"
 
 #Objects
 
@@ -30,8 +25,16 @@ DanishAxeWeapon = weapons("Danish axe", 20, 0.1, 10)
 BattleAxeWeapon = weapons("Battle axe", 2, 6, 60)
 GolokSwordWeapon = weapons("Golok sword", 0.5, 5.5, 60)
 DaodacSwordWeapon = weapons("Daodac Sword", 1, 8, 95)
+DefaultDaggerWeapon = weapons("Rusty dagger", 3, 1, 1)
 
+# PLACEHOLDER VAL
 
+player_damage = 5
+inventory = [DefaultDaggerWeapon]
+equippedItem = inventory[0]
+item_shop_list_all = [SteelSwordWeapon, WoodSwordWeapon, AtgeirSpearWeapon, YariSpearWeapon, DanishAxeWeapon, BattleAxeWeapon, GolokSwordWeapon, DaodacSwordWeapon]
+item_shop_list_1 = [SteelSwordWeapon, WoodSwordWeapon, AtgeirSpearWeapon, YariSpearWeapon]
+item_shop_list_2 = [DanishAxeWeapon, BattleAxeWeapon, GolokSwordWeapon, DaodacSwordWeapon]
 
 #Functions
 
@@ -119,12 +122,15 @@ def ChooseCharacter():
             input("An Error Was Detected. \nPress Enter To Try Again. ")
        
 def openInventory():
+    global equippedItem
     while True:
-        print(inventory, equippedItem)
+        for items in inventory:
+            print(items.weapon_name, end=", ")
+        print(equippedItem.weapon_name)
         inventory_choice = int(input("1: Equip Item, 2: Go Back -> "))
 
         if inventory_choice == 1:
-            print("This is your current equipped item: ",equippedItem)
+            print("This is your current equipped item: ",equippedItem.weapon_name)
             print(inventory)
             itemToEquip = int(input("Choose one of the slots, starting with 1 -> "))
             itemToEquip -= 1
@@ -134,6 +140,11 @@ def openInventory():
             print("You go back...\n")
             break
 
+def addItemToInventory(itemToAdd):
+    if len(inventory) < player.inventory_size:
+        inventory.append(itemToAdd)
+    else:
+        print("Can't pick up the item. Your inventory is full")
 
 def RandomMonster():
     random_monster_int = rand.randint(1, 6)
@@ -163,7 +174,7 @@ def FightMonster():
 
             if fight_input == 1:
                 print("You strike the enemy!")
-                monster_type.enemy_health -= player_damage
+                monster_type.enemy_health -= equippedItem.weapon_damage
                 
             enemy_strike_int = rand.randint(1,2)
 
@@ -254,7 +265,7 @@ def Home():
             blacksmith()
 
         elif home_action_choice == 3:
-            blacksmith()
+            item_shop()
 
         elif home_action_choice == 4:
             print("Your going out")
@@ -297,7 +308,26 @@ def blacksmith():
 
 def item_shop():
     while True:
-        print ("")
+        print("Look at the items to buy: 1, Leave: 2")
+        item_menu_choice = int(input("-> "))
+
+        if item_menu_choice == 1:
+            print ("Welcome to the item shop")
+            print("All items that are available: ")
+            for items in item_shop_list_1:
+                print(items.weapon_name, end=": ")
+                print(items.weapon_value, end=" Coins, ")
+            print()
+            for items_2 in item_shop_list_2:
+                print(items_2.weapon_name, end=": ")
+                print(items_2.weapon_value, end=" Coins, ")
+            print()
+            itemToBuy = int(input("Choose What Item To Buy -> "))
+            itemToBuy -= 1
+
+            addItemToInventory(item_shop_list_all[itemToBuy])
+        elif item_menu_choice == 2:
+            break
 
 def MovePlayer():
     while True:
