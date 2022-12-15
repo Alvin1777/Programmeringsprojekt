@@ -27,14 +27,24 @@ GolokSwordWeapon = weapons("Golok sword", 0.5, 5.5, 60)
 DaodacSwordWeapon = weapons("Daodac Sword", 1, 8, 95)
 DefaultDaggerWeapon = weapons("Rusty dagger", 3, 1, 1)
 
+#Items
+
+potatoItem = items("Potato", 5, True, 2)
+beefItem = items("Beef", 10, True, 5)
+healingPoitionItem = items("Healing potion", 100, True, 100)
+bronzeArtifactItem = items("Bronze artifact", 50, False, 0)
+silverArtifactItem = items("Silver artifact", 100, False, 0)
+goldArtifactItem = items("Gold artifact", 200, False, 0)
+
 # PLACEHOLDER VAL
 
 player_damage = 5
 inventory = [DefaultDaggerWeapon]
 equippedItem = inventory[0]
-item_shop_list_all = [SteelSwordWeapon, WoodSwordWeapon, AtgeirSpearWeapon, YariSpearWeapon, DanishAxeWeapon, BattleAxeWeapon, GolokSwordWeapon, DaodacSwordWeapon]
-item_shop_list_1 = [SteelSwordWeapon, WoodSwordWeapon, AtgeirSpearWeapon, YariSpearWeapon]
-item_shop_list_2 = [DanishAxeWeapon, BattleAxeWeapon, GolokSwordWeapon, DaodacSwordWeapon]
+blacksmith_item_list_all = [SteelSwordWeapon, WoodSwordWeapon, AtgeirSpearWeapon, YariSpearWeapon, DanishAxeWeapon, BattleAxeWeapon, GolokSwordWeapon, DaodacSwordWeapon]
+blacksmith_item_list_1 = [SteelSwordWeapon, WoodSwordWeapon, AtgeirSpearWeapon, YariSpearWeapon]
+blacksmith_item_list_2 = [DanishAxeWeapon, BattleAxeWeapon, GolokSwordWeapon, DaodacSwordWeapon]
+item_shop_item_list = []
 player_bank = 100
 full_health = 30
 chest_list = []
@@ -156,7 +166,7 @@ def addItemToInventory(itemToAdd):
 def getRandomWeapon():
     rand_weapon_int = rand.randint(0, 8)
 
-    randomWeapon = item_shop_list_all[rand_weapon_int]
+    randomWeapon = blacksmith_item_list_all[rand_weapon_int]
 
     return randomWeapon
 
@@ -213,6 +223,7 @@ def FightMonster():
             print("\n\nYou Slain The Enemy!")
             print("You earned ",money_to_earn," coins!")
             print("Your bank balance is now ",player_bank," coins!")
+            time.sleep(2)
             break
 
 def chestRoom():
@@ -316,7 +327,7 @@ def Home():
             blacksmith()
 
         elif home_action_choice == 3:
-            item_shop()
+            blacksmith()
 
         elif home_action_choice == 4:
             print("Your going out")
@@ -391,8 +402,35 @@ def at_house():
             print ("")
 
 def blacksmith():
+    global player_bank
     while True:
-        print ("")
+        print("Look at the weapons/armour to buy: 1, Leave: 2")
+        item_menu_choice = int(input("-> "))
+
+        if item_menu_choice == 1:
+            print ("Welcome to the blacksmith")
+            print("Your bank balance: ",player_bank," coins")
+            print("All items that are available: ")
+            for items in blacksmith_item_list_1:
+                print(items.weapon_name, end=": ")
+                print(items.weapon_value, end=" Coins, ")
+            print()
+            for items_2 in blacksmith_item_list_2:
+                print(items_2.weapon_name, end=": ")
+                print(items_2.weapon_value, end=" Coins, ")
+            print()
+            itemToBuy = int(input("Choose What Item To Buy -> "))
+            itemToBuy -= 1
+            itemToBuyObject = blacksmith_item_list_all[itemToBuy]
+
+            if player_bank >=  itemToBuyObject.weapon_value:
+                player_bank -= itemToBuyObject.weapon_value
+                addItemToInventory(blacksmith_item_list_all[itemToBuy])
+                print("Your balance is now ",player_bank," coins!")
+            else:
+                print("Your bank balance is to low...")
+        elif item_menu_choice == 2:
+            break
 
 def item_shop():
     global player_bank
@@ -404,21 +442,21 @@ def item_shop():
             print ("Welcome to the item shop")
             print("Your bank balance: ",player_bank," coins")
             print("All items that are available: ")
-            for items in item_shop_list_1:
-                print(items.weapon_name, end=": ")
-                print(items.weapon_value, end=" Coins, ")
+            for items in item_shop_item_list:
+                print(items.item_name, end=": ")
+                print(items.item_value, end=" Coins, ")
             print()
-            for items_2 in item_shop_list_2:
-                print(items_2.weapon_name, end=": ")
-                print(items_2.weapon_value, end=" Coins, ")
+            for items_2 in item_shop_item_list:
+                print(items_2.item_name, end=": ")
+                print(items_2.item_value, end=" Coins, ")
             print()
             itemToBuy = int(input("Choose What Item To Buy -> "))
             itemToBuy -= 1
-            itemToBuyObject = item_shop_list_all[itemToBuy]
+            itemToBuyObject = item_shop_item_list[itemToBuy]
 
-            if player_bank >=  itemToBuyObject.weapon_value:
-                player_bank -= itemToBuyObject.weapon_value
-                addItemToInventory(item_shop_list_all[itemToBuy])
+            if player_bank >=  itemToBuyObject.item_value:
+                player_bank -= itemToBuyObject.item_value
+                addItemToInventory(item_shop_item_list[itemToBuy])
                 print("Your balance is now ",player_bank," coins!")
             else:
                 print("Your bank balance is to low...")
@@ -486,5 +524,3 @@ def MainMenu():
         except:
             print("Please Use Numbers To Choose One Of The Options Above\n")
             time.sleep(2)
-
-
