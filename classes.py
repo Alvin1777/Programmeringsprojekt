@@ -17,13 +17,18 @@ class Player():
         print(self.character_name_title, self.player_name, self.character_name_surname)
 
 class weapons():
-    def __init__(self, weapon_name):
+    def __init__(self, weapon_name, attack_speed, weapon_damage, weapon_value):
         self.weapon_name = weapon_name
-
+        self.attack_speed = attack_speed
+        self.weapon_damage = weapon_damage
+        self.weapon_value = weapon_value
 
 class items():
-    def __init__(self, item_name):
+    def __init__(self, item_name, item_value, isHealingItem, healing_power):
         self.item_name = item_name
+        self.item_value = item_value
+        self.isHealingItem = isHealingItem
+        self.healing_power = healing_power
 
 
 class enemy():
