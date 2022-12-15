@@ -1,13 +1,14 @@
 
 
 class Player():
-    def __init__(self, player_name, player_character, player_house, character_name_title, character_name_surname, player_health):
+    def __init__(self, player_name, player_character, player_house, character_name_title, character_name_surname, player_health, player_level):
         self.player_name = player_name
         self.character = player_character
         self.player_house = player_house
         self.character_name_title = character_name_title
         self.character_name_surname = character_name_surname
         self.player_health = player_health
+        self.player_level = player_level
 
     def print_info(self):
         print("name: ",self.player_name,"character choice: ", self.character, "player house : ",self.player_house)
