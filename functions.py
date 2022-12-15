@@ -222,10 +222,11 @@ def Home():
             at_house()
 
         elif home_action_choice == 2:
-            print ("PLACEHOLDER AT BLACKSMITH")
+            blacksmith()
 
         elif home_action_choice == 3:
-            print ("PLACEHOLDER AT ITEM SHOP")
+            blacksmith()
+
         elif home_action_choice == 4:
             print("Your going out")
             break
@@ -237,22 +238,37 @@ def Home():
 
 
 def at_house():
-    print ("Welcome home to your", player.player_house)
-    print ("Choose what to do at your", player_house,",", player_name)
-    print ('''
-            ----------------------------------------
-            1. Eat and sleep
-            2. Store items in chest
-            3. Go back
-            4. Save and quit
-            ----------------------------------------
-    ''')
-    house_action_choice = int(input("What do you want to do", player_name))
-    if house_action_choice == 1:
-        print("PLACEHOLDER FOR RESTING")
-    elif house_action_choice == 2:
-        print ("PLACEHOLDER FOR CHEST")
+    while True:
+        print ("Welcome home to your", player.player_house)
+        print ("Choose what to do at your", player_house,",", player_name)
+        print ('''
+                ----------------------------------------
+                1. Eat and sleep
+                2. Store items in chest
+                3. Go back
+                4. Save and quit
+                ----------------------------------------
+        ''')
+        house_action_choice = int(input("What do you want to do", player_name))
+        if house_action_choice == 1:
+            print("PLACEHOLDER FOR RESTING")
+        elif house_action_choice == 2:
+            print ("PLACEHOLDER FOR CHEST")
+        elif house_action_choice == 3:
+            print ("Going back...")
+            break
+        elif house_action_choice == 4:
+            QuitGame()
+        else:
+            print ("")
 
+def blacksmith():
+    while True:
+        print ("")
+
+def item_shop():
+    while True:
+        print ("")
 
 def MovePlayer():
     while True:
