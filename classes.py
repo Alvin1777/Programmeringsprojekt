@@ -11,7 +11,7 @@ class Player():
         self.player_level = player_level
 
     def print_info(self):
-        print("name: ",self.player_name,"character choice: ", self.character, "player house : ",self.player_house)
+        print("Name: ",self.player_name,"Character Choice: ", self.character, "Player House: ",self.player_house,"Player Character Name: ", self.character_name_title,"Player Character Surname: ", self.character_name_surname,"Player Health: ", self.player_health,"Player Level: ", self.player_level)
 
     def PrintPlayerName(self):
         print(self.character_name_title, self.player_name, self.character_name_surname)
