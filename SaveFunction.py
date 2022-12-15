@@ -71,7 +71,7 @@ userData.append(player.player_house)
 userData.append(player.character_name_title)
 userData.append(player.character_name_surname)
 userData.append(player.player_health)
-userData.append(player.)
+userData.append(player.player_level)
  
  
 #When Closing Game
