@@ -26,6 +26,9 @@ AtgeirSpearWeapon = weapons("Atgeir spear", 3, 4, 75)
 YariSpearWeapon = weapons("Yari spear", 3, 3, 45)
 DanishAxeWeapon = weapons("Danish axe", 20, 0.1, 10)
 BattleAxeWeapon = weapons("Battle axe", 2, 6, 60)
+GolokSwordWeapon = weapons("Golok sword", 0.5, 5.5, 60)
+DaodacSwordWeapon = weapons("Daodac Sword", 1, 8, 95)
+
 
 
 #Functions
