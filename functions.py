@@ -8,6 +8,8 @@ from classes import *
 # PLACEHOLDER VAL
 
 player_damage = 5
+inventory = ["hands"]
+equippedItem = "hands"
 
 #Objects
 
@@ -15,7 +17,7 @@ SkeletonEnemy = enemy("Skeleton", 20, 5, False)
 ZombieEnemy = enemy("Zombie", 30, 4, False)
 OrcEnemy = enemy("Orc", 10, 10, False)
 GoblinEnemy = enemy("Goblin", 15, 7, False)
-BatEnemy = enemy("Bat",2, 2, False )
+BatEnemy = enemy("Bat",2, 2, False)
 SpiderEnemy = enemy("Spider", 10, 5, False)
 
 #Weapons
@@ -26,6 +28,9 @@ AtgeirSpearWeapon = weapons("Atgeir spear", 3, 4, 75)
 YariSpearWeapon = weapons("Yari spear", 3, 3, 45)
 DanishAxeWeapon = weapons("Danish axe", 20, 0.1, 10)
 BattleAxeWeapon = weapons("Battle axe", 2, 6, 60)
+GolokSwordWeapon = weapons("Golok sword", 0.5, 5.5, 60)
+DaodacSwordWeapon = weapons("Daodac Sword", 1, 8, 95)
+
 
 
 #Functions
@@ -58,13 +63,14 @@ def ChooseCharacter():
                 player_house = "Castle"
                 title = "Sir"
                 surname = "the Dragon Slayer"
+                inventory_size = 6
                 print("\n\n\n\n\n\n\n\n\n")
                 print_backstory_1()
                 print("\n")
 
                 confirm_character = input("Want To Use This Character? y/n -> ")
                 if confirm_character == "y":
-                    player = Player(player_name, character, player_house, title, surname, 30, 0)
+                    player = Player(player_name, character, player_house, title, surname, 30, 0, inventory_size)
                     player.print_info()
                     print("Character Confirmed...")
                     break
@@ -75,13 +81,14 @@ def ChooseCharacter():
                 player_house = "house"
                 title = ""
                 surname = "Ironhill"
+                inventory_size = 6
                 print("\n\n\n\n\n\n\n\n\n")
                 print_backstory_2()
                 print("\n")
 
                 confirm_character = input("Want To Use This Character? y/n -> ")
                 if confirm_character == "y":
-                    player = Player(player_name, character, player_house, title, surname, 30, 0)
+                    player = Player(player_name, character, player_house, title, surname, 30, 0, inventory_size)
                     player.print_info()
                     print("Character Confirmed...")
                     break
@@ -92,13 +99,14 @@ def ChooseCharacter():
                 player_house = "Barn"
                 title = ""
                 surname = "Fairbairns"
+                inventory_size = 6
                 print("\n\n\n\n\n\n\n\n\n")
                 print_backstory_3()
                 print("\n")
 
                 confirm_character = input("Want To Use This Character? y/n -> ")
                 if confirm_character == "y":
-                    player = Player(player_name, character, player_house, title, surname, 30, 0)
+                    player = Player(player_name, character, player_house, title, surname, 30, 0, inventory_size)
                     player.print_info()
                     print("Character Confirmed...")
                     
@@ -110,6 +118,23 @@ def ChooseCharacter():
         except:
             input("An Error Was Detected. \nPress Enter To Try Again. ")
        
+def openInventory():
+    while True:
+        print(inventory, equippedItem)
+        inventory_choice = int(input("1: Equip Item, 2: Go Back -> "))
+
+        if inventory_choice == 1:
+            print("This is your current equipped item: ",equippedItem)
+            print(inventory)
+            itemToEquip = int(input("Choose one of the slots, starting with 1 -> "))
+            itemToEquip -= 1
+
+            equippedItem = inventory[itemToEquip]
+        elif inventory_choice == 2:
+            print("You go back...\n")
+            break
+
+
 def RandomMonster():
     random_monster_int = rand.randint(1, 6)
 
@@ -171,7 +196,8 @@ def ChooseDirection():
             1: Left 
             2: Forward
             3: Right
-            4: Go back
+            4: Open inventory
+            5: Go back
             ''')
 
         direction_choice = input("-> ")
@@ -186,8 +212,11 @@ def ChooseDirection():
             print("You choose to turn left...")
             GenerateRoom()
         elif direction_choice == "4":
+            openInventory()
+        elif direction_choice == "5":
             print("Your turn back...")
             break
+        
 
 
 def Home():
