@@ -15,7 +15,7 @@ def PrintTitleScreen():
     ''')
 
 
-def at_home_castle():
+def at_home_castle_artwork():
     print ('''
                                                 ▓
                                               ▒▓█▓
@@ -58,7 +58,7 @@ def at_home_castle():
     ''')
 
 
-def at_home_house():
+def at_home_house_artwork():
     print('''
                              ▒███▓     ▒▒▒▒
                             ▓██████▒   ▓█▒▓
@@ -100,7 +100,7 @@ def at_home_house():
     ''')
 
 
-def at_home_village():
+def at_home_village_artwork():
     print ('''
                             ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
                            ▓▒▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒

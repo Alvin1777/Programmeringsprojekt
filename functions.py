@@ -183,26 +183,14 @@ def ChooseDirection():
 def Home():
 
     if player.character == "Knight":
-        at_home_castle()
+        at_home_castle_artwork()
+        #time.sleep(4)
     elif player.character == "Blacksmith":
-        at_home_house()
+        at_home_house_artwork()
+        #time.sleep(4)
     elif player.character == "Farmer":
-        at_home_village()
-
-    # #if  charachter == 1:
-    # time.sleep(2)
-    # at_home_castle()
-    # time.sleep(2)
-
-    # #if charachter == 2
-    # time.sleep(2)
-    # at_home_house()
-    # time.sleep(2)
-
-    # #if charachter == 3
-    # time.sleep(2)
-    # at_home_village() 
-    # time.sleep(2)
+        at_home_village_artwork()
+        #time.sleep(4)
 
 
     while True:
@@ -221,7 +209,7 @@ def Home():
         home_action_choice = int(input('''Decide what to do -->  '''))
 
         if home_action_choice == 1:
-            print ("PLACEHOLDER AT HOUSE")
+            at_house()
 
         elif home_action_choice == 2:
             print ("PLACEHOLDER AT BLACKSMITH")
@@ -236,6 +224,24 @@ def Home():
             QuitGame()
         else:
             print("")
+
+
+def at_house():
+    print ("Welcome home to your", player.player_house)
+    print ("Choose what to do at your", player_house,",", player_name)
+    print ('''
+            ----------------------------------------
+            1. Eat and sleep
+            2. Store items in chest
+            3. Go back
+            4. Save and quit
+            ----------------------------------------
+    ''')
+    house_action_choice = int(input("What do you want to do", player_name))
+    if house_action_choice == 1:
+        print("PLACEHOLDER FOR RESTING")
+    elif house_action_choice == 2:
+        print ("PLACEHOLDER FOR CHEST")
 
 
 def MovePlayer():
