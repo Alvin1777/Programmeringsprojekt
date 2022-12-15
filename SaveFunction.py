@@ -63,8 +63,15 @@ userData = current_userData
 #         self.character_name_surname = character_name_surname
 #         self.player_health = player_health
 #         self.player_level = player_level
+userData = []
 
-userData[]
+userData.append(player.player_name)
+userData.append(player.character)
+userData.append(player.player_house)
+userData.append(player.character_name_title)
+userData.append(player.character_name_surname)
+userData.append(player.player_health)
+userData.append(player.)
  
  
 #When Closing Game

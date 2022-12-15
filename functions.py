@@ -53,7 +53,7 @@ def ChooseCharacter():
 
                 confirm_character = input("Want To Use This Character? y/n -> ")
                 if confirm_character == "y":
-                    player = Player(player_name, character, player_house, title, surname, 30)
+                    player = Player(player_name, character, player_house, title, surname, 30, 0)
                     player.print_info()
                     print("Character Confirmed...")
                     break
@@ -87,7 +87,7 @@ def ChooseCharacter():
 
                 confirm_character = input("Want To Use This Character? y/n -> ")
                 if confirm_character == "y":
-                    player = Player(player_name, character, player_house, title, surname, 30)
+                    player = Player(player_name, character, player_house, title, surname, 30, 0)
                     player.print_info()
                     print("Character Confirmed...")
                     
