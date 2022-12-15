@@ -127,14 +127,18 @@ def ChooseCharacter():
 def openInventory():
     global equippedItem
     while True:
+        print("\n\n\n")
         for items in inventory:
             print(items.weapon_name, end=", ")
-        print(equippedItem.weapon_name)
+            print()
+        print("Equipped weapon: ",equippedItem.weapon_name)
         inventory_choice = int(input("1: Equip Item, 2: Go Back -> "))
 
         if inventory_choice == 1:
             print("This is your current equipped item: ",equippedItem.weapon_name)
-            print(inventory)
+            for items_2 in inventory:
+                print(items_2.weapon_name, end=", ")
+            print()
             itemToEquip = int(input("Choose one of the slots, starting with 1 -> "))
             itemToEquip -= 1
 
@@ -148,6 +152,13 @@ def addItemToInventory(itemToAdd):
         inventory.append(itemToAdd)
     else:
         print("Can't pick up the item. Your inventory is full")
+
+def getRandomWeapon():
+    rand_weapon_int = rand.randint(0, 8)
+
+    randomWeapon = item_shop_list_all[rand_weapon_int]
+
+    return randomWeapon
 
 def RandomMonster():
     random_monster_int = rand.randint(1, 6)
@@ -168,39 +179,66 @@ def RandomMonster():
 def FightMonster():
     global player_bank
     monster_type = RandomMonster()
+    print("\n\n\n\n\n\n")
     print("A ",monster_type.enemy_name," appeard!")
 
     while True:
         if monster_type.enemy_health > 0:
+            print("\n\n")
             print("What is action",player.PrintPlayerName())
+            print("Your health: ",player.player_health)
+            print("Enemy health: ",monster_type.enemy_health)
             print("1. Strike, 2. Block, 3. Flee")
             fight_input = int(input("-> "))
 
             if fight_input == 1:
-                print("You strike the enemy!")
+                print("You hit the enemy for ",equippedItem.weapon_damage,"HP!")
                 monster_type.enemy_health -= equippedItem.weapon_damage
                 
             enemy_strike_int = rand.randint(1,2)
 
             if enemy_strike_int == 1:
-                print("The enemy hit you!")
+                print("The enemy hit you for",monster_type.enemy_damage,"HP!")
                 player.player_health -= monster_type.enemy_damage
+
+            if player.player_health <= 0:
+                print("\n\n")
+                print("You died!")
+                print("GAME OVER")
+                QuitGame()
+
         else:
             money_to_earn = rand.randint(10, 30)
             player_bank += money_to_earn
-            print("You Slain The Enemy!")
+            print("\n\nYou Slain The Enemy!")
             print("You earned ",money_to_earn," coins!")
             print("Your bank balance is now ",player_bank," coins!")
             break
 
+def chestRoom():
+    global player_bank
+    print("\n\n\n\n\n")
+    print("Chest Room")
+    chest_recvie_item = rand.randint(1, 2)
+
+    if chest_recvie_item == 1:
+        print("You found a weapon!")
+        weapon_to_recive = getRandomWeapon()
+        print("A ",weapon_to_recive.weapon_name,)
+        addItemToInventory(weapon_to_recive)
+    elif chest_recvie_item == 2:
+        print("You found coins!")
+        money_to_recive = rand.randint(20, 50)
+        print("",money_to_recive," coins!")
+        player_bank += money_to_recive
+        print("Player balance is ",player_bank," coins!")
 
 def GenerateRoom():
     random_room_int = rand.randint(1, 3)
 
     if random_room_int == 1:
-        print("Chest Room")
-        print("You recived an item.. *PLACEHOLDER* ")
-
+        chestRoom()
+            
     elif random_room_int in (2, 3):
         FightMonster()
 
@@ -220,20 +258,25 @@ def ChooseDirection():
             ''')
 
         direction_choice = input("-> ")
-
+        print("\n\n")
         if direction_choice == "1":
             print("You choose to turn right...")
+            print("\n\n")
             GenerateRoom()
         elif direction_choice == "2":
             print("You choose to go forward...")
+            print("\n\n")
             GenerateRoom()
         elif direction_choice == "3":
             print("You choose to turn left...")
+            print("\n\n")
             GenerateRoom()
         elif direction_choice == "4":
+            print("\n\n")
             openInventory()
         elif direction_choice == "5":
             print("Your turn back...")
+            print("\n\n")
             break
         
 
