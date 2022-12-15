@@ -17,6 +17,16 @@ GoblinEnemy = enemy("Goblin", 15, 7, False)
 BatEnemy = enemy("Bat",2, 2, False )
 SpiderEnemy = enemy("Spider", 10, 5, False)
 
+#Weapons
+
+SteelSwordWeapon = weapons("Steel sword", 1, 5, 50)
+WoodSwordWeapon = weapons("Wooden sword", 0.5, 1, 10)
+AtgeirSpearWeapon = weapons("Atgeir spear", 3, 4, 75)
+YariSpearWeapon = weapons("Yari spear", 3, 3, 45)
+DanishAxeWeapon = weapons("Danish axe", 20, 0.1, 10)
+BattleAxeWeapon = weapons("Battle axe", 2, 6, 60)
+
+
 #Functions
 
 def ChooseCharacter():
