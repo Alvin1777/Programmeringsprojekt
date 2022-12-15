@@ -54,43 +54,34 @@ elif doesSaveExist == False:
  
 userData = current_userData
  
-#Data Gets Changed
- 
-# self.player_name = player_name
-#         self.character = player_character
-#         self.player_house = player_house
-#         self.character_name_title = character_name_title
-#         self.character_name_surname = character_name_surname
-#         self.player_health = player_health
-#         self.player_level = player_level
-userData = []
 
-userData.append(player.player_name)
-userData.append(player.character)
-userData.append(player.player_house)
-userData.append(player.character_name_title)
-userData.append(player.character_name_surname)
-userData.append(player.player_health)
-userData.append(player.player_level)
  
- 
-#When Closing Game
- 
-def SaveData():      
+def SaveData():   
+    userData = []
+
+    userData.append(player.player_name)
+    userData.append(player.character)
+    userData.append(player.player_house)
+    userData.append(player.character_name_title)
+    userData.append(player.character_name_surname)
+    userData.append(player.player_health)
+    userData.append(player.player_level)
+
     outfile = open(filename,'wb')
     pickle.dump(userData,outfile)
     outfile.close()
- 
-while True:
-    want_to_quit = input("Want to save files or see them? 1, 2, 3 -> ")
- 
-    if want_to_quit == "1":
-        SaveData()
-        break
- 
-    elif want_to_quit == "2":
-        print(userData)
- 
-    elif want_to_quit == "3":
-        print("Shutting Down...")
-        break
+
+def InitiateSaveGame():
+    while True:
+        want_to_quit = input("Want to save files or see them? 1, 2, 3 -> ")
+    
+        if want_to_quit == "1":
+            SaveData()
+            quit()
+    
+        elif want_to_quit == "2":
+            print(userData)
+    
+        elif want_to_quit == "3":
+            print("Shutting Down...")
+            quit()
