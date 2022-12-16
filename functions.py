@@ -44,7 +44,7 @@ equippedItem = inventory[0]
 blacksmith_item_list_all = [SteelSwordWeapon, WoodSwordWeapon, AtgeirSpearWeapon, YariSpearWeapon, DanishAxeWeapon, BattleAxeWeapon, GolokSwordWeapon, DaodacSwordWeapon]
 blacksmith_item_list_1 = [SteelSwordWeapon, WoodSwordWeapon, AtgeirSpearWeapon, YariSpearWeapon]
 blacksmith_item_list_2 = [DanishAxeWeapon, BattleAxeWeapon, GolokSwordWeapon, DaodacSwordWeapon]
-item_shop_item_list = []
+item_shop_item_list = [potatoItem, beefItem, healingPoitionItem, bronzeArtifactItem, silverArtifactItem, goldArtifactItem]
 player_bank = 100
 full_health = 30
 chest_list = []
@@ -163,11 +163,14 @@ def addItemToInventory(itemToAdd):
     else:
         print("Can't pick up the item. Your inventory is full")
 
+def getRandomItem():
+    rand_item_int = rand.randint(0, 5)
+    randomItem = item_shop_item_list[rand_item_int]
+    return randomItem
+
 def getRandomWeapon():
     rand_weapon_int = rand.randint(0, 8)
-
     randomWeapon = blacksmith_item_list_all[rand_weapon_int]
-
     return randomWeapon
 
 def RandomMonster():
@@ -196,8 +199,10 @@ def FightMonster():
         if monster_type.enemy_health > 0:
             print("\n\n")
             print("What is action",player.PrintPlayerName())
+            print("\n")
             print("Your health: ",player.player_health)
             print("Enemy health: ",monster_type.enemy_health)
+            print("\n")
             print("1. Strike, 2. Block, 3. Flee")
             fight_input = int(input("-> "))
 
@@ -230,7 +235,7 @@ def chestRoom():
     global player_bank
     print("\n\n\n\n\n")
     print("Chest Room")
-    chest_recvie_item = rand.randint(1, 2)
+    chest_recvie_item = rand.randint(1, 3)
 
     if chest_recvie_item == 1:
         print("You found a weapon!")
@@ -238,6 +243,11 @@ def chestRoom():
         print("A ",weapon_to_recive.weapon_name,)
         addItemToInventory(weapon_to_recive)
     elif chest_recvie_item == 2:
+        print("You found a item!")
+        item_to_recive = getRandomItem()
+        print("A",item_to_recive.item_name)
+        addItemToInventory(item_to_recive)
+    elif chest_recvie_item == 3:
         print("You found coins!")
         money_to_recive = rand.randint(20, 50)
         print("",money_to_recive," coins!")
@@ -252,8 +262,6 @@ def GenerateRoom():
             
     elif random_room_int in (2, 3):
         FightMonster()
-
-        
 
 
 
@@ -289,21 +297,19 @@ def ChooseDirection():
             print("Your turn back...")
             print("\n\n")
             break
-        
 
 
 def Home():
 
     if player.character == "Knight":
         at_home_castle_artwork()
-        #time.sleep(4)
+        time.sleep(3)
     elif player.character == "Blacksmith":
         at_home_house_artwork()
-        #time.sleep(4)
+        time.sleep(3)
     elif player.character == "Farmer":
         at_home_village_artwork()
-        #time.sleep(4)
-
+        time.sleep(3)
 
     while True:
         print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
@@ -319,6 +325,7 @@ def Home():
                 ----------------------------------------        
         ''')
         home_action_choice = int(input('''Decide what to do -->  '''))
+        print("\n\n")
 
         if home_action_choice == 1:
             at_house()
@@ -338,7 +345,6 @@ def Home():
         else:
             print("")
 
-
 def at_house():
     while True:
         print ("Welcome home to your", player.player_house)
@@ -356,8 +362,9 @@ def at_house():
         if house_action_choice == 1:
             player.player_health = full_health
             print("You rest for the night...")
-            time.sleep(2)
-            print("A new day! Your health has been restored!")
+            restArtwork()
+            print("\n\n\n\n")
+            print("A new day! Your health has been restored!\n")
             time.sleep(2)
         elif house_action_choice == 2:
             while True:
