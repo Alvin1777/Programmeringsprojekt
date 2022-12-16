@@ -3,8 +3,11 @@ from texts import *
 from art import *
 import random as rand
 from classes import *
+import pickle
 
 
+#For Save Files
+filename = "SaveFile"
 
 #Objects
 
@@ -472,7 +475,7 @@ def item_shop():
 
 def MovePlayer():
     while True:
-        print("What Is Your Action", player_name,"?")
+        print("What Is Your Action", player.player_name,"?")
         print('''
             1. Explore the world.
             2. Go Home.
@@ -486,9 +489,37 @@ def MovePlayer():
             print("You choose to go home...")
             Home()
                     
+def ExistingSave():
+    try:
+        testInfile = open(filename, 'rb')
+        testInfile.close()
+        doesSaveExist = True
+    except:
+        doesSaveExist = False
+    return doesSaveExist
+
+def LoadSave():
+    global player
+    infile = open(filename,'rb')
+    saved_stats = pickle.load(infile)
+    infile.close()
+
+    user_load = input("Do you want to load save or start a new game? 1, 2 -> ")
+
+    if user_load == "1":
+        player = Player(saved_stats[0], saved_stats[1], saved_stats[2], saved_stats[3], saved_stats[4], saved_stats[5], saved_stats[6], saved_stats[7])
+
+    elif user_load == "2":
+        ChooseCharacter()
+
 
 def Play():
-    ChooseCharacter()
+    found_save_game = ExistingSave()
+
+    if found_save_game == True:
+        LoadSave()
+    elif found_save_game == False:
+        ChooseCharacter()
     MovePlayer()
 
 def HowToPlay():
@@ -507,7 +538,21 @@ def ShowCredits():
 
     input("Press Enter To Continue")
 
+def SaveGame():
+    save_game_choice = int(input("Do you want to save game? 1. yes, 2. no -> "))
+
+    if save_game_choice == 1:
+        user_data = [player.player_name, player.character, player.player_house, player.character_name_title, player.character_name_surname, player.player_health, player.player_level, player.inventory_size]
+
+        outfile = open(filename,'wb')
+        pickle.dump(user_data,outfile)
+        outfile.close()
+
+    elif save_game_choice == 2:
+        pass
+
 def QuitGame():
+    SaveGame()
     print("Game Shutting Down...")
     time.sleep(2)
     print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")

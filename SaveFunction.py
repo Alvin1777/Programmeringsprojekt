@@ -1,9 +1,3 @@
-from functions import *
-from classes import *
-from main import *
-from art import *
-from texts import *
-
 import pickle
  
 filename = 'SaveFile'
@@ -56,32 +50,3 @@ userData = current_userData
  
 
  
-def SaveData():   
-    userData = []
-
-    userData.append(player.player_name)
-    userData.append(player.character)
-    userData.append(player.player_house)
-    userData.append(player.character_name_title)
-    userData.append(player.character_name_surname)
-    userData.append(player.player_health)
-    userData.append(player.player_level)
-
-    outfile = open(filename,'wb')
-    pickle.dump(userData,outfile)
-    outfile.close()
-
-def InitiateSaveGame():
-    while True:
-        want_to_quit = input("Want to save files or see them? 1, 2, 3 -> ")
-    
-        if want_to_quit == "1":
-            SaveData()
-            quit()
-    
-        elif want_to_quit == "2":
-            print(userData)
-    
-        elif want_to_quit == "3":
-            print("Shutting Down...")
-            quit()
