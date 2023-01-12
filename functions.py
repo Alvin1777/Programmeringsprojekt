@@ -3,14 +3,10 @@ from texts import *
 from art import *
 import random as rand
 from classes import *
-import pickle
-
-
-#For Save Files
-filename = "SaveFile"
 
 #Objects
 
+    #Enemies
 SkeletonEnemy = enemy("Skeleton", 20, 5, False)
 ZombieEnemy = enemy("Zombie", 30, 4, False)
 OrcEnemy = enemy("Orc", 10, 10, False)
@@ -18,7 +14,7 @@ GoblinEnemy = enemy("Goblin", 15, 7, False)
 BatEnemy = enemy("Bat",2, 2, False)
 SpiderEnemy = enemy("Spider", 10, 5, False)
 
-#Weapons
+    #Weapons
 
 SteelSwordWeapon = weapons("Steel sword", 1, 5, 50)
 WoodSwordWeapon = weapons("Wooden sword", 0.5, 1, 10)
@@ -30,7 +26,7 @@ GolokSwordWeapon = weapons("Golok sword", 0.5, 5.5, 60)
 DaodacSwordWeapon = weapons("Daodac Sword", 1, 8, 95)
 DefaultDaggerWeapon = weapons("Rusty dagger", 3, 1, 1)
 
-#Items
+    #Items
 
 potatoItem = items("Potato", 5, True, 2)
 beefItem = items("Beef", 10, True, 5)
@@ -489,37 +485,9 @@ def MovePlayer():
             print("You choose to go home...")
             Home()
                     
-def ExistingSave():
-    try:
-        testInfile = open(filename, 'rb')
-        testInfile.close()
-        doesSaveExist = True
-    except:
-        doesSaveExist = False
-    return doesSaveExist
-
-def LoadSave():
-    global player
-    infile = open(filename,'rb')
-    saved_stats = pickle.load(infile)
-    infile.close()
-
-    user_load = input("Do you want to load save or start a new game? 1, 2 -> ")
-
-    if user_load == "1":
-        player = Player(saved_stats[0], saved_stats[1], saved_stats[2], saved_stats[3], saved_stats[4], saved_stats[5], saved_stats[6], saved_stats[7])
-
-    elif user_load == "2":
-        ChooseCharacter()
-
 
 def Play():
-    found_save_game = ExistingSave()
-
-    if found_save_game == True:
-        LoadSave()
-    elif found_save_game == False:
-        ChooseCharacter()
+    ChooseCharacter()
     MovePlayer()
 
 def HowToPlay():
@@ -538,21 +506,7 @@ def ShowCredits():
 
     input("Press Enter To Continue")
 
-def SaveGame():
-    save_game_choice = int(input("Do you want to save game? 1. yes, 2. no -> "))
-
-    if save_game_choice == 1:
-        user_data = [player.player_name, player.character, player.player_house, player.character_name_title, player.character_name_surname, player.player_health, player.player_level, player.inventory_size]
-
-        outfile = open(filename,'wb')
-        pickle.dump(user_data,outfile)
-        outfile.close()
-
-    elif save_game_choice == 2:
-        pass
-
 def QuitGame():
-    SaveGame()
     print("Game Shutting Down...")
     time.sleep(2)
     print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
