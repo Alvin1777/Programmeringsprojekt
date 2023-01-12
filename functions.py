@@ -14,6 +14,13 @@ GoblinEnemy = enemy("Goblin", 15, 7, False)
 BatEnemy = enemy("Bat",2, 2, False)
 SpiderEnemy = enemy("Spider", 10, 5, False)
 
+SkeletonBoss = enemy("Skeleton King", 40, 10, True)
+ZombieBoss = enemy("Zombie king", 45, 6, True)
+OrcBoss = enemy("Orc Lord", 30, 10, True)
+DragonBoss = enemy("Dragon", 50, 12, True)
+BatBoss = enemy("Man Bat",20, 5, True)
+SpiderBoss = enemy("Large Spider", 35, 7, True)
+
     #Weapons
 
 SteelSwordWeapon = weapons("Steel sword", 1, 5, 50)
@@ -59,7 +66,7 @@ def ChooseCharacter():
 
     while True:
         
-        print("\n\n\n\n\n\n\n\n\n")
+        print("\n"* 10)
         print("You May Choose Between Three Different Character With Three Different Backgrounds...\n")
         print("      ----------------------------------------\n")
         print("       1.   Knight, Choose To Learn More...")
@@ -79,14 +86,20 @@ def ChooseCharacter():
                 title = "Sir"
                 surname = "the Dragon Slayer"
                 inventory_size = 6
+                bank = 1000
+                xp_multiplier = 1.2
+                damage_reduction = 0.9
+                damage_multiplier = 1.2
+                weapon_price_reduction = 1
+                item_price_reduction = 1
+
                 print("\n\n\n\n\n\n\n\n\n")
                 print_backstory_1()
                 print("\n")
 
                 confirm_character = input("Want To Use This Character? y/n -> ")
                 if confirm_character == "y":
-                    player = Player(player_name, character, player_house, title, surname, 30, 0, inventory_size)
-                    player.print_info()
+                    player = Player(player_name, character, player_house, title, surname, 30, 0, inventory_size, bank, xp_multiplier, damage_reduction, damage_multiplier, weapon_price_reduction, item_price_reduction)
                     print("Character Confirmed...")
                     break
                 else:
@@ -97,14 +110,19 @@ def ChooseCharacter():
                 title = ""
                 surname = "Ironhill"
                 inventory_size = 6
+                bank = 700
+                xp_multiplier = 1.2
+                damage_reduction = 1
+                damage_multiplier = 1.2
+                weapon_price_reduction = 0.6
+                item_price_reduction = 1
                 print("\n\n\n\n\n\n\n\n\n")
                 print_backstory_2()
                 print("\n")
 
                 confirm_character = input("Want To Use This Character? y/n -> ")
                 if confirm_character == "y":
-                    player = Player(player_name, character, player_house, title, surname, 30, 0, inventory_size)
-                    player.print_info()
+                    player = Player(player_name, character, player_house, title, surname, 30, 0, inventory_size, bank, xp_multiplier, damage_reduction, damage_multiplier, weapon_price_reduction, item_price_reduction)
                     print("Character Confirmed...")
                     break
                 else:
@@ -115,16 +133,20 @@ def ChooseCharacter():
                 title = ""
                 surname = "Fairbairns"
                 inventory_size = 6
+                bank = 300
+                xp_multiplier = 1
+                damage_reduction = 1
+                damage_multiplier = 1.1
+                weapon_price_reduction = 1
+                item_price_reduction = 0.5
                 print("\n\n\n\n\n\n\n\n\n")
                 print_backstory_3()
                 print("\n")
 
                 confirm_character = input("Want To Use This Character? y/n -> ")
                 if confirm_character == "y":
-                    player = Player(player_name, character, player_house, title, surname, 30, 0, inventory_size)
-                    player.print_info()
+                    player = Player(player_name, character, player_house, title, surname, 30, 0, inventory_size, bank, xp_multiplier, damage_reduction, damage_multiplier, weapon_price_reduction, item_price_reduction)
                     print("Character Confirmed...")
-                    
                     break
                 else:
                     print("")
@@ -137,8 +159,9 @@ def openInventory():
     global equippedItem
     while True:
         print("\n\n\n")
+        item_slot = 1
         for items in inventory:
-            print(items.weapon_name, end=", ")
+            print(item_slot,", ",items.weapon_name,",")
             print()
         print("Equipped weapon: ",equippedItem.weapon_name)
         inventory_choice = int(input("1: Equip Item, 2: Go Back -> "))
@@ -175,21 +198,37 @@ def getRandomWeapon():
 def RandomMonster():
     random_monster_int = rand.randint(1, 6)
 
-    if random_monster_int == 1:
-        return SkeletonEnemy
-    elif random_monster_int == 2:
-        return ZombieEnemy
-    elif random_monster_int == 3:
-        return OrcEnemy
-    elif random_monster_int == 4:
-        return GoblinEnemy
-    elif random_monster_int == 5:
-        return BatEnemy
-    elif random_monster_int == 6:
-        return SpiderEnemy
+    if player.boss_spawn == 10:
+        player.boss_spawn = 0
+
+        if random_monster_int == 1:
+            return SkeletonBoss
+        elif random_monster_int == 2:
+            return ZombieBoss
+        elif random_monster_int == 3:
+            return OrcBoss
+        elif random_monster_int == 4:
+            return DragonBoss
+        elif random_monster_int == 5:
+            return BatBoss
+        elif random_monster_int == 6:
+            return SpiderBoss
+
+    else:    
+        if random_monster_int == 1:
+            return SkeletonEnemy
+        elif random_monster_int == 2:
+            return ZombieEnemy
+        elif random_monster_int == 3:
+            return OrcEnemy
+        elif random_monster_int == 4:
+            return GoblinEnemy
+        elif random_monster_int == 5:
+            return BatEnemy
+        elif random_monster_int == 6:
+            return SpiderEnemy
 
 def FightMonster():
-    global player_bank
     monster_type = RandomMonster()
     print("\n\n\n\n\n\n")
     print("A ",monster_type.enemy_name," appeard!")
@@ -206,14 +245,19 @@ def FightMonster():
             fight_input = int(input("-> "))
 
             if fight_input == 1:
-                print("You hit the enemy for ",equippedItem.weapon_damage,"HP!")
-                monster_type.enemy_health -= equippedItem.weapon_damage
+                damage_dealt = round(equippedItem.weapon_damage * player.damage_multiplier, 1)
+
+                print("You hit the enemy for ",damage_dealt,"HP!")
+                monster_type.enemy_health -= equippedItem.weapon_damage * player.damage_multiplier
+                monster_type.enemy_health = round(monster_type.enemy_health, 1)
                 
             enemy_strike_int = rand.randint(1,2)
 
             if enemy_strike_int == 1:
-                print("The enemy hit you for",monster_type.enemy_damage,"HP!")
-                player.player_health -= monster_type.enemy_damage
+                damage_taken = round(monster_type.enemy_damage * player.damage_reduction, 1)
+                print("The enemy hit you for",damage_taken,"HP!")
+                player.player_health -= monster_type.enemy_damage * player.damage_reduction
+                player.player_health = round(player.player_health, 1)
 
             if player.player_health <= 0:
                 print("\n\n")
@@ -222,16 +266,37 @@ def FightMonster():
                 QuitGame()
 
         else:
-            money_to_earn = rand.randint(10, 30)
-            player_bank += money_to_earn
+            if monster_type.enemy_is_boss == True:
+                xp_to_earn = round(rand.randint(5, 8) * player.xp_multi, 1)
+                money_to_earn = rand.randint(30, 50)
+
+            else:
+                xp_to_earn = round(rand.randint(1, 5) * player.xp_multi, 1)
+                money_to_earn = rand.randint(10, 30)
+
+            
+            player.bank += money_to_earn
+
+            old_player_level = player.player_level
+            player.current_xp += xp_to_earn
+
+            if player.current_xp >= 20:
+                player.current_xp -= 20
+                player.player_level += 1
+                player.boss_spawn += 1
+
             print("\n\nYou Slain The Enemy!")
-            print("You earned ",money_to_earn," coins!")
-            print("Your bank balance is now ",player_bank," coins!")
+            print("You earned ",money_to_earn," coins and ",xp_to_earn," experience points!")
+            print("Your bank balance is now ",player.bank," coins!")
+            if player.player_level > old_player_level:
+                print("You have leveled up!")
+            else:
+                pass
+            print("Your level is",player.player_level,", XP remaining to next level: ",player.current_xp,"/",20,"")
             time.sleep(2)
             break
 
 def chestRoom():
-    global player_bank
     print("\n\n\n\n\n")
     print("Chest Room")
     chest_recvie_item = rand.randint(1, 3)
@@ -250,8 +315,8 @@ def chestRoom():
         print("You found coins!")
         money_to_recive = rand.randint(20, 50)
         print("",money_to_recive," coins!")
-        player_bank += money_to_recive
-        print("Player balance is ",player_bank," coins!")
+        player.bank += money_to_recive
+        print("Player balance is ",player.bank," coins!")
 
 def GenerateRoom():
     random_room_int = rand.randint(1, 3)
@@ -371,12 +436,15 @@ def at_house():
                 home_chest_choice = int(input("-> "))
 
                 if home_chest_choice == 1:
+                    item_slot = 1
                     for items in inventory:
-                        print(items.weapon_name, end=", ")
+                        print("",item_slot ,".", items.weapon_name,",")
+                        item_slot += 1
+                    item_slot = 1
                     print()
                     for chest_items in chest_list:
                         try:
-                            print(chest_items.weapon_name, end=", ")
+                            print("",item_slot,".",chest_items.weapon_name,",")
                         except:
                             print("Chest is empty...")
                     print()
@@ -408,45 +476,45 @@ def at_house():
             print ("")
 
 def blacksmith():
-    global player_bank
     while True:
         print("Look at the weapons/armour to buy: 1, Leave: 2")
         item_menu_choice = int(input("-> "))
 
         if item_menu_choice == 1:
             print ("Welcome to the blacksmith")
-            print("Your bank balance: ",player_bank," coins")
+            print("Your bank balance: ",player.bank," coins")
             print("All items that are available: ")
+
+            item_slot = 1
+
             for items in blacksmith_item_list_1:
-                print(items.weapon_name, end=": ")
-                print(items.weapon_value, end=" Coins, ")
+                print(item_slot,", ",items.weapon_name ," ",items.weapon_value,"")
             print()
+            item_slot = 1
             for items_2 in blacksmith_item_list_2:
-                print(items_2.weapon_name, end=": ")
-                print(items_2.weapon_value, end=" Coins, ")
+                print(item_slot,", ",items_2.weapon_name ," ",items_2.weapon_value,"")
             print()
             itemToBuy = int(input("Choose What Item To Buy -> "))
             itemToBuy -= 1
             itemToBuyObject = blacksmith_item_list_all[itemToBuy]
 
-            if player_bank >=  itemToBuyObject.weapon_value:
-                player_bank -= itemToBuyObject.weapon_value
+            if player.bank >=  itemToBuyObject.weapon_value:
+                player.bank -= itemToBuyObject.weapon_value
                 addItemToInventory(blacksmith_item_list_all[itemToBuy])
-                print("Your balance is now ",player_bank," coins!")
+                print("Your balance is now ",player.bank," coins!")
             else:
                 print("Your bank balance is to low...")
         elif item_menu_choice == 2:
             break
 
 def item_shop():
-    global player_bank
     while True:
         print("Look at the items to buy: 1, Leave: 2")
         item_menu_choice = int(input("-> "))
 
         if item_menu_choice == 1:
             print ("Welcome to the item shop")
-            print("Your bank balance: ",player_bank," coins")
+            print("Your bank balance: ",player.bank," coins")
             print("All items that are available: ")
             for items in item_shop_item_list:
                 print(items.item_name, end=": ")
@@ -460,8 +528,8 @@ def item_shop():
             itemToBuy -= 1
             itemToBuyObject = item_shop_item_list[itemToBuy]
 
-            if player_bank >=  itemToBuyObject.item_value:
-                player_bank -= itemToBuyObject.item_value
+            if player.bank >=  itemToBuyObject.item_value:
+                player.bank -= itemToBuyObject.item_value
                 addItemToInventory(item_shop_item_list[itemToBuy])
                 print("Your balance is now ",player_bank," coins!")
             else:
