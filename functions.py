@@ -43,8 +43,6 @@ silverArtifactItem = items("Silver artifact", 100, False, 0)
 goldArtifactItem = items("Gold artifact", 200, False, 0)
 
 # PLACEHOLDER VAL
-
-player_damage = 5
 inventory = [DefaultDaggerWeapon]
 equippedItem = inventory[0]
 blacksmith_item_list_all = [SteelSwordWeapon, WoodSwordWeapon, AtgeirSpearWeapon, YariSpearWeapon, DanishAxeWeapon, BattleAxeWeapon, GolokSwordWeapon, DaodacSwordWeapon]
@@ -109,7 +107,7 @@ def ChooseCharacter():
                 player_house = "house"
                 title = ""
                 surname = "Ironhill"
-                inventory_size = 6
+                inventory_size = 10
                 bank = 700
                 xp_multiplier = 1.2
                 damage_reduction = 1
