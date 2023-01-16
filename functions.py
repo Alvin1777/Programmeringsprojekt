@@ -160,6 +160,7 @@ def openInventory():
         item_slot = 1
         for items in inventory:
             print(item_slot,", ",items.weapon_name,",")
+            item_slot += 1
             print()
         print("Equipped weapon: ",equippedItem.weapon_name)
         inventory_choice = int(input("1: Equip Item, 2: Go Back -> "))
@@ -396,7 +397,7 @@ def Home():
             blacksmith()
 
         elif home_action_choice == 3:
-            blacksmith()
+            item_shop()
 
         elif home_action_choice == 4:
             print("Your going out")
@@ -415,8 +416,9 @@ def at_house():
                 ----------------------------------------
                 1. Eat and sleep
                 2. Store items in chest
-                3. Go back
-                4. Save and quit
+                3. Open inventory
+                4. Go back
+                5. Save and quit
                 ----------------------------------------
         ''')
         print("What do you want to do ",player_name,"?")
@@ -466,12 +468,15 @@ def at_house():
                     break
 
         elif house_action_choice == 3:
+            openInventory()
+        elif house_action_choice == 4:
             print ("Going back...")
             break
-        elif house_action_choice == 4:
+        elif house_action_choice == 5:
             QuitGame()
         else:
-            print ("")
+            print ("Use numbers between 1-5")
+            input("Press Enter To Continue")
 
 def blacksmith():
     while True:
@@ -487,6 +492,7 @@ def blacksmith():
 
             for items in blacksmith_item_list_1:
                 print(item_slot,", ",items.weapon_name ," ",items.weapon_value,"")
+                item_slot += 1
             print()
             item_slot = 1
             for items_2 in blacksmith_item_list_2:
@@ -514,13 +520,17 @@ def item_shop():
             print ("Welcome to the item shop")
             print("Your bank balance: ",player.bank," coins")
             print("All items that are available: ")
+            item_slot = 1
             for items in item_shop_item_list:
-                print(items.item_name, end=": ")
-                print(items.item_value, end=" Coins, ")
+                print(item_slot, items.item_name, end=":")
+                print(items.item_value, "Coins")
+                item_slot += 1
             print()
+            item_slot = 1
             for items_2 in item_shop_item_list:
-                print(items_2.item_name, end=": ")
-                print(items_2.item_value, end=" Coins, ")
+                print(item_slot, items_2.item_name, end=":")
+                print(items_2.item_value, "Coins")
+                item_slot += 1
             print()
             itemToBuy = int(input("Choose What Item To Buy -> "))
             itemToBuy -= 1
