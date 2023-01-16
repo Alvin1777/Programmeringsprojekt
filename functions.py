@@ -76,7 +76,7 @@ def ChooseCharacter():
             
 
 
-            print("\n\n\n")
+            print("\n"*3)
 
             if character_choice == 1:
                 character = "Knight"
@@ -91,7 +91,7 @@ def ChooseCharacter():
                 weapon_price_reduction = 1
                 item_price_reduction = 1
 
-                print("\n\n\n\n\n\n\n\n\n")
+                print("\n"*8)
                 print_backstory_1()
                 print("\n")
 
@@ -114,7 +114,7 @@ def ChooseCharacter():
                 damage_multiplier = 1.2
                 weapon_price_reduction = 0.6
                 item_price_reduction = 1
-                print("\n\n\n\n\n\n\n\n\n")
+                print("\n"*9)
                 print_backstory_2()
                 print("\n")
 
@@ -137,7 +137,7 @@ def ChooseCharacter():
                 damage_multiplier = 1.1
                 weapon_price_reduction = 1
                 item_price_reduction = 0.5
-                print("\n\n\n\n\n\n\n\n\n")
+                print("\n"*9)
                 print_backstory_3()
                 print("\n")
 
@@ -156,7 +156,7 @@ def ChooseCharacter():
 def openInventory():
     global equippedItem
     while True:
-        print("\n\n\n")
+        print("\n"*3)
         item_slot = 1
         for items in inventory:
             print(item_slot,", ",items.weapon_name,",")
@@ -228,12 +228,12 @@ def RandomMonster():
 
 def FightMonster():
     monster_type = RandomMonster()
-    print("\n\n\n\n\n\n")
+    print("\n"*6)
     print("A ",monster_type.enemy_name," appeard!")
 
     while True:
         if monster_type.enemy_health > 0:
-            print("\n\n")
+            print("\n"*2)
             print("What is action",player.PrintPlayerName())
             print("\n")
             print("Your health: ",player.player_health)
@@ -258,7 +258,7 @@ def FightMonster():
                 player.player_health = round(player.player_health, 1)
 
             if player.player_health <= 0:
-                print("\n\n")
+                print("\n"*2)
                 print("You died!")
                 print("GAME OVER")
                 QuitGame()
@@ -295,7 +295,7 @@ def FightMonster():
             break
 
 def chestRoom():
-    print("\n\n\n\n\n")
+    print("\n"*5)
     print("Chest Room")
     chest_recvie_item = rand.randint(1, 3)
 
@@ -339,25 +339,25 @@ def ChooseDirection():
             ''')
 
         direction_choice = input("-> ")
-        print("\n\n")
+        print("\n"*2)
         if direction_choice == "1":
             print("You choose to turn right...")
-            print("\n\n")
+            print("\n"*2)
             GenerateRoom()
         elif direction_choice == "2":
             print("You choose to go forward...")
-            print("\n\n")
+            print("\n"*2)
             GenerateRoom()
         elif direction_choice == "3":
             print("You choose to turn left...")
-            print("\n\n")
+            print("\n"*2)
             GenerateRoom()
         elif direction_choice == "4":
-            print("\n\n")
+            print("\n"*2)
             openInventory()
         elif direction_choice == "5":
             print("Your turn back...")
-            print("\n\n")
+            print("\n"*2)
             break
 
 
@@ -376,7 +376,7 @@ def Home():
     while True:
         print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
         print("You are home at your", player.player_house)
-        print ("\n\n")
+        print ("\n"*2)
         print('''You can now decide what to do at home...
                 ----------------------------------------
                 1. You can stay in your house and rest
@@ -387,7 +387,7 @@ def Home():
                 ----------------------------------------        
         ''')
         home_action_choice = int(input('''Decide what to do -->  '''))
-        print("\n\n")
+        print("\n"*2)
 
         if home_action_choice == 1:
             at_house()
@@ -425,7 +425,7 @@ def at_house():
             player.player_health = full_health
             print("You rest for the night...")
             restArtwork()
-            print("\n\n\n\n")
+            print("\n"*4)
             print("A new day! Your health has been restored!\n")
             time.sleep(2)
         elif house_action_choice == 2:
@@ -575,7 +575,7 @@ def ShowCredits():
 def QuitGame():
     print("Game Shutting Down...")
     time.sleep(2)
-    print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
+    print("\n"*20)
     exit()
 
 
