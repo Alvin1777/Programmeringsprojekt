@@ -403,110 +403,113 @@ def Home():
         time.sleep(3)
 
     while True:
-        print("\n"*40)
-        print("You are home at your", player.player_house)
-        print ("\n"*2)
-        print('''You can now decide what to do at home...
-                ----------------------------------------
-                1. You can stay in your house and rest
-                2. You can go to the blacksmith
-                3. You can go to the item shop
-                4. Go back out in the wild
-                5. Quit and save
-                ----------------------------------------        
-        ''')
-        home_action_choice = int(input('''Decide what to do -->  '''))
-        print("\n"*2)
+            try:
+                print("\n"*40)
+                print("You are home at your", player.player_house)
+                print ("\n"*2)
+                print('''You can now decide what to do at home...
+                        ----------------------------------------
+                        1. You can stay in your house and rest
+                        2. You can go to the blacksmith
+                        3. You can go to the item shop
+                        4. Go back out in the wild
+                        5. Quit and save
+                        ----------------------------------------        
+                ''')
+                home_action_choice = int(input('''Decide what to do -->  '''))
+                print("\n"*2)
 
-        if home_action_choice == 1:
-            at_house()
+                if home_action_choice == 1:
+                    at_house()
 
-        elif home_action_choice == 2:
-            blacksmith()
+                elif home_action_choice == 2:
+                    blacksmith()
 
-        elif home_action_choice == 3:
-            item_shop()
+                elif home_action_choice == 3:
+                    item_shop()
 
-        elif home_action_choice == 4:
-            print("Your going out")
-            break
-        elif home_action_choice == 5:
-            
-            QuitGame()
-        else:
-            print("")
-
-def at_house():
-    while True:
-        print("\n"*40)
-        print ("Welcome home to your", player.player_house)
-        print ("Choose what to do at your", player_house,",", player_name)
-        print ('''
-                ----------------------------------------
-                1. Eat and sleep
-                2. Store items in chest
-                3. Open inventory
-                4. Go back
-                5. Save and quit
-                ----------------------------------------
-        ''')
-        print("What do you want to do ",player_name,"?")
-        house_action_choice = int(input("-> "))
-        if house_action_choice == 1:
-            player.player_health = full_health
-            print("You rest for the night...")
-            restArtwork()
-            print("\n"*4)
-            print("A new day! Your health has been restored!\n")
-            time.sleep(2)
-        elif house_action_choice == 2:
-            while True:
-                print("\n"*50)
-                print ("Do you want to add an item to the chest? 1. yes, 2. Go back")
-                home_chest_choice = int(input("-> "))
-                print("\n"*5)
-
-                if home_chest_choice == 1:
-                    item_slot = 1
-                    for items in inventory:
-                        print("",item_slot ,".", items.weapon_name,",")
-                        item_slot += 1
-                    item_slot = 1
-                    print()
-                    for chest_items in chest_list:
-                        try:
-                            print("",item_slot,".",chest_items.weapon_name,",")
-                        except:
-                            print("Chest is empty...")
-                    print()
-                    chest_choice = int(input("1. Store item, 2. Take item -> "))
-                    print("\n"*5)
-                    if chest_choice == 1:
-                        item_to_add_to_chest = int(input("Choose Item To add to chest: "))
-                        item_to_add_to_chest -= 1
-
-                        chest_list.append(inventory[item_to_add_to_chest])
-                        inventory.pop(item_to_add_to_chest)
-
-                    elif chest_choice == 2:
-                        item_to_take_from_chest = int(input("Choose Item To take from the chest: "))
-                        item_to_take_from_chest -= 1
-
-                        inventory.append(item_to_take_from_chest)
-                        chest_list.pop(item_to_take_from_chest)
-                
-                elif home_chest_choice == 2:
-                    print("You go back..")
+                elif home_action_choice == 4:
+                    print("Your going out")
                     break
+                elif home_action_choice == 5:
+                    
+                    QuitGame()
+            except:
+                print ("Use numbers between 1-5")
+                input("Press Enter To Continue")
+def at_house():
+        try:
+            while True:
+                print("\n"*40)
+                print ("Welcome home to your", player.player_house)
+                print ("Choose what to do at your", player_house,",", player_name)
+                print ('''
+                        ----------------------------------------
+                        1. Eat and sleep
+                        2. Store items in chest
+                        3. Open inventory
+                        4. Go back
+                        5. Save and quit
+                        ----------------------------------------
+                ''')
+                print("What do you want to do ",player_name,"?")
+                house_action_choice = int(input("-> "))
+                if house_action_choice == 1:
+                    player.player_health = full_health
+                    print("You rest for the night...")
+                    restArtwork()
+                    print("\n"*4)
+                    print("A new day! Your health has been restored!\n")
+                    time.sleep(2)
+                elif house_action_choice == 2:
+                    while True:
+                        print("\n"*50)
+                        print ("Do you want to add an item to the chest? 1. yes, 2. Go back")
+                        home_chest_choice = int(input("-> "))
+                        print("\n"*5)
 
-        elif house_action_choice == 3:
-            openInventory()
-        elif house_action_choice == 4:
-            print ("Going back...")
-            break
-        elif house_action_choice == 5:
-            QuitGame()
-        else:
+                        if home_chest_choice == 1:
+                            item_slot = 1
+                            for items in inventory:
+                                print("",item_slot ,".", items.weapon_name,",")
+                                item_slot += 1
+                            item_slot = 1
+                            print()
+                            for chest_items in chest_list:
+                                try:
+                                    print("",item_slot,".",chest_items.weapon_name,",")
+                                except:
+                                    print("Chest is empty...")
+                            print()
+                            chest_choice = int(input("1. Store item, 2. Take item -> "))
+                            print("\n"*5)
+                            if chest_choice == 1:
+                                item_to_add_to_chest = int(input("Choose Item To add to chest: "))
+                                item_to_add_to_chest -= 1
+
+                                chest_list.append(inventory[item_to_add_to_chest])
+                                inventory.pop(item_to_add_to_chest)
+
+                            elif chest_choice == 2:
+                                item_to_take_from_chest = int(input("Choose Item To take from the chest: "))
+                                item_to_take_from_chest -= 1
+
+                                inventory.append(item_to_take_from_chest)
+                                chest_list.pop(item_to_take_from_chest)
+                        
+                        elif home_chest_choice == 2:
+                            print("You go back..")
+                            break
+
+                elif house_action_choice == 3:
+                    print("\n"*50)
+                    openInventory()
+                elif house_action_choice == 4:
+                    print ("Going back...")
+                    break
+                elif house_action_choice == 5:
+                    QuitGame()
+        except:
             print ("Use numbers between 1-5")
             input("Press Enter To Continue")
 
