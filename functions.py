@@ -426,14 +426,14 @@ def Home():
                 elif home_action_choice == 3:
                     item_shop()
 
-<<<<<<< HEAD
-        elif home_action_choice == 4:
-            print("Your going out")
-            break
-        elif home_action_choice == 5:     
-            QuitGame()
-        else:
-            print("")
+                elif home_action_choice == 4:
+                    print("Your going out")
+                    break
+                elif home_action_choice == 5:     
+                    QuitGame()
+            except:
+                print("Choose between numbers 1-5")
+                input("Press Enter To Continue")
 
 def at_house():
     while True:
@@ -492,19 +492,7 @@ def at_house():
                         inventory.append(item_to_take_from_chest)
                         chest_list.pop(item_to_take_from_chest)
                 
-                elif home_chest_choice == 2:
-                    print("You go back..")
-=======
-                elif home_action_choice == 4:
-                    print("Your going out")
->>>>>>> 4a5bd3240f96fa61008defa2ebf0aac5e7e97acf
-                    break
-                elif home_action_choice == 5:
-                    
-                    QuitGame()
-            except:
-                print ("Use numbers between 1-5")
-                input("Press Enter To Continue")
+            
 def at_house():
         try:
             while True:
