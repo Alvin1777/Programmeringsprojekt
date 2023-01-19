@@ -231,6 +231,10 @@ def FightMonster():
     monster_type = RandomMonster()
     print("\n"*6)
     print("A ",monster_type.enemy_name," appeard!")
+    if monster_type.enemy_health > 0:
+        monster_type = RandomMonster()
+    else: 
+        pass
 
     while True:
         if monster_type.enemy_health > 0:
@@ -342,7 +346,7 @@ def ChooseDirection():
         direction_choice = input("-> ")
         print("\n"*2)
         if direction_choice == "1":
-            print("You choose to turn right...")
+            print("You choose to turn left...")
             print("\n"*2)
             GenerateRoom()
         elif direction_choice == "2":
@@ -350,7 +354,7 @@ def ChooseDirection():
             print("\n"*2)
             GenerateRoom()
         elif direction_choice == "3":
-            print("You choose to turn left...")
+            print("You choose to turn right...")
             print("\n"*2)
             GenerateRoom()
         elif direction_choice == "4":
