@@ -64,7 +64,7 @@ def ChooseCharacter():
 
     while True:
         
-        print("\n"* 10)
+        print("\n"* 35)
         print("You May Choose Between Three Different Character With Three Different Backgrounds...\n")
         print("      ----------------------------------------\n")
         print("       1.   Knight, Choose To Learn More...")
@@ -91,7 +91,7 @@ def ChooseCharacter():
                 weapon_price_reduction = 1
                 item_price_reduction = 1
 
-                print("\n"*8)
+                print("\n"*30)
                 print_backstory_1()
                 print("\n")
 
@@ -114,7 +114,7 @@ def ChooseCharacter():
                 damage_multiplier = 1.2
                 weapon_price_reduction = 0.6
                 item_price_reduction = 1
-                print("\n"*9)
+                print("\n"*30)
                 print_backstory_2()
                 print("\n")
 
@@ -137,7 +137,7 @@ def ChooseCharacter():
                 damage_multiplier = 1.1
                 weapon_price_reduction = 1
                 item_price_reduction = 0.5
-                print("\n"*9)
+                print("\n"*30)
                 print_backstory_3()
                 print("\n")
 
@@ -239,7 +239,7 @@ def FightMonster():
     while True:
         if monster_type.enemy_health > 0:
             print("\n"*2)
-            print("What is action",player.PrintPlayerName())
+            print("What is action",player.player_name)
             print("\n")
             print("Your health: ",player.player_health)
             print("Enemy health: ",monster_type.enemy_health)
@@ -253,19 +253,37 @@ def FightMonster():
                 print("You hit the enemy for ",damage_dealt,"HP!")
                 monster_type.enemy_health -= equippedItem.weapon_damage * player.damage_multiplier
                 monster_type.enemy_health = round(monster_type.enemy_health, 1)
-                
-            enemy_strike_int = rand.randint(1,2)
 
-            if enemy_strike_int == 1:
-                damage_taken = round(monster_type.enemy_damage * player.damage_reduction, 1)
-                print("The enemy hit you for",damage_taken,"HP!")
-                player.player_health -= monster_type.enemy_damage * player.damage_reduction
-                player.player_health = round(player.player_health, 1)
+                enemy_strike_int = rand.randint(1,2)
+
+                if enemy_strike_int == 1:
+                    damage_taken = round(monster_type.enemy_damage * player.damage_reduction, 1)
+                    print("The enemy hit you for",damage_taken,"HP!")
+                    player.player_health -= monster_type.enemy_damage * player.damage_reduction
+                    player.player_health = round(player.player_health, 1)
+                
+            elif fight_input == 2:
+                print("You blocked an incoming attack!")
+                print("Do you wish to open iventory to change weapon or use an item? y/n")
+                block_choice = input("-> ")
+
+                if block_choice == "y":
+                    openInventory()
+                else:
+                    pass
+            
+            elif fight_input == 3:
+                print("You choose to flee the battle!")
+                print("\n"*2)
+                break
 
             if player.player_health <= 0:
-                print("\n"*2)
+                print("\n"*35)
                 print("You died!")
-                print("GAME OVER")
+                gameOverArt()
+                time.sleep(2)
+                print("\n"*10)
+                ShowCredits()
                 QuitGame()
 
         else:
