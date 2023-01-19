@@ -46,12 +46,10 @@ goldArtifactItem = items("Gold artifact", 200, False, 0)
 inventory = [DefaultDaggerWeapon]
 equippedItem = inventory[0]
 blacksmith_item_list_all = [SteelSwordWeapon, WoodSwordWeapon, AtgeirSpearWeapon, YariSpearWeapon, DanishAxeWeapon, BattleAxeWeapon, GolokSwordWeapon, DaodacSwordWeapon]
-blacksmith_item_list_1 = [SteelSwordWeapon, WoodSwordWeapon, AtgeirSpearWeapon, YariSpearWeapon]
-blacksmith_item_list_2 = [DanishAxeWeapon, BattleAxeWeapon, GolokSwordWeapon, DaodacSwordWeapon]
 item_shop_item_list = [potatoItem, beefItem, healingPoitionItem, bronzeArtifactItem, silverArtifactItem, goldArtifactItem]
 player_bank = 100
 full_health = 30
-chest_list = []
+chest_list = [potatoItem, beefItem, healingPoitionItem]
 
 #Functions
 
@@ -267,7 +265,7 @@ def FightMonster():
                 
             elif fight_input == 2:
                 print("You blocked an incoming attack!")
-                print("Do you wish to open iventory to change weapon or use an item? y/n")
+                print("Do you wish to open inventory to change weapon or use an item? y/n")
                 block_choice = input("-> ")
 
                 if block_choice == "y":
@@ -427,8 +425,7 @@ def Home():
         elif home_action_choice == 4:
             print("Your going out")
             break
-        elif home_action_choice == 5:
-            
+        elif home_action_choice == 5:     
             QuitGame()
         else:
             print("")
@@ -457,19 +454,21 @@ def at_house():
             time.sleep(2)
         elif house_action_choice == 2:
             while True:
-                print ("Do you want to add an item to the chest? 1. yes, 2. Go back")
+                print ("Do you want to access the chest? 1. yes, 2. Go back")
                 home_chest_choice = int(input("-> "))
 
                 if home_chest_choice == 1:
                     item_slot = 1
+                    print("Inventory:")
                     for items in inventory:
                         print("",item_slot ,".", items.weapon_name,",")
                         item_slot += 1
                     item_slot = 1
                     print()
+                    print("Chest:")
                     for chest_items in chest_list:
                         try:
-                            print("",item_slot,".",chest_items.weapon_name,",")
+                            print("",item_slot,".",chest_items.item_name,",")
                         except:
                             print("Chest is empty...")
                     print()
@@ -515,13 +514,9 @@ def blacksmith():
 
             item_slot = 1
 
-            for items in blacksmith_item_list_1:
+            for items in blacksmith_item_list_all:
                 print(item_slot,", ",items.weapon_name ," ",items.weapon_value,"")
                 item_slot += 1
-            print()
-            item_slot = 1
-            for items_2 in blacksmith_item_list_2:
-                print(item_slot,", ",items_2.weapon_name ," ",items_2.weapon_value,"")
             print()
             itemToBuy = int(input("Choose What Item To Buy -> "))
             itemToBuy -= 1
@@ -550,12 +545,7 @@ def item_shop():
                 print(item_slot, items.item_name, end=":")
                 print(items.item_value, "Coins")
                 item_slot += 1
-            print()
-            item_slot = 1
-            for items_2 in item_shop_item_list:
-                print(item_slot, items_2.item_name, end=":")
-                print(items_2.item_value, "Coins")
-                item_slot += 1
+
             print()
             itemToBuy = int(input("Choose What Item To Buy -> "))
             itemToBuy -= 1
