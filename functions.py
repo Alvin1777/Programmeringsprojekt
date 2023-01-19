@@ -375,7 +375,7 @@ def Home():
         time.sleep(3)
 
     while True:
-        print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
+        print("\n"*20)
         print("You are home at your", player.player_house)
         print ("\n"*2)
         print('''You can now decide what to do at home...
@@ -568,7 +568,9 @@ def Play():
 
 def HowToPlay():
     print("\n This Game Is Based On A Turn Based Fighting System Where You Travel The World By Choosing One Of The Actions Given By The Game To Progress Futher.")
-    print("As You Level You Will Encounter New Bosses And Story Events. \n")
+    print("As You Level You Will Encounter New Bosses And Story Events.\n")
+    print("Whichever charachter you choose has access to a house, were you can rest or manage your chest and inventory.\n")
+    print("Close to your house you can go to the blacksmith for weapons and armor purchases and an item shop for item purchases.")
     input("Press Enter To Continue")
 
 def ShowCredits():
