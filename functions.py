@@ -592,10 +592,30 @@ def Play():
     MovePlayer()
 
 def HowToPlay():
-    print("\n This Game Is Based On A Turn Based Fighting System Where You Travel The World By Choosing One Of The Actions Given By The Game To Progress Futher.")
-    print("As You Level You Will Encounter New Bosses And Story Events.\n")
-    print("Whichever charachter you choose has access to a house, were you can rest or manage your chest and inventory.\n")
-    print("Close to your house you can go to the blacksmith for weapons and armor purchases and an item shop for item purchases.")
+    print ('''\n 
+    
+    The Start:
+    The game starts with a choice of three different charachters: A knighted Noblesman, a blacksmith or a farmer.    
+    Whichever charachter you choose has access to a house, were you can rest or manage your chest and inventory.
+    Each charachter also has a different background and life-experiences and therefore a different skillset. 
+    Each charachter is thereby given a set of uniqe boosts which you can read more about in the charachter selection page. 
+    Close to every charachters house you can go to the blacksmith for weapons and armor purchases and an item shop for item purchases.
+
+
+    In-game systems:
+    The game comes with a few systems to enhance gaming-experience. Among those are the Money-, XP- and the fighting-systems. 
+    
+    You can use money for buying weapons, armor and items in the blacksmith or the item shop and you can earn said money by defeating enemies in battle.
+    Or by taking your rich parents money *cough *cough the Knight *cough *cough. 
+
+    As for experience you can only gain it by defeating enemies in battle. 
+    By gaining experience you will level up and by leveling up you will get chances to fight bosses in battle. 
+        
+    The game itself is based on a turn based fighting system where you travel the world while fighting enemies 
+    by choosing one of the actions given by the game to progress further. 
+
+    ''')
+
     input("Press Enter To Continue")
 
 def ShowCredits():
