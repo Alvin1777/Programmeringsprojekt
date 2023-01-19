@@ -390,12 +390,15 @@ def ChooseDirection():
 def Home():
 
     if player.character == "Knight":
+        print("\n"*40)
         at_home_castle_artwork()
         time.sleep(3)
     elif player.character == "Blacksmith":
+        print("\n"*40)
         at_home_house_artwork()
         time.sleep(3)
     elif player.character == "Farmer":
+        print("\n"*40)
         at_home_village_artwork()
         time.sleep(3)
 
@@ -435,6 +438,7 @@ def Home():
 
 def at_house():
     while True:
+        print("\n"*40)
         print ("Welcome home to your", player.player_house)
         print ("Choose what to do at your", player_house,",", player_name)
         print ('''
@@ -457,8 +461,10 @@ def at_house():
             time.sleep(2)
         elif house_action_choice == 2:
             while True:
+                print("\n"*50)
                 print ("Do you want to add an item to the chest? 1. yes, 2. Go back")
                 home_chest_choice = int(input("-> "))
+                print("\n"*5)
 
                 if home_chest_choice == 1:
                     item_slot = 1
@@ -474,6 +480,7 @@ def at_house():
                             print("Chest is empty...")
                     print()
                     chest_choice = int(input("1. Store item, 2. Take item -> "))
+                    print("\n"*5)
                     if chest_choice == 1:
                         item_to_add_to_chest = int(input("Choose Item To add to chest: "))
                         item_to_add_to_chest -= 1
