@@ -234,12 +234,10 @@ def FightMonster():
     monster_type = RandomMonster()
     print("\n"*6)
     print("A ",monster_type.enemy_name," appeard!")
-    while True:
-        if monster_type.enemy_health < 0:
-            monster_type = RandomMonster()
-            break
-    else: 
-        pass
+    
+    if monster_type.enemy_health <= 0:
+        monster_type = RandomMonster()
+
 
     while True:
         if monster_type.enemy_health > 0:
