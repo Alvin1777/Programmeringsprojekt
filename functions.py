@@ -231,11 +231,15 @@ def FightMonster():
     monster_type = RandomMonster()
     print("\n"*6)
     print("A ",monster_type.enemy_name," appeard!")
+    if monster_type.enemy_health > 0:
+        monster_type = RandomMonster()
+    else: 
+        pass
 
     while True:
         if monster_type.enemy_health > 0:
             print("\n"*2)
-            print("What is action",player.PrintPlayerName())
+            print("What is action",player.player_name)
             print("\n")
             print("Your health: ",player.player_health)
             print("Enemy health: ",monster_type.enemy_health)
@@ -249,14 +253,29 @@ def FightMonster():
                 print("You hit the enemy for ",damage_dealt,"HP!")
                 monster_type.enemy_health -= equippedItem.weapon_damage * player.damage_multiplier
                 monster_type.enemy_health = round(monster_type.enemy_health, 1)
-                
-            enemy_strike_int = rand.randint(1,2)
 
-            if enemy_strike_int == 1:
-                damage_taken = round(monster_type.enemy_damage * player.damage_reduction, 1)
-                print("The enemy hit you for",damage_taken,"HP!")
-                player.player_health -= monster_type.enemy_damage * player.damage_reduction
-                player.player_health = round(player.player_health, 1)
+                enemy_strike_int = rand.randint(1,2)
+
+                if enemy_strike_int == 1:
+                    damage_taken = round(monster_type.enemy_damage * player.damage_reduction, 1)
+                    print("The enemy hit you for",damage_taken,"HP!")
+                    player.player_health -= monster_type.enemy_damage * player.damage_reduction
+                    player.player_health = round(player.player_health, 1)
+                
+            elif fight_input == 2:
+                print("You blocked an incoming attack!")
+                print("Do you wish to open iventory to change weapon or use an item? y/n")
+                block_choice = input("-> ")
+
+                if block_choice == "y":
+                    openInventory()
+                else:
+                    pass
+            
+            elif fight_input == 3:
+                print("You choose to flee the battle!")
+                print("\n"*2)
+                break
 
             if player.player_health <= 0:
                 print("\n"*35)
@@ -345,7 +364,7 @@ def ChooseDirection():
         direction_choice = input("-> ")
         print("\n"*2)
         if direction_choice == "1":
-            print("You choose to turn right...")
+            print("You choose to turn left...")
             print("\n"*2)
             GenerateRoom()
         elif direction_choice == "2":
@@ -353,7 +372,7 @@ def ChooseDirection():
             print("\n"*2)
             GenerateRoom()
         elif direction_choice == "3":
-            print("You choose to turn left...")
+            print("You choose to turn right...")
             print("\n"*2)
             GenerateRoom()
         elif direction_choice == "4":
