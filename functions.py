@@ -99,6 +99,7 @@ def ChooseCharacter():
                 if confirm_character == "y":
                     player = Player(player_name, character, player_house, title, surname, 30, 0, inventory_size, bank, xp_multiplier, damage_reduction, damage_multiplier, weapon_price_reduction, item_price_reduction)
                     print("Character Confirmed...")
+                    print("\n"*40)
                     break
                 else:
                     print("")
@@ -122,6 +123,7 @@ def ChooseCharacter():
                 if confirm_character == "y":
                     player = Player(player_name, character, player_house, title, surname, 30, 0, inventory_size, bank, xp_multiplier, damage_reduction, damage_multiplier, weapon_price_reduction, item_price_reduction)
                     print("Character Confirmed...")
+                    print("\n"*40)
                     break
                 else:
                     print("")
@@ -137,7 +139,7 @@ def ChooseCharacter():
                 damage_multiplier = 1.1
                 weapon_price_reduction = 1
                 item_price_reduction = 0.5
-                print("\n"*30)
+                print("\n"*40)
                 print_backstory_3()
                 print("\n")
 
@@ -145,6 +147,7 @@ def ChooseCharacter():
                 if confirm_character == "y":
                     player = Player(player_name, character, player_house, title, surname, 30, 0, inventory_size, bank, xp_multiplier, damage_reduction, damage_multiplier, weapon_price_reduction, item_price_reduction)
                     print("Character Confirmed...")
+                    print("\n"*40)
                     break
                 else:
                     print("")
@@ -397,7 +400,7 @@ def Home():
         time.sleep(3)
 
     while True:
-        print("\n"*20)
+        print("\n"*40)
         print("You are home at your", player.player_house)
         print ("\n"*2)
         print('''You can now decide what to do at home...
