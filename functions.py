@@ -46,12 +46,10 @@ goldArtifactItem = items("Gold artifact", 200, False, 0)
 inventory = [DefaultDaggerWeapon]
 equippedItem = inventory[0]
 blacksmith_item_list_all = [SteelSwordWeapon, WoodSwordWeapon, AtgeirSpearWeapon, YariSpearWeapon, DanishAxeWeapon, BattleAxeWeapon, GolokSwordWeapon, DaodacSwordWeapon]
-blacksmith_item_list_1 = [SteelSwordWeapon, WoodSwordWeapon, AtgeirSpearWeapon, YariSpearWeapon]
-blacksmith_item_list_2 = [DanishAxeWeapon, BattleAxeWeapon, GolokSwordWeapon, DaodacSwordWeapon]
 item_shop_item_list = [potatoItem, beefItem, healingPoitionItem, bronzeArtifactItem, silverArtifactItem, goldArtifactItem]
 player_bank = 100
 full_health = 30
-chest_list = []
+chest_list = [potatoItem, beefItem, healingPoitionItem]
 
 #Functions
 
@@ -234,10 +232,10 @@ def FightMonster():
     monster_type = RandomMonster()
     print("\n"*6)
     print("A ",monster_type.enemy_name," appeard!")
-    if monster_type.enemy_health > 0:
+    
+    if monster_type.enemy_health <= 0:
         monster_type = RandomMonster()
-    else: 
-        pass
+
 
     while True:
         if monster_type.enemy_health > 0:
@@ -267,7 +265,7 @@ def FightMonster():
                 
             elif fight_input == 2:
                 print("You blocked an incoming attack!")
-                print("Do you wish to open iventory to change weapon or use an item? y/n")
+                print("Do you wish to open inventory to change weapon or use an item? y/n")
                 block_choice = input("-> ")
 
                 if block_choice == "y":
@@ -390,48 +388,52 @@ def ChooseDirection():
 def Home():
 
     if player.character == "Knight":
+        print("\n"*40)
         at_home_castle_artwork()
         time.sleep(3)
     elif player.character == "Blacksmith":
+        print("\n"*40)
         at_home_house_artwork()
         time.sleep(3)
     elif player.character == "Farmer":
+        print("\n"*40)
         at_home_village_artwork()
         time.sleep(3)
 
     while True:
-        print("\n"*40)
-        print("You are home at your", player.player_house)
-        print ("\n"*2)
-        print('''You can now decide what to do at home...
-                ----------------------------------------
-                1. You can stay in your house and rest
-                2. You can go to the blacksmith
-                3. You can go to the item shop
-                4. Go back out in the wild
-                5. Quit and save
-                ----------------------------------------        
-        ''')
-        home_action_choice = int(input('''Decide what to do -->  '''))
-        print("\n"*2)
+            try:
+                print("\n"*40)
+                print("You are home at your", player.player_house)
+                print ("\n"*2)
+                print('''You can now decide what to do at home...
+                        ----------------------------------------
+                        1. You can stay in your house and rest
+                        2. You can go to the blacksmith
+                        3. You can go to the item shop
+                        4. Go back out in the wild
+                        5. Quit and save
+                        ----------------------------------------        
+                ''')
+                home_action_choice = int(input('''Decide what to do -->  '''))
+                print("\n"*2)
 
-        if home_action_choice == 1:
-            at_house()
+                if home_action_choice == 1:
+                    at_house()
 
-        elif home_action_choice == 2:
-            blacksmith()
+                elif home_action_choice == 2:
+                    blacksmith()
 
-        elif home_action_choice == 3:
-            item_shop()
+                elif home_action_choice == 3:
+                    item_shop()
 
-        elif home_action_choice == 4:
-            print("Your going out")
-            break
-        elif home_action_choice == 5:
-            
-            QuitGame()
-        else:
-            print("")
+                elif home_action_choice == 4:
+                    print("Your going out")
+                    break
+                elif home_action_choice == 5:     
+                    QuitGame()
+            except:
+                print("Choose between numbers 1-5")
+                input("Press Enter To Continue")
 
 def at_house():
     while True:
@@ -457,19 +459,21 @@ def at_house():
             time.sleep(2)
         elif house_action_choice == 2:
             while True:
-                print ("Do you want to add an item to the chest? 1. yes, 2. Go back")
+                print ("Do you want to access the chest? 1. yes, 2. Go back")
                 home_chest_choice = int(input("-> "))
 
                 if home_chest_choice == 1:
                     item_slot = 1
+                    print("Inventory:")
                     for items in inventory:
                         print("",item_slot ,".", items.weapon_name,",")
                         item_slot += 1
                     item_slot = 1
                     print()
+                    print("Chest:")
                     for chest_items in chest_list:
                         try:
-                            print("",item_slot,".",chest_items.weapon_name,",")
+                            print("",item_slot,".",chest_items.item_name,",")
                         except:
                             print("Chest is empty...")
                     print()
@@ -488,18 +492,80 @@ def at_house():
                         inventory.append(item_to_take_from_chest)
                         chest_list.pop(item_to_take_from_chest)
                 
-                elif home_chest_choice == 2:
-                    print("You go back..")
-                    break
+            
+def at_house():
+        try:
+            while True:
+                print("\n"*40)
+                print ("Welcome home to your", player.player_house)
+                print ("Choose what to do at your", player_house,",", player_name)
+                print ('''
+                        ----------------------------------------
+                        1. Eat and sleep
+                        2. Store items in chest
+                        3. Open inventory
+                        4. Go back
+                        5. Save and quit
+                        ----------------------------------------
+                ''')
+                print("What do you want to do ",player_name,"?")
+                house_action_choice = int(input("-> "))
+                if house_action_choice == 1:
+                    player.player_health = full_health
+                    print("You rest for the night...")
+                    restArtwork()
+                    print("\n"*4)
+                    print("A new day! Your health has been restored!\n")
+                    time.sleep(2)
+                elif house_action_choice == 2:
+                    while True:
+                        print("\n"*50)
+                        print ("Do you want to add an item to the chest? 1. yes, 2. Go back")
+                        home_chest_choice = int(input("-> "))
+                        print("\n"*5)
 
-        elif house_action_choice == 3:
-            openInventory()
-        elif house_action_choice == 4:
-            print ("Going back...")
-            break
-        elif house_action_choice == 5:
-            QuitGame()
-        else:
+                        if home_chest_choice == 1:
+                            item_slot = 1
+                            for items in inventory:
+                                print("",item_slot ,".", items.weapon_name,",")
+                                item_slot += 1
+                            item_slot = 1
+                            print()
+                            for chest_items in chest_list:
+                                try:
+                                    print("",item_slot,".",chest_items.weapon_name,",")
+                                except:
+                                    print("Chest is empty...")
+                            print()
+                            chest_choice = int(input("1. Store item, 2. Take item -> "))
+                            print("\n"*5)
+                            if chest_choice == 1:
+                                item_to_add_to_chest = int(input("Choose Item To add to chest: "))
+                                item_to_add_to_chest -= 1
+
+                                chest_list.append(inventory[item_to_add_to_chest])
+                                inventory.pop(item_to_add_to_chest)
+
+                            elif chest_choice == 2:
+                                item_to_take_from_chest = int(input("Choose Item To take from the chest: "))
+                                item_to_take_from_chest -= 1
+
+                                inventory.append(item_to_take_from_chest)
+                                chest_list.pop(item_to_take_from_chest)
+                        
+                        elif home_chest_choice == 2:
+                            print("You go back..")
+                            break
+
+                elif house_action_choice == 3:
+                    print("\n"*50)
+                    openInventory()
+                elif house_action_choice == 4:
+                    print ("Going back...")
+                    break
+                elif house_action_choice == 5:
+                    QuitGame()
+        except:
             print ("Use numbers between 1-5")
             input("Press Enter To Continue")
 
@@ -515,13 +581,9 @@ def blacksmith():
 
             item_slot = 1
 
-            for items in blacksmith_item_list_1:
+            for items in blacksmith_item_list_all:
                 print(item_slot,", ",items.weapon_name ," ",items.weapon_value,"")
                 item_slot += 1
-            print()
-            item_slot = 1
-            for items_2 in blacksmith_item_list_2:
-                print(item_slot,", ",items_2.weapon_name ," ",items_2.weapon_value,"")
             print()
             itemToBuy = int(input("Choose What Item To Buy -> "))
             itemToBuy -= 1
@@ -550,12 +612,7 @@ def item_shop():
                 print(item_slot, items.item_name, end=":")
                 print(items.item_value, "Coins")
                 item_slot += 1
-            print()
-            item_slot = 1
-            for items_2 in item_shop_item_list:
-                print(item_slot, items_2.item_name, end=":")
-                print(items_2.item_value, "Coins")
-                item_slot += 1
+
             print()
             itemToBuy = int(input("Choose What Item To Buy -> "))
             itemToBuy -= 1
