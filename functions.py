@@ -283,7 +283,7 @@ def FightMonster():
             if player.player_health <= 0:
                 print("\n"*35)
                 print("You died!")
-                print("GAME OVER")
+                gameOverArt()
                 time.sleep(2)
                 print("\n"*10)
                 ShowCredits()
