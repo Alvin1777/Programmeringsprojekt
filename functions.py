@@ -7,12 +7,12 @@ from classes import *
 #Objects
 
     #Enemies
-SkeletonEnemy = enemy("Skeleton", 20, 5, False)
+SkeletonEnemy = enemy("Skeleton", 20, 6, False)
 ZombieEnemy = enemy("Zombie", 30, 4, False)
 OrcEnemy = enemy("Orc", 10, 10, False)
 GoblinEnemy = enemy("Goblin", 15, 7, False)
 BatEnemy = enemy("Bat",2, 2, False)
-SpiderEnemy = enemy("Spider", 10, 5, False)
+SpiderEnemy = enemy("Spider", 10, 4, False)
 
 SkeletonBoss = enemy("Skeleton King", 40, 10, True)
 ZombieBoss = enemy("Zombie king", 45, 6, True)
@@ -42,7 +42,7 @@ bronzeArtifactItem = items("Bronze artifact", 50, False, 0, False)
 silverArtifactItem = items("Silver artifact", 100, False, 0, False)
 goldArtifactItem = items("Gold artifact", 200, False, 0, False)
 
-# PLACEHOLDER VAL
+# VAL
 inventory_weapon = [DefaultDaggerWeapon]
 inventory_item = [potatoItem]
 equippedItem = inventory_weapon[0]
@@ -175,6 +175,7 @@ def openInventory():
 
         if inventory_choice == 1:
             print("This is your current equipped item: ",equippedItem.weapon_name)
+            item_slot = 1
             for items in inventory_weapon:
                 print(item_slot,", ",items.weapon_name,",")
                 item_slot += 1
@@ -200,6 +201,7 @@ def openInventory():
                     player.player_health += item_to_be_used.healing_power
                     print("Health restored!")
                     print("You now have",player.player_health,"HP!")
+                    inventory_item.pop(itemToEquip)
                     break
                 else: 
                     print("Please choose a healing item")
@@ -227,7 +229,7 @@ def getRandomItem():
     return randomItem
 
 def getRandomWeapon():
-    rand_weapon_int = rand.randint(0, 8)
+    rand_weapon_int = rand.randint(0, 7)
     randomWeapon = blacksmith_item_list_all[rand_weapon_int]
     return randomWeapon
 
@@ -323,7 +325,7 @@ def FightMonster():
                 ShowCredits()
                 QuitGame()
 
-        else:
+        elif monster_type.enemy_health <= 0:
             if monster_type.enemy_is_boss == True:
                 xp_to_earn = round(rand.randint(5, 8) * player.xp_multi, 1)
                 money_to_earn = rand.randint(30, 50)
@@ -377,12 +379,12 @@ def chestRoom():
         print("Player balance is ",player.bank," coins!")
 
 def GenerateRoom():
-    random_room_int = rand.randint(1, 3)
+    random_room_int = rand.randint(1, 2)
 
     if random_room_int == 1:
         chestRoom()
             
-    elif random_room_int in (2, 3):
+    elif random_room_int == 2:
         FightMonster()
 
 
@@ -524,6 +526,7 @@ def at_house():
                                 print("",item_slot ,".", chest_weapons.weapon_name,",")
                                 item_slot += 1
                             item_slot = 1
+                            print("Items:")
                             for chest_items in  chest_list_item:
                                 print("",item_slot ,".", chest_items.item_name,",")
                                 item_slot += 1
@@ -535,6 +538,11 @@ def at_house():
                             if chest_choice == 1:
                                 chest_choice_item = int(input("1. Store Item, 2. Store Weapon -> "))
                                 if chest_choice_item == 1:
+                                    item_slot = 1
+                                    print("Items: ")
+                                    for items in inventory_item:
+                                        print(item_slot,",",  items.item_name)
+                                        item_slot += 1
                                     item_to_add_to_chest = int(input("Choose Item To add to chest: "))
                                     item_to_add_to_chest -= 1
 
@@ -542,6 +550,11 @@ def at_house():
                                     inventory_item.pop(item_to_add_to_chest)
                                 
                                 elif chest_choice_item == 2:
+                                    item_slot = 1
+                                    print("Items: ")
+                                    for items in inventory_weapon:
+                                        print(item_slot,",",  items.weapon_name)
+                                        item_slot += 1
                                     item_to_add_to_chest = int(input("Choose Item To add to chest: "))
                                     item_to_add_to_chest -= 1
 
@@ -554,29 +567,33 @@ def at_house():
                                 item_chest_choice = int(input("-> "))
 
                                 if item_chest_choice == 1:
+                                    print("Weapons: ")
                                     item_slot = 1
                                     for items in inventory_weapon:
                                         print("",item_slot ,".", items.weapon_name,",")
                                         item_slot += 1
                                     item_slot = 1
+                                    print()
 
                                     item_to_take_from_chest = int(input("Choose Item To take from the chest: "))
                                     item_to_take_from_chest -= 1
 
-                                    inventory_weapon.append(item_to_take_from_chest)
+                                    inventory_weapon.append(chest_list_weapon[item_to_take_from_chest])
                                     chest_list_weapon.pop(item_to_take_from_chest)
                                 
                                 elif item_chest_choice == 2:
+                                    print("Items: ")
                                     item_slot = 1
                                     for items in inventory_item:
                                         print("",item_slot ,".", items.item_name,",")
                                         item_slot += 1
                                     item_slot = 1
+                                    print()
 
                                     item_to_take_from_chest = int(input("Choose Item To take from the chest: "))
                                     item_to_take_from_chest -= 1
 
-                                    inventory_item.append(item_to_take_from_chest)
+                                    inventory_item.append(chest_list_item[item_to_take_from_chest])
                                     chest_list_item.pop(item_to_take_from_chest)
                         
                         elif home_chest_choice == 2:
