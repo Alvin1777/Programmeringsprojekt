@@ -675,19 +675,23 @@ def item_shop():
 
 def MovePlayer():
     while True:
-        print("What Is Your Action", player.player_name,"?")
-        print('''
-            1. Explore the world.
-            2. Go Home.
-            ''')
-        input_what_to_do = input("-> ")
+        try:
+            print("What Is Your Action", player.player_name,"?")
+            print('''
+                1. Explore the world.
+                2. Go Home.
+                ''')
+            input_what_to_do = input("-> ")
 
-        if input_what_to_do == "1":
-            print("You choose to explore...")
-            ChooseDirection()
-        elif input_what_to_do == "2":
-            print("You choose to go home...")
-            Home()
+            if input_what_to_do == "1":
+                print("You choose to explore...")
+                ChooseDirection()
+            elif input_what_to_do == "2":
+                print("You choose to go home...")
+                Home()
+        except:
+                print("Use Numbers Between 1-2")
+                print("Press Enter To Continue")    
                     
 
 def Play():
