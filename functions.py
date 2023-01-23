@@ -507,6 +507,8 @@ def at_house():
 
                         if home_chest_choice == 1:
                             item_slot = 1
+                            print("Player:")
+                            print()
                             print("Weapons:")
                             for items in inventory_weapon:
                                 print("",item_slot ,".", items.weapon_name,",")
@@ -518,7 +520,7 @@ def at_house():
                                 print("",item_slot ,".", items.item_name,",")
                                 item_slot += 1
                             item_slot = 1
-                            print()
+                            print("\n"*2)
                             print("Chest:")
                             print()
                             print("Weapons:")
@@ -526,6 +528,7 @@ def at_house():
                                 print("",item_slot ,".", chest_weapons.weapon_name,",")
                                 item_slot += 1
                             item_slot = 1
+                            print()
                             print("Items:")
                             for chest_items in  chest_list_item:
                                 print("",item_slot ,".", chest_items.item_name,",")
@@ -551,7 +554,7 @@ def at_house():
                                 
                                 elif chest_choice_item == 2:
                                     item_slot = 1
-                                    print("Items: ")
+                                    print("Weapons: ")
                                     for items in inventory_weapon:
                                         print(item_slot,",",  items.weapon_name)
                                         item_slot += 1
@@ -569,7 +572,7 @@ def at_house():
                                 if item_chest_choice == 1:
                                     print("Weapons: ")
                                     item_slot = 1
-                                    for items in inventory_weapon:
+                                    for items in chest_list_weapon:
                                         print("",item_slot ,".", items.weapon_name,",")
                                         item_slot += 1
                                     item_slot = 1
@@ -584,7 +587,7 @@ def at_house():
                                 elif item_chest_choice == 2:
                                     print("Items: ")
                                     item_slot = 1
-                                    for items in inventory_item:
+                                    for items in chest_list_item:
                                         print("",item_slot ,".", items.item_name,",")
                                         item_slot += 1
                                     item_slot = 1
