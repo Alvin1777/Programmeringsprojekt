@@ -267,16 +267,22 @@ def RandomMonster():
             return SpiderEnemy
 
 def FightMonster():
+    enemy_health_check = 0
     monster_type = RandomMonster()
     print("\n"*6)
     print("A ",monster_type.enemy_name," appeard!")
     
     if monster_type.enemy_health <= 0:
-        monster_type = RandomMonster()
+        monster_type.enemy_health = 10
 
 
     while True:
+        if monster_type.enemy_health <= 0 and enemy_health_check == 0:
+            monster_type.enemy_health = 10
+            enemy_health_check = 1
+
         if monster_type.enemy_health > 0:
+            enemy_health_check = 1
             print("\n"*2)
             print("What is action",player.player_name)
             print("\n")
