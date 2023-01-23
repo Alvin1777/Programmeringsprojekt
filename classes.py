@@ -33,6 +33,9 @@ class weapons():
         self.weapon_damage = weapon_damage
         self.weapon_value = weapon_value
         self.isWeapon = isWeapon
+
+    def showWeaponStats(self):
+        print(f"{self.weapon_name}, Damage: {self.weapon_damage}, Price: {self.weapon_value}")
         
 
 class items():

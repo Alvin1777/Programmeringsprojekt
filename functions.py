@@ -683,17 +683,29 @@ def blacksmith():
                 print ("Welcome to the blacksmith")
                 print("Your bank balance: ",player.bank," coins")
                 print("All items that are available: ")
+                while True:
+                    item_slot = 1
 
-                item_slot = 1
+                    for items in blacksmith_item_list_all:
+                        print(item_slot,", ",items.weapon_name ," ",items.weapon_value,"")
+                        item_slot += 1
+                    print()
+                    itemToBuy = int(input("Choose What Item To Buy -> "))
+                    itemToBuy -= 1
+                    itemToBuyObject = blacksmith_item_list_all[itemToBuy]
 
-                for items in blacksmith_item_list_all:
-                    print(item_slot,", ",items.weapon_name ," ",items.weapon_value,"")
-                    item_slot += 1
-                print()
-                itemToBuy = int(input("Choose What Item To Buy -> "))
-                itemToBuy -= 1
-                itemToBuyObject = blacksmith_item_list_all[itemToBuy]
+                    itemToBuyObject.showWeaponStats()
 
+                    print("Do you wish to buy this weapon? y/n")
+                    buyItemChoice = input("-> ")
+
+                    if buyItemChoice == "y":
+                        break
+                    elif buyItemChoice == "n":
+                        pass
+                    else:
+                        print("Please use the letters y and n")
+                        input("Press Enter To Continue")
                 if player.bank >=  itemToBuyObject.weapon_value:
                     player.bank -= itemToBuyObject.weapon_value
                     addItemToInventory(blacksmith_item_list_all[itemToBuy])
