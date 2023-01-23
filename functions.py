@@ -647,8 +647,12 @@ def at_house():
                     break
                 elif house_action_choice == 5:
                     QuitGame()
+        except ValueError:
+            print("Use Numbers Between 1-5")
+            time.sleep(1)
+            input("Press Enter To Continue")
         except:
-            print ("Use numbers between 1-5")
+            print("An Error Was Detected")
             time.sleep(1)
             input("Press Enter To Continue")
 
@@ -681,8 +685,12 @@ def blacksmith():
                     print("Your bank balance is to low...")
             elif item_menu_choice == 2:
                 break
-        except:
+        except ValueError:
             print("Use Numbers Between 1-2")
+            time.sleep(1)
+            input("Press Enter To Continue")
+        except:
+            print("An Error Was Detected")
             time.sleep(1)
             input("Press Enter To Continue")
 
@@ -715,8 +723,12 @@ def item_shop():
                     print("Your bank balance is to low...")
             elif item_menu_choice == 2:
                 break
-        except:
+        except ValueError:
             print("Use Numbers Between 1-2")
+            time.sleep(1)
+            input("Press Enter To Continue")
+        except:
+            print("An Error Was Detected")
             time.sleep(1)
             input("Press Enter To Continue")
 
@@ -736,10 +748,14 @@ def MovePlayer():
             elif input_what_to_do == 2:
                 print("You choose to go home...")
                 Home()
+        except ValueError:
+            print("Use Numbers Between 1-2")
+            time.sleep(1)
+            input("Press Enter To Continue")
         except:
-                print("Use Numbers Between 1-2")
-                time.sleep(1)
-                input("Press Enter To Continue")    
+            print("An Error Was Detected")
+            time.sleep(1)
+            input("Press Enter To Continue")
                     
 
 def Play():
@@ -805,7 +821,11 @@ def MainMenu():
         try:
             main_menu_choice = int(input("What Is Your Action? -> "))
             return main_menu_choice
+        except ValueError:
+            print("Use Numbers Between 1-4")
+            time.sleep(1)
+            input("Press Enter To Continue")
         except:
-            print("\nUse Numbers Between 1-4\n")
+            print("An Error Was Detected")
             time.sleep(1)
             input("Press Enter To Continue")
