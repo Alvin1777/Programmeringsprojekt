@@ -19,5 +19,6 @@ while True:
     elif main_menu_choice == 4:
         QuitGame()
     else:
-        print("Please Use Numbers To Choose One Of The Options Above\n")
-        time.sleep(2)
+        print("Use Numbers Between 1-4")
+        time.sleep(1)
+        input("Press Enter To Continue")

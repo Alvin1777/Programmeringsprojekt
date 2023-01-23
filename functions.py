@@ -155,10 +155,14 @@ def ChooseCharacter():
                     break
                 else:
                     print("")
+            else:
+                print("Use Numbers Between 1-3")
+                time.sleep(1)
+                input("Press Enter To Continue")
         except ValueError:
-            print("Use Numbers Between 1-3")
-            time.sleep(1)
-            input("Press Enter To Continue")
+                print("Use Numbers Between 1-3")
+                time.sleep(1)
+                input("Press Enter To Continue")      
         except:
             print("An Error Was Detected")
             time.sleep(1)
@@ -332,6 +336,11 @@ def FightMonster():
                         print("You choose to flee the battle!")
                         print("\n"*2)
                         break
+
+                    else:
+                        print("Use Numbers Between 1-3")
+                        time.sleep(1)
+                        input("Press Enter To Continue")
                 if player.player_health <= 0:
                     print("\n"*35)
                     print("You died!")
@@ -446,6 +455,10 @@ def ChooseDirection():
                 print("Your turn back...")
                 print("\n"*2)
                 break
+            else:
+                print("Use Numbers Between 1-5")
+                time.sleep(1)
+                input("Press Enter To Continue")
         except ValueError:
             print("Use Numbers Between 1-5")
             time.sleep(1)
@@ -647,6 +660,10 @@ def at_house():
                     break
                 elif house_action_choice == 5:
                     QuitGame()
+                else:
+                    print("Use Numbers Between 1-5")
+                    time.sleep(1)
+                    input("Press Enter To Continue")
         except ValueError:
             print("Use Numbers Between 1-5")
             time.sleep(1)
@@ -685,6 +702,10 @@ def blacksmith():
                     print("Your bank balance is to low...")
             elif item_menu_choice == 2:
                 break
+            else:          
+                print("Use Numbers Between 1-2")
+                time.sleep(1)
+                input("Press Enter To Continue")
         except ValueError:
             print("Use Numbers Between 1-2")
             time.sleep(1)
@@ -723,6 +744,10 @@ def item_shop():
                     print("Your bank balance is to low...")
             elif item_menu_choice == 2:
                 break
+            else:         
+                print("Use Numbers Between 1-2")
+                time.sleep(1)
+                input("Press Enter To Continue")
         except ValueError:
             print("Use Numbers Between 1-2")
             time.sleep(1)
@@ -748,6 +773,10 @@ def MovePlayer():
             elif input_what_to_do == 2:
                 print("You choose to go home...")
                 Home()
+            else:
+                print("Use Numbers Between 1-2")
+                time.sleep(1)
+                input("Press Enter To Continue")
         except ValueError:
             print("Use Numbers Between 1-2")
             time.sleep(1)
