@@ -301,7 +301,7 @@ def FightMonster():
             enemy_health_check = 0
             monster_type = RandomMonster()
             print("\n"*6)
-            print("A ",monster_type.enemy_name," appeard!")
+            print("A",monster_type.enemy_name,"appeard!")
             
             if monster_type.enemy_health <= 0:
                 monster_type.enemy_health = 10
@@ -327,7 +327,7 @@ def FightMonster():
                         damage_dealt = round(equippedItem.weapon_damage * player.damage_multiplier, 1)
 
                         print("You hit the enemy for",damage_dealt,"HP!")
-                        monster_type.enemy_health -= equippedItem.weapon_damage * player.damage_multiplier
+                        monster_type.enemy_health -= damage_dealt
                         monster_type.enemy_health = round(monster_type.enemy_health, 1)
 
                         enemy_strike_int = rand.randint(1,2)
@@ -371,31 +371,31 @@ def FightMonster():
                         xp_to_earn = round(rand.randint(5, 8) * player.xp_multi, 1)
                         money_to_earn = rand.randint(30, 50)
 
-                else:
-                    xp_to_earn = round(rand.randint(1, 5) * player.xp_multi, 1)
-                    money_to_earn = rand.randint(10, 30)
+                    else:
+                        xp_to_earn = round(rand.randint(1, 5) * player.xp_multi, 1)
+                        money_to_earn = rand.randint(10, 30)
 
                 
-                player.bank += money_to_earn
+                    player.bank += money_to_earn
 
-                old_player_level = player.player_level
-                player.current_xp += xp_to_earn
+                    old_player_level = player.player_level
+                    player.current_xp += xp_to_earn
 
-                if player.current_xp >= 10:
-                    player.current_xp -= 10
-                    player.player_level += 1
-                    player.boss_spawn += 1
+                    if player.current_xp >= 10:
+                        player.current_xp -= 10
+                        player.player_level += 1
+                        player.boss_spawn += 1
 
-                print("\n\nYou Slain The Enemy!")
-                print("You earned ",money_to_earn," coins and ",xp_to_earn," experience points!")
-                print("Your bank balance is now ",player.bank," coins!")
-                if player.player_level > old_player_level:
-                    print("You have leveled up!")
-                else:
-                    pass
-                print("Your level is",player.player_level,", XP remaining to next level: ",player.current_xp,"/",10,"")
-                time.sleep(2)
-                break
+                    print("\n\nYou Slain The Enemy!")
+                    print("You earned ",money_to_earn," coins and ",xp_to_earn," experience points!")
+                    print("Your bank balance is now ",player.bank," coins!")
+                    if player.player_level > old_player_level:
+                        print("You have leveled up!")
+                    else:
+                        pass
+                    print("Your level is",player.player_level,", XP remaining to next level: ",player.current_xp,"/",10,"")
+                    time.sleep(2)
+                    break
         except ValueError:
             print("Use Numbers Between 1-3")
             time.sleep(1)
@@ -681,12 +681,12 @@ def at_house():
                 elif house_action_choice == 4:
                     print ("Going back...")
                     break
-                elif house_action_choice == 5:
-                    QuitGame()
                 else:
                     print("Use Numbers Between 1-5")
                     time.sleep(1)
                     input("Press Enter To Continue")
+                if house_action_choice == 5:
+                    QuitGame()
         except ValueError:
             print("Use Numbers Between 1-5")
             time.sleep(1)
