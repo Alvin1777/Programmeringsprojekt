@@ -15,8 +15,11 @@ def print_backstory_1():
     Inside the castle walls there is also a blacksmith where weapons can be forged and a shop where items can be bought. 
     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     Choosing the Knight grants the following modifiers:
-        - Honorable title (XP multiplier )
-        - Rich family (Starts with much more money)\n
+        - Honorable title (XP multiplier)
+        - Rich family (Starts with much more money)
+        - Strong armor (Damage taken reduction)
+        - Combat trained (Damage multiplier)
+        \n
     ----------------------------------------------------------------------------------------------------------- 
     ''')
 
@@ -36,7 +39,8 @@ def print_backstory_2():
     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     Choosing the blacksmith grants the following modifiers:
         - Strong weapons (Damage multiplier)
-        - Family-legacy (Free weapons forge)\n
+        - Family-legacy (Cheaper weapons)
+        \n
     -----------------------------------------------------------------------------------------------------------
     ''')
 
@@ -55,8 +59,9 @@ def print_backstory_3():
     if he can afford it. The farmer also has his own farm where he can grow his own food. 
     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     Choosing the farmer grants the following modifiers:
-        - Self-grown crops (Free food)
-        - Poor (Starts with much less money)
-\n
+        	- Strong (Damage multiplier) 
+	        - Self-grown crops (Cheaper food and item)
+	        - Poor (Starts with less money)
+            \n
     -----------------------------------------------------------------------------------------------------------
     ''')
