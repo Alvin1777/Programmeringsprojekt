@@ -2,9 +2,9 @@ from classes import *
 from functions import *
 from art import *
 
-print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
+print("\n"*10)
 PrintTitleScreen()
-print("\n\n\n\n")
+print("\n"*4)
 time.sleep(3)
 
 while True:
