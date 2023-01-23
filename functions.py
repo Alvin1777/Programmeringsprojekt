@@ -280,6 +280,22 @@ def RandomMonster():
         elif random_monster_int == 6:
             return SpiderEnemy
 
+def showPlayerStats():
+    global equippedItem
+    print("-"*20)
+    print()
+    player.printPlayerName()
+    print()
+    print(player.current_xp,"/ 10")
+    print("Level:",player.player_level)
+    print()
+    print("Equipped:",equippedItem.weapon_name)
+    print()
+    print("-"*20)
+    print()
+    input("Press Enter To Continue")
+    print("\n"*10)
+
 def FightMonster():
         try:
             enemy_health_check = 0
@@ -310,7 +326,7 @@ def FightMonster():
                     if fight_input == 1:
                         damage_dealt = round(equippedItem.weapon_damage * player.damage_multiplier, 1)
 
-                        print("You hit the enemy for ",damage_dealt,"HP!")
+                        print("You hit the enemy for",damage_dealt,"HP!")
                         monster_type.enemy_health -= equippedItem.weapon_damage * player.damage_multiplier
                         monster_type.enemy_health = round(monster_type.enemy_health, 1)
 
@@ -365,8 +381,8 @@ def FightMonster():
                 old_player_level = player.player_level
                 player.current_xp += xp_to_earn
 
-                if player.current_xp >= 20:
-                    player.current_xp -= 20
+                if player.current_xp >= 10:
+                    player.current_xp -= 10
                     player.player_level += 1
                     player.boss_spawn += 1
 
@@ -377,7 +393,7 @@ def FightMonster():
                     print("You have leveled up!")
                 else:
                     pass
-                print("Your level is",player.player_level,", XP remaining to next level: ",player.current_xp,"/",20,"")
+                print("Your level is",player.player_level,", XP remaining to next level: ",player.current_xp,"/",10,"")
                 time.sleep(2)
                 break
         except ValueError:
@@ -431,7 +447,8 @@ def ChooseDirection():
                 2: Forward
                 3: Right
                 4: Open inventory
-                5: Go back
+                5: See stats
+                6: Go back
                 ''')
 
             direction_choice = input("-> ")
@@ -452,11 +469,13 @@ def ChooseDirection():
                 print("\n"*2)
                 openInventory()
             elif direction_choice == "5":
+                showPlayerStats()
+            elif direction_choice == "6":
                 print("Your turn back...")
                 print("\n"*2)
                 break
             else:
-                print("Use Numbers Between 1-5")
+                print("Use Numbers Between 1-6")
                 time.sleep(1)
                 input("Press Enter To Continue")
         except ValueError:
@@ -495,7 +514,8 @@ def Home():
                         1. You can stay in your house and rest
                         2. You can go to the blacksmith
                         3. You can go to the item shop
-                        4. Go back out in the wild
+                        4. Show stats
+                        5. Go back out in the wild
                         ----------------------------------------        
                 ''')
                 home_action_choice = int(input('''Decide what to do -->  '''))
@@ -511,10 +531,13 @@ def Home():
                     item_shop()
 
                 elif home_action_choice == 4:
+                    showPlayerStats()
+
+                elif home_action_choice == 5:
                     print("Your going out")
                     break
             except ValueError:
-                print("Use Numbers Between 1-4")
+                print("Use Numbers Between 1-5")
                 time.sleep(1)
                 input("Press Enter To Continue")
             except:
