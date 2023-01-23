@@ -19,7 +19,7 @@ ZombieBoss = enemy("Zombie king", 45, 6, True)
 OrcBoss = enemy("Orc Lord", 30, 10, True)
 DragonBoss = enemy("Dragon", 50, 12, True)
 BatBoss = enemy("Man Bat",20, 5, True)
-SpiderBoss = enemy("Large Spider", 35, 7, True)
+SpiderBoss = enemy("Papa Spider", 35, 7, True)
 
     #Weapons
 
