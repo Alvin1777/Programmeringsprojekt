@@ -58,8 +58,13 @@ def ChooseCharacter():
     global player
     global player_name
     global player_house
-    print("What Is Your Name Explorer?")
-    player_name = input("-> ")
+    try:
+        print("What Is Your Name Explorer?")
+        player_name = input("-> ")
+    except:
+        print("An Error Was Detected")
+        time.sleep(1)
+        input("Press Enter To Continue")
 
     while True:
         
@@ -150,10 +155,19 @@ def ChooseCharacter():
                     break
                 else:
                     print("")
+            else:
+                print("Use Numbers Between 1-3")
+                time.sleep(1)
+                input("Press Enter To Continue")
         except ValueError:
-            input("Choose Between The Numbers 1-3. \nPress Enter To Try Again. ")
+                print("Use Numbers Between 1-3")
+                time.sleep(1)
+                input("Press Enter To Continue")      
         except:
-            input("An Error Was Detected. \nPress Enter To Try Again. ")
+            print("An Error Was Detected")
+            time.sleep(1)
+            input("Press Enter To Continue")
+        
        
 def openInventory():
     global equippedItem
@@ -267,94 +281,113 @@ def RandomMonster():
             return SpiderEnemy
 
 def FightMonster():
-    monster_type = RandomMonster()
-    print("\n"*6)
-    print("A ",monster_type.enemy_name," appeard!")
-    
-    if monster_type.enemy_health <= 0:
-        monster_type = RandomMonster()
+        try:
+            enemy_health_check = 0
+            monster_type = RandomMonster()
+            print("\n"*6)
+            print("A ",monster_type.enemy_name," appeard!")
+            
+            if monster_type.enemy_health <= 0:
+                monster_type.enemy_health = 10
 
 
-    while True:
-        if monster_type.enemy_health > 0:
-            print("\n"*2)
-            print("What is action",player.player_name)
-            print("\n")
-            print("Your health: ",player.player_health)
-            print("Enemy health: ",monster_type.enemy_health)
-            print("\n")
-            print("1. Strike, 2. Block, 3. Flee")
-            fight_input = int(input("-> "))
+            while True:
+                if monster_type.enemy_health <= 0 and enemy_health_check == 0:
+                    monster_type.enemy_health = 10
+                    enemy_health_check = 1
 
-            if fight_input == 1:
-                damage_dealt = round(equippedItem.weapon_damage * player.damage_multiplier, 1)
+                if monster_type.enemy_health > 0:
+                    enemy_health_check = 1
+                    print("\n"*2)
+                    print("What is action",player.player_name)
+                    print("\n")
+                    print("Your health: ",player.player_health)
+                    print("Enemy health: ",monster_type.enemy_health)
+                    print("\n")
+                    print("1. Strike, 2. Block, 3. Flee")
+                    fight_input = int(input("-> "))
 
-                print("You hit the enemy for ",damage_dealt,"HP!")
-                monster_type.enemy_health -= equippedItem.weapon_damage * player.damage_multiplier
-                monster_type.enemy_health = round(monster_type.enemy_health, 1)
+                    if fight_input == 1:
+                        damage_dealt = round(equippedItem.weapon_damage * player.damage_multiplier, 1)
 
-                enemy_strike_int = rand.randint(1,2)
+                        print("You hit the enemy for ",damage_dealt,"HP!")
+                        monster_type.enemy_health -= equippedItem.weapon_damage * player.damage_multiplier
+                        monster_type.enemy_health = round(monster_type.enemy_health, 1)
 
-                if enemy_strike_int == 1:
-                    damage_taken = round(monster_type.enemy_damage * player.damage_reduction, 1)
-                    print("The enemy hit you for",damage_taken,"HP!")
-                    player.player_health -= monster_type.enemy_damage * player.damage_reduction
-                    player.player_health = round(player.player_health, 1)
+                        enemy_strike_int = rand.randint(1,2)
+
+                        if enemy_strike_int == 1:
+                            damage_taken = round(monster_type.enemy_damage * player.damage_reduction, 1)
+                            print("The enemy hit you for",damage_taken,"HP!")
+                            player.player_health -= monster_type.enemy_damage * player.damage_reduction
+                            player.player_health = round(player.player_health, 1)
+                        
+                    elif fight_input == 2:
+                        print("You blocked an incoming attack!")
+                        print("Do you wish to open inventory to change weapon or use an item? y/n")
+                        block_choice = input("-> ")
+
+                        if block_choice == "y":
+                            openInventory()
+                        else:
+                            pass
+                    
+                    elif fight_input == 3:
+                        print("You choose to flee the battle!")
+                        print("\n"*2)
+                        break
+
+                    else:
+                        print("Use Numbers Between 1-3")
+                        time.sleep(1)
+                        input("Press Enter To Continue")
+                if player.player_health <= 0:
+                    print("\n"*35)
+                    print("You died!")
+                    gameOverArt()
+                    time.sleep(2)
+                    print("\n"*10)
+                    ShowCredits()
+                    QuitGame()
+
+                elif monster_type.enemy_health <= 0:
+                    if monster_type.enemy_is_boss == True:
+                        xp_to_earn = round(rand.randint(5, 8) * player.xp_multi, 1)
+                        money_to_earn = rand.randint(30, 50)
+
+                else:
+                    xp_to_earn = round(rand.randint(1, 5) * player.xp_multi, 1)
+                    money_to_earn = rand.randint(10, 30)
+
                 
-            elif fight_input == 2:
-                print("You blocked an incoming attack!")
-                print("Do you wish to open inventory to change weapon or use an item? y/n")
-                block_choice = input("-> ")
+                player.bank += money_to_earn
 
-                if block_choice == "y":
-                    openInventory()
+                old_player_level = player.player_level
+                player.current_xp += xp_to_earn
+
+                if player.current_xp >= 20:
+                    player.current_xp -= 20
+                    player.player_level += 1
+                    player.boss_spawn += 1
+
+                print("\n\nYou Slain The Enemy!")
+                print("You earned ",money_to_earn," coins and ",xp_to_earn," experience points!")
+                print("Your bank balance is now ",player.bank," coins!")
+                if player.player_level > old_player_level:
+                    print("You have leveled up!")
                 else:
                     pass
-            
-            elif fight_input == 3:
-                print("You choose to flee the battle!")
-                print("\n"*2)
-                break
-
-            if player.player_health <= 0:
-                print("\n"*35)
-                print("You died!")
-                gameOverArt()
+                print("Your level is",player.player_level,", XP remaining to next level: ",player.current_xp,"/",20,"")
                 time.sleep(2)
-                print("\n"*10)
-                ShowCredits()
-                QuitGame()
-
-        elif monster_type.enemy_health <= 0:
-            if monster_type.enemy_is_boss == True:
-                xp_to_earn = round(rand.randint(5, 8) * player.xp_multi, 1)
-                money_to_earn = rand.randint(30, 50)
-
-            else:
-                xp_to_earn = round(rand.randint(1, 5) * player.xp_multi, 1)
-                money_to_earn = rand.randint(10, 30)
-
-            
-            player.bank += money_to_earn
-
-            old_player_level = player.player_level
-            player.current_xp += xp_to_earn
-
-            if player.current_xp >= 20:
-                player.current_xp -= 20
-                player.player_level += 1
-                player.boss_spawn += 1
-
-            print("\n\nYou Slain The Enemy!")
-            print("You earned ",money_to_earn," coins and ",xp_to_earn," experience points!")
-            print("Your bank balance is now ",player.bank," coins!")
-            if player.player_level > old_player_level:
-                print("You have leveled up!")
-            else:
-                pass
-            print("Your level is",player.player_level,", XP remaining to next level: ",player.current_xp,"/",20,"")
-            time.sleep(2)
-            break
+                break
+        except ValueError:
+            print("Use Numbers Between 1-3")
+            time.sleep(1)
+            input("Press Enter To Continue")
+        except:
+            print("An Error Was Detected")
+            time.sleep(1)
+            input("Press Enter To Continue")
 
 def chestRoom():
     print("\n"*5)
@@ -391,36 +424,50 @@ def GenerateRoom():
 
 def ChooseDirection():
     while True:
-        print("Where do you wanna go?")
-        print('''
-            1: Left 
-            2: Forward
-            3: Right
-            4: Open inventory
-            5: Go back
-            ''')
+        try:
+            print("Where do you wanna go?")
+            print('''
+                1: Left 
+                2: Forward
+                3: Right
+                4: Open inventory
+                5: Go back
+                ''')
 
-        direction_choice = input("-> ")
-        print("\n"*2)
-        if direction_choice == "1":
-            print("You choose to turn left...")
+            direction_choice = input("-> ")
             print("\n"*2)
-            GenerateRoom()
-        elif direction_choice == "2":
-            print("You choose to go forward...")
-            print("\n"*2)
-            GenerateRoom()
-        elif direction_choice == "3":
-            print("You choose to turn right...")
-            print("\n"*2)
-            GenerateRoom()
-        elif direction_choice == "4":
-            print("\n"*2)
-            openInventory()
-        elif direction_choice == "5":
-            print("Your turn back...")
-            print("\n"*2)
-            break
+            if direction_choice == "1":
+                print("You choose to turn left...")
+                print("\n"*2)
+                GenerateRoom()
+            elif direction_choice == "2":
+                print("You choose to go forward...")
+                print("\n"*2)
+                GenerateRoom()
+            elif direction_choice == "3":
+                print("You choose to turn right...")
+                print("\n"*2)
+                GenerateRoom()
+            elif direction_choice == "4":
+                print("\n"*2)
+                openInventory()
+            elif direction_choice == "5":
+                print("Your turn back...")
+                print("\n"*2)
+                break
+            else:
+                print("Use Numbers Between 1-5")
+                time.sleep(1)
+                input("Press Enter To Continue")
+        except ValueError:
+            print("Use Numbers Between 1-5")
+            time.sleep(1)
+            input("Press Enter To Continue")
+        except:
+            print("An Error Was Detected")
+            time.sleep(1)
+            input("Press Enter To Continue")
+
 
 
 def Home():
@@ -449,7 +496,6 @@ def Home():
                         2. You can go to the blacksmith
                         3. You can go to the item shop
                         4. Go back out in the wild
-                        5. Quit and save
                         ----------------------------------------        
                 ''')
                 home_action_choice = int(input('''Decide what to do -->  '''))
@@ -467,10 +513,13 @@ def Home():
                 elif home_action_choice == 4:
                     print("Your going out")
                     break
-                elif home_action_choice == 5:     
-                    QuitGame()
+            except ValueError:
+                print("Use Numbers Between 1-4")
+                time.sleep(1)
+                input("Press Enter To Continue")
             except:
-                print("Choose between numbers 1-5")
+                print("An Error Was Detected")
+                time.sleep(1)
                 input("Press Enter To Continue")
                 
             
@@ -486,7 +535,7 @@ def at_house():
                         2. Store items in chest
                         3. Open inventory
                         4. Go back
-                        5. Save and quit
+                        5. Quit game
                         ----------------------------------------
                 ''')
                 print("What do you want to do ",player_name,"?")
@@ -611,67 +660,102 @@ def at_house():
                     break
                 elif house_action_choice == 5:
                     QuitGame()
+                else:
+                    print("Use Numbers Between 1-5")
+                    time.sleep(1)
+                    input("Press Enter To Continue")
+        except ValueError:
+            print("Use Numbers Between 1-5")
+            time.sleep(1)
+            input("Press Enter To Continue")
         except:
-            print ("Use numbers between 1-5")
+            print("An Error Was Detected")
+            time.sleep(1)
             input("Press Enter To Continue")
 
 def blacksmith():
     while True:
-        print("Look at the weapons/armour to buy: 1, Leave: 2")
-        item_menu_choice = int(input("-> "))
+        try:
+            print("Look at the weapons/armour to buy: 1, Leave: 2")
+            item_menu_choice = int(input("-> "))
 
-        if item_menu_choice == 1:
-            print ("Welcome to the blacksmith")
-            print("Your bank balance: ",player.bank," coins")
-            print("All items that are available: ")
+            if item_menu_choice == 1:
+                print ("Welcome to the blacksmith")
+                print("Your bank balance: ",player.bank," coins")
+                print("All items that are available: ")
 
-            item_slot = 1
+                item_slot = 1
 
-            for items in blacksmith_item_list_all:
-                print(item_slot,", ",items.weapon_name ," ",items.weapon_value,"")
-                item_slot += 1
-            print()
-            itemToBuy = int(input("Choose What Item To Buy -> "))
-            itemToBuy -= 1
-            itemToBuyObject = blacksmith_item_list_all[itemToBuy]
+                for items in blacksmith_item_list_all:
+                    print(item_slot,", ",items.weapon_name ," ",items.weapon_value,"")
+                    item_slot += 1
+                print()
+                itemToBuy = int(input("Choose What Item To Buy -> "))
+                itemToBuy -= 1
+                itemToBuyObject = blacksmith_item_list_all[itemToBuy]
 
-            if player.bank >=  itemToBuyObject.weapon_value:
-                player.bank -= itemToBuyObject.weapon_value
-                addItemToInventory(blacksmith_item_list_all[itemToBuy])
-                print("Your balance is now ",player.bank," coins!")
-            else:
-                print("Your bank balance is to low...")
-        elif item_menu_choice == 2:
-            break
+                if player.bank >=  itemToBuyObject.weapon_value:
+                    player.bank -= itemToBuyObject.weapon_value
+                    addItemToInventory(blacksmith_item_list_all[itemToBuy])
+                    print("Your balance is now ",player.bank," coins!")
+                else:
+                    print("Your bank balance is to low...")
+            elif item_menu_choice == 2:
+                break
+            else:          
+                print("Use Numbers Between 1-2")
+                time.sleep(1)
+                input("Press Enter To Continue")
+        except ValueError:
+            print("Use Numbers Between 1-2")
+            time.sleep(1)
+            input("Press Enter To Continue")
+        except:
+            print("An Error Was Detected")
+            time.sleep(1)
+            input("Press Enter To Continue")
 
 def item_shop():
     while True:
-        print("Look at the items to buy: 1, Leave: 2")
-        item_menu_choice = int(input("-> "))
+        try:
+            print("Look at the items to buy: 1, Leave: 2")
+            item_menu_choice = int(input("-> "))
 
-        if item_menu_choice == 1:
-            print ("Welcome to the item shop")
-            print("Your bank balance: ",player.bank," coins")
-            print("All items that are available: ")
-            item_slot = 1
-            for items in item_shop_item_list:
-                print(item_slot, items.item_name, end=":")
-                print(items.item_value, "Coins")
-                item_slot += 1
+            if item_menu_choice == 1:
+                print ("Welcome to the item shop")
+                print("Your bank balance: ",player.bank," coins")
+                print("All items that are available: ")
+                item_slot = 1
+                for items in item_shop_item_list:
+                    print(item_slot, items.item_name, end=":")
+                    print(items.item_value, "Coins")
+                    item_slot += 1
 
-            print()
-            itemToBuy = int(input("Choose What Item To Buy -> "))
-            itemToBuy -= 1
-            itemToBuyObject = item_shop_item_list[itemToBuy]
+                print()
+                itemToBuy = int(input("Choose What Item To Buy -> "))
+                itemToBuy -= 1
+                itemToBuyObject = item_shop_item_list[itemToBuy]
 
-            if player.bank >=  itemToBuyObject.item_value:
-                player.bank -= itemToBuyObject.item_value
-                addItemToInventory(item_shop_item_list[itemToBuy])
-                print("Your balance is now ",player.bank," coins!")
-            else:
-                print("Your bank balance is to low...")
-        elif item_menu_choice == 2:
-            break
+                if player.bank >=  itemToBuyObject.item_value:
+                    player.bank -= itemToBuyObject.item_value
+                    addItemToInventory(item_shop_item_list[itemToBuy])
+                    print("Your balance is now ",player.bank," coins!")
+                else:
+                    print("Your bank balance is to low...")
+            elif item_menu_choice == 2:
+                break
+            else:         
+                print("Use Numbers Between 1-2")
+                time.sleep(1)
+                input("Press Enter To Continue")
+        except ValueError:
+            print("Use Numbers Between 1-2")
+            time.sleep(1)
+            input("Press Enter To Continue")
+        except:
+            print("An Error Was Detected")
+            time.sleep(1)
+            input("Press Enter To Continue")
 
 def MovePlayer():
     while True:
@@ -689,9 +773,18 @@ def MovePlayer():
             elif input_what_to_do == 2:
                 print("You choose to go home...")
                 Home()
-        except:
+            else:
                 print("Use Numbers Between 1-2")
-                input("Press Enter To Continue")    
+                time.sleep(1)
+                input("Press Enter To Continue")
+        except ValueError:
+            print("Use Numbers Between 1-2")
+            time.sleep(1)
+            input("Press Enter To Continue")
+        except:
+            print("An Error Was Detected")
+            time.sleep(1)
+            input("Press Enter To Continue")
                     
 
 def Play():
@@ -757,6 +850,11 @@ def MainMenu():
         try:
             main_menu_choice = int(input("What Is Your Action? -> "))
             return main_menu_choice
+        except ValueError:
+            print("Use Numbers Between 1-4")
+            time.sleep(1)
+            input("Press Enter To Continue")
         except:
-            print("Please Use Numbers To Choose One Of The Options Above\n")
-            time.sleep(2)
+            print("An Error Was Detected")
+            time.sleep(1)
+            input("Press Enter To Continue")

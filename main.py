@@ -2,9 +2,9 @@ from classes import *
 from functions import *
 from art import *
 
-print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
+print("\n"*10)
 PrintTitleScreen()
-print("\n\n\n\n")
+print("\n"*4)
 time.sleep(3)
 
 while True:
@@ -19,5 +19,6 @@ while True:
     elif main_menu_choice == 4:
         QuitGame()
     else:
-        print("Please Use Numbers To Choose One Of The Options Above\n")
-        time.sleep(2)
+        print("Use Numbers Between 1-4")
+        time.sleep(1)
+        input("Press Enter To Continue")
