@@ -681,17 +681,17 @@ def MovePlayer():
                 1. Explore the world.
                 2. Go Home.
                 ''')
-            input_what_to_do = input("-> ")
+            input_what_to_do = int(input("-> "))
 
-            if input_what_to_do == "1":
+            if input_what_to_do == 1:
                 print("You choose to explore...")
                 ChooseDirection()
-            elif input_what_to_do == "2":
+            elif input_what_to_do == 2:
                 print("You choose to go home...")
                 Home()
         except:
                 print("Use Numbers Between 1-2")
-                print("Press Enter To Continue")    
+                input("Press Enter To Continue")    
                     
 
 def Play():
