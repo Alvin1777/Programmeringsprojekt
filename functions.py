@@ -666,16 +666,22 @@ def blacksmith():
             item_menu_choice = int(input("-> "))
 
             if item_menu_choice == 1:
+                print("\n"*10)
+                print("-"*30)
+                print()
                 print ("Welcome to the blacksmith")
+                print()
                 print("Your bank balance: ",player.bank," coins")
+                print()
                 print("All items that are available: ")
                 while True:
                     item_slot = 1
 
                     for items in blacksmith_item_list_all:
-                        print(item_slot,", ",items.weapon_name ," ",items.weapon_value,"")
+                        print(item_slot,",",items.weapon_name)
                         item_slot += 1
                     print()
+                    print("-"*30)
                     itemToBuy = int(input("Choose What Item To Buy -> "))
                     itemToBuy -= 1
                     itemToBuyObject = blacksmith_item_list_all[itemToBuy]
@@ -720,16 +726,22 @@ def item_shop():
             item_menu_choice = int(input("-> "))
 
             if item_menu_choice == 1:
+                print("\n"*10)
+                print("-"*30)
+                print()
                 print ("Welcome to the item shop")
+                print()
                 print("Your bank balance: ",player.bank," coins")
+                print()
                 print("All items that are available: ")
+                print()
                 item_slot = 1
                 for items in item_shop_item_list:
                     print(item_slot, items.item_name, end=":")
                     print(items.item_value, "Coins")
                     item_slot += 1
-
                 print()
+                print("-"*30)
                 itemToBuy = int(input("Choose What Item To Buy -> "))
                 itemToBuy -= 1
                 itemToBuyObject = item_shop_item_list[itemToBuy]

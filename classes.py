@@ -44,6 +44,9 @@ class items():
         self.healing_power = healing_power
         self.isWeapon = isWeapon
 
+    def showItemStats(self):
+        print(f"{self.item_name}, Healing: {self.healing_power}, Price: {self.item_value}")
+
 
 class enemy():
     def __init__(self, enemy_name, enemy_health, enemy_damage, is_boss):
