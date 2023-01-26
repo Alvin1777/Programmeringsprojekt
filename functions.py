@@ -512,7 +512,6 @@ def Home():
                 time.sleep(1)
                 input("Press Enter To Continue")
                 
-            
 def at_house():
         try:
             while True:
@@ -525,7 +524,7 @@ def at_house():
                         2. Store items in chest
                         3. Open inventory
                         4. Go back
-                        5. Quit game
+                        5. Save and quit
                         ----------------------------------------
                 ''')
                 print("What do you want to do ",player_name,"?")
@@ -546,69 +545,82 @@ def at_house():
 
                         if home_chest_choice == 1:
                             item_slot = 1
-                            print("Player:")
+                            print("Player Inventory:") #players inventory
                             print()
-                            print("Weapons:")
+                            print("Weapons:")          #players weapons
                             for items in inventory_weapon:
                                 print("",item_slot ,".", items.weapon_name,",")
                                 item_slot += 1
                             item_slot = 1
-                            print()
-                            print("Items:")
+                            print("\n"*2)
+                            print("Items:")             #players items
                             for items in inventory_item:
                                 print("",item_slot ,".", items.item_name,",")
                                 item_slot += 1
                             item_slot = 1
-                            print("\n"*2)
-                            print("Chest:")
+                            print("\n"*4)
+                            print("Chest Inventory:")   #chest inventory
                             print()
-                            print("Weapons:")
+                            print("Weapons:")           #chest weapons
                             for chest_weapons in chest_list_weapon:
                                 print("",item_slot ,".", chest_weapons.weapon_name,",")
                                 item_slot += 1
                             item_slot = 1
-                            print()
-                            print("Items:")
+                            print("\n"*2)
+                            print("Items:")             #chest items
                             for chest_items in  chest_list_item:
                                 print("",item_slot ,".", chest_items.item_name,",")
                                 item_slot += 1
                             item_slot = 1
                             print()
                             print()
-                            chest_choice = int(input("1. Store item, 2. Take item -> "))
+                            #Do you want to extract or insert something to the chest?
+                            chest_choice = int(input("1. Store to chest, 2. Extract from chest -> "))
                             print("\n"*5)
+                            
+                            #Store in chest
                             if chest_choice == 1:
+                                #Do you want to store an item or a weapon?
                                 chest_choice_item = int(input("1. Store Item, 2. Store Weapon -> "))
+                                
+                                #Store Weapon
                                 if chest_choice_item == 1:
                                     item_slot = 1
-                                    print("Items: ")
-                                    for items in inventory_item:
-                                        print(item_slot,",",  items.item_name)
-                                        item_slot += 1
-                                    item_to_add_to_chest = int(input("Choose Item To add to chest: "))
-                                    item_to_add_to_chest -= 1
-
-                                    chest_list_item.append(inventory_item[item_to_add_to_chest])
-                                    inventory_item.pop(item_to_add_to_chest)
-                                
-                                elif chest_choice_item == 2:
-                                    item_slot = 1
-                                    print("Weapons: ")
+                                    print("\n"*10)
+                                    print("Weapons in inventory: ")
                                     for items in inventory_weapon:
                                         print(item_slot,",",  items.weapon_name)
                                         item_slot += 1
+                                    print("\n"*5)
                                     item_to_add_to_chest = int(input("Choose Item To add to chest: "))
                                     item_to_add_to_chest -= 1
 
                                     chest_list_weapon.append(inventory_weapon[item_to_add_to_chest])
                                     inventory_weapon.pop(item_to_add_to_chest)
-
-                            elif chest_choice == 2:
                                 
-                                print("1. Take Weapons, 2. Take items")
-                                item_chest_choice = int(input("-> "))
+                                #Store Item
+                                elif chest_choice_item == 2:
+                                    item_slot = 1
+                                    print("\n"*10)
+                                    print("Items in inventory: ")
+                                    for items in inventory_item:
+                                        print(item_slot,",",  items.item_name)
+                                        item_slot += 1
+                                    print("\n"*5)
+                                    item_to_add_to_chest = int(input("Choose Item To add to chest: "))
+                                    item_to_add_to_chest -= 1
 
+                                    chest_list_item.append(inventory_item[item_to_add_to_chest])
+                                    inventory_item.pop(item_to_add_to_chest)
+
+                            #Extract from chest
+                            elif chest_choice == 2:
+                                #Do you want to store an item or a weapon?
+                                item_chest_choice = int(input("1. Take Weapons, 2. Take Items -> "))
+                                
+                                #Take weapons
                                 if item_chest_choice == 1:
+                                    print("\n"*10)
                                     print("Weapons: ")
                                     item_slot = 1
                                     for items in chest_list_weapon:
@@ -623,7 +635,9 @@ def at_house():
                                     inventory_weapon.append(chest_list_weapon[item_to_take_from_chest])
                                     chest_list_weapon.pop(item_to_take_from_chest)
                                 
+                                #Take items
                                 elif item_chest_choice == 2:
+                                    print("\n"*10)
                                     print("Items: ")
                                     item_slot = 1
                                     for items in chest_list_item:
@@ -650,17 +664,8 @@ def at_house():
                     break
                 elif house_action_choice == 5:
                     QuitGame()
-                else:
-                    print("Use Numbers Between 1-5")
-                    time.sleep(1)
-                    input("Press Enter To Continue")
-        except ValueError:
-            print("Use Numbers Between 1-5")
-            time.sleep(1)
-            input("Press Enter To Continue")
         except:
-            print("An Error Was Detected")
-            time.sleep(1)
+            print ("Use numbers between 1-5")
             input("Press Enter To Continue")
 
 def blacksmith():
