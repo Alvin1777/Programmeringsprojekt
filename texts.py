@@ -118,3 +118,16 @@ def print_backstory_3():
             \n
     -----------------------------------------------------------------------------------------------------------
     ''')
+
+
+
+
+#Blacksmith dialogue:
+
+#Dialogue 1:
+#I forge veabons und armor for all zee beople around. Arh ! 
+#Poth for farmers vanting broteczion und for zee zoltiers in zee area. For ein brice Hoffcourze.  
+
+#Dialoge 2:
+#I am the local blacksmith around. I don't know if you can here it on my accent but I come from Germany. 
+#From the great city of Bobritzsch-Hilbersdorf to exact. I moved here with my family to start a new life after a 
