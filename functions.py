@@ -6,17 +6,19 @@ from classes import *
 from Object import *
 
 
-# VAL
+# VAR
+is_game_won = False
 is_game_closed = False
 inventory_weapon = [DefaultDaggerWeapon]
 inventory_item = [potatoItem]
 equippedItem = inventory_weapon[0]
 blacksmith_item_list_all = [SteelSwordWeapon, WoodSwordWeapon, AtgeirSpearWeapon, YariSpearWeapon, DanishAxeWeapon, BattleAxeWeapon, GolokSwordWeapon, DaodacSwordWeapon]
 item_shop_item_list = [potatoItem, beefItem, healingPoitionItem, bronzeArtifactItem, silverArtifactItem, goldArtifactItem]
-full_health = 30
 chest_list_item = [potatoItem, beefItem, healingPoitionItem]
+full_health = 30
 chest_list_weapon = []
 monsters_killed = 0
+trap_names = ["spike", "fire pit", "arrow", "explosive"]
 
 #Functions
 
@@ -54,7 +56,6 @@ def ChooseCharacter():
                 player_house = "Castle"
                 title = "Sir"
                 surname = "the Dragon Slayer"
-                inventory_size = 6
                 bank = 1000
                 xp_multiplier = 1.2
                 damage_reduction = 0.9
@@ -68,7 +69,7 @@ def ChooseCharacter():
 
                 confirm_character = input("Want To Use This Character? y/n -> ")
                 if confirm_character == "y":
-                    player = Player(player_name, character, player_house, title, surname, 30, 0, inventory_size, bank, xp_multiplier, damage_reduction, damage_multiplier, weapon_price_reduction, item_price_reduction)
+                    player = Player(player_name, character, player_house, title, surname, 300000, 0, bank, xp_multiplier, damage_reduction, damage_multiplier, weapon_price_reduction, item_price_reduction)
                     print("Character Confirmed...")
                     print("\n"*40)
                     break
@@ -79,7 +80,6 @@ def ChooseCharacter():
                 player_house = "house"
                 title = ""
                 surname = "Ironhill"
-                inventory_size = 10
                 bank = 700
                 xp_multiplier = 1.2
                 damage_reduction = 1
@@ -92,7 +92,7 @@ def ChooseCharacter():
 
                 confirm_character = input("Want To Use This Character? y/n -> ")
                 if confirm_character == "y":
-                    player = Player(player_name, character, player_house, title, surname, 30, 0, inventory_size, bank, xp_multiplier, damage_reduction, damage_multiplier, weapon_price_reduction, item_price_reduction)
+                    player = Player(player_name, character, player_house, title, surname, 30, 0, bank, xp_multiplier, damage_reduction, damage_multiplier, weapon_price_reduction, item_price_reduction)
                     print("Character Confirmed...")
                     print("\n"*40)
                     break
@@ -103,7 +103,6 @@ def ChooseCharacter():
                 player_house = "Barn"
                 title = ""
                 surname = "Fairbairns"
-                inventory_size = 6
                 bank = 300
                 xp_multiplier = 1
                 damage_reduction = 1
@@ -116,7 +115,7 @@ def ChooseCharacter():
 
                 confirm_character = input("Want To Use This Character? y/n -> ")
                 if confirm_character == "y":
-                    player = Player(player_name, character, player_house, title, surname, 30, 0, inventory_size, bank, xp_multiplier, damage_reduction, damage_multiplier, weapon_price_reduction, item_price_reduction)
+                    player = Player(player_name, character, player_house, title, surname, 30, 0, bank, xp_multiplier, damage_reduction, damage_multiplier, weapon_price_reduction, item_price_reduction)
                     print("Character Confirmed...")
                     print("\n"*40)
                     break
@@ -168,7 +167,7 @@ def openInventory():
             print("This is your current equipped item: ",equippedItem.weapon_name, "\n")
             item_slot = 1
             for items in inventory_weapon:
-                print(item_slot,", ",items.weapon_name,",")
+                print(item_slot,",",items.weapon_name,",")
                 item_slot += 1
             print()
             itemToEquip = int(input("Choose one of the slots, starting with 1 -> "))
@@ -180,7 +179,7 @@ def openInventory():
         elif inventory_choice == 2:
             item_slot = 1
             for items in inventory_item:
-                print(item_slot,", ",items.item_name,",")
+                print(item_slot,",",items.item_name,",")
                 item_slot += 1
             print()
             while True:
@@ -212,10 +211,77 @@ def openInventory():
             break
 
 def addItemToInventory(itemToAdd):
+    print("\n"*45)
     if itemToAdd.isWeapon == True:
-        inventory_weapon.append(itemToAdd)
+        if len(inventory_weapon) >= 3:
+            print("Your inventory is full!")
+            print()
+            print("Do you wish to replace a weapon? y/n")
+            replace_weapon_choice = input("-> ")
+            while True:
+                if replace_weapon_choice == "y":
+                    item_slot = 1
+                    for items in inventory_weapon:
+                        print(item_slot,",",items.weapon_name)
+                        item_slot += 1
+                    print()
+                    item_slot = 1
+                    print("What weapon do you wish to replace? 1-3")
+
+                    replace_weapon_slot = int(input("-> "))
+
+                    replace_weapon_slot -= 1
+
+                    inventory_weapon[replace_weapon_slot] = itemToAdd
+
+                    break
+
+                elif replace_item_choice == "n":
+                    break
+
+                else:
+                    print("Use y or n")
+                    time.sleep(1)
+                    input("Press enter to continue")
+
+        else:
+            inventory_weapon.append(itemToAdd)
+
     elif itemToAdd.isWeapon == False:
-        inventory_item.append(itemToAdd)
+        if len(inventory_item) >= 3:
+            print("Your inventory is full!")
+            print()
+            print("Do you wish to replace a item? y/n")
+            replace_item_choice = input("-> ")
+            while True:
+                if replace_item_choice == "y":
+                    item_slot = 1
+                    for items in inventory_item:
+                        print(item_slot,",",items.item_name)
+                        item_slot += 1
+                    print()
+                    item_slot = 1
+                    print("What item do you wish to replace? 1-3")
+
+                    replace_item_slot = int(input("-> "))
+
+                    replace_item_slot -= 1
+
+                    inventory_item[replace_item_slot] = itemToAdd
+
+                    break
+                
+                elif replace_item_choice == "n":
+                    break
+
+                else:
+                    print("Use y or n")
+                    time.sleep(1)
+                    input("Press enter to continue")
+
+        else:
+            inventory_item.append(itemToAdd)
+
 
 def getRandomItem():
     rand_item_int = rand.randint(0, 5)
@@ -230,7 +296,7 @@ def getRandomWeapon():
 def RandomMonster():
     random_monster_int = rand.randint(1, 6)
 
-    if player.boss_spawn == 10:
+    if player.boss_spawn == 5:
         player.boss_spawn = 0
 
         if random_monster_int == 1:
@@ -266,7 +332,9 @@ def showPlayerStats():
     print()
     player.printPlayerName()
     print()
-    print(player.current_xp,"/ 10")
+    print(f"Player health: {player.player_health} hp")
+    print()
+    print(player.current_xp,"/ 10 XP")
     print("Level:",player.player_level)
     print("Enemies Slain:",monsters_killed)
     print()
@@ -278,19 +346,23 @@ def showPlayerStats():
     print("\n"*10)
 
 def FightMonster():
+        global is_game_won
         global is_game_closed
         global monsters_killed
         try:
+            print("\n"*45)
             enemy_health_check = 0
             monster_type = RandomMonster()
             print("\n"*6)
             print("A",monster_type.enemy_name,"appeard!")
+            time.sleep(1)
             
             if monster_type.enemy_health <= 0:
                 monster_type.enemy_health = 10
 
 
             while True:
+                print("\n"*45)
                 if monster_type.enemy_health <= 0 and enemy_health_check == 0:
                     monster_type.enemy_health = 10
                     enemy_health_check = 1
@@ -298,26 +370,29 @@ def FightMonster():
                 if monster_type.enemy_health > 0:
                     enemy_health_check = 1
                     print("\n"*2)
-                    print(f"What is your action{player.player_name}?")
+                    print(f"What is your action {player.player_name}?")
                     print("\n")
                     print("Your health:",player.player_health)
                     print("Enemy health:",monster_type.enemy_health)
                     print("\n")
                     print("1. Strike, 2. Block, 3. Flee")
                     fight_input = int(input("-> "))
-
+                    print("\n"*2)
                     if fight_input == 1:
                         damage_dealt = round(equippedItem.weapon_damage * player.damage_multiplier, 1)
 
                         print("You hit the enemy for",damage_dealt,"HP!")
+                        time.sleep(1)
                         monster_type.enemy_health -= damage_dealt
                         monster_type.enemy_health = round(monster_type.enemy_health, 1)
 
                         enemy_strike_int = rand.randint(1,2)
 
                         if enemy_strike_int == 1:
+                            print("\n"*2)
                             damage_taken = round(monster_type.enemy_damage * player.damage_reduction, 1)
                             print("The enemy hit you for",damage_taken,"HP!")
+                            time.sleep(1)
                             player.player_health -= monster_type.enemy_damage * player.damage_reduction
                             player.player_health = round(player.player_health, 1)
                         
@@ -352,7 +427,7 @@ def FightMonster():
 
                 elif monster_type.enemy_health <= 0:
                     if monster_type.enemy_is_boss == True:
-                        xp_to_earn = round(rand.randint(5, 8) * player.xp_multi, 1)
+                        xp_to_earn = round(rand.randint(8, 10) * player.xp_multi, 1)
                         money_to_earn = rand.randint(30, 50)
 
                     else:
@@ -370,16 +445,19 @@ def FightMonster():
                         player.current_xp -= 10
                         player.player_level += 1
                         player.boss_spawn += 1
+                    
+                    player.current_xp = round(player.current_xp, 1)
 
                     print("\n\nYou Slain The Enemy!")
-                    print("You earned ",money_to_earn," coins and ",xp_to_earn," experience points!")
-                    print("Your bank balance is now ",player.bank," coins!")
+                    print("You earned",money_to_earn,"coins and",xp_to_earn,"experience points!")
+                    print("Your bank balance is now",player.bank,"coins!")
                     if player.player_level > old_player_level:
                         print("You have leveled up!")
                     else:
                         pass
-                    print("Your level is",player.player_level,", XP remaining to next level: ",player.current_xp,"/",10,"")
+                    print("Your level is",player.player_level,", XP remaining to next level:",player.current_xp,"/",10,"")
                     time.sleep(2)
+                    is_game_won = True
                     break
 
         except ValueError:
@@ -390,6 +468,23 @@ def FightMonster():
             print("Use Numbers Between 1-3")
             time.sleep(1)
             input("Press Enter To Continue")
+
+def generateTrapName():
+    random_trap_name_int = rand.randint(0, 3)
+    trap_name = trap_names[random_trap_name_int]
+    return trap_name
+
+
+def trapRoom():
+    trap_name = generateTrapName()
+    print("\n"*45)
+    print("You stumbled across a",trap_name,"trap!")
+    time.sleep(1.5)
+    print()
+    print("You took 5 damage!")
+    player.player_health -= 5
+    time.sleep(1)
+    print("\n"*45)
 
 def chestRoom():
     print("\n"*5)
@@ -416,13 +511,16 @@ def chestRoom():
     time.sleep(2)
 
 def GenerateRoom():
-    random_room_int = rand.randint(1, 2)
+    random_room_int = rand.randint(1, 6)
 
-    if random_room_int == 1:
+    if random_room_int in (1, 2):
         chestRoom()
             
-    elif random_room_int == 2:
+    elif random_room_int in (3, 4, 5):
         FightMonster()
+
+    elif random_room_int == 6:
+        trapRoom()
 
 
 
@@ -432,11 +530,13 @@ def ChooseDirection():
         try:
             if is_game_closed == True:
                 break
+            if is_game_won == True:
+                break
             print("Where do you wanna go?")
             print('''
-                1: Left 
-                2: Forward
-                3: Right
+                1: West 
+                2: North
+                3: East
                 4: Open inventory
                 5: See stats
                 6: Go back
@@ -782,7 +882,7 @@ def item_shop():
                 print()
                 print ("Welcome to the item shop")
                 print()
-                print("Your bank balance: ",player.bank," coins")
+                print("Your bank balance:",player.bank,"coins!")
                 print()
                 print("All items that are available: ")
                 print()
@@ -828,6 +928,8 @@ def MovePlayer():
     while True:
         if is_game_closed == True:
             break
+        if is_game_won == True:
+            break
         try:
             print(f"What Is Your Action {player.player_name}?")
             print('''
@@ -853,22 +955,19 @@ def MovePlayer():
         except:
             print("An Error Was Detected")
             time.sleep(1)
-            input("Press Enter To Continue")
-                    
+            input("Press Enter To Continue")                    
 
 def Play():
     ChooseCharacter()
     MovePlayer()
+    if is_game_won == True:
+        youWonArt()
     exit()
-
-
 
 def QuitGame():
     print("Game Shutting Down...")
     time.sleep(2)
     print("\n"*45)
-    
-
 
 def MainMenu():
     while True:        
