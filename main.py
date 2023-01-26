@@ -1,13 +1,17 @@
 from classes import *
 from functions import *
 from art import *
+from texts import *
 
 print("\n"*10)
 PrintTitleScreen()
 print("\n"*4)
-time.sleep(3)
+time.sleep(2)
 
 while True:
+    print("\n"*45)
+    PrintTitleScreen()
+    print("\n"*4)
     main_menu_choice = MainMenu()
 
     if main_menu_choice == 1:

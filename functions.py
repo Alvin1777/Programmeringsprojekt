@@ -15,6 +15,7 @@ item_shop_item_list = [potatoItem, beefItem, healingPoitionItem, bronzeArtifactI
 full_health = 30
 chest_list_item = [potatoItem, beefItem, healingPoitionItem]
 chest_list_weapon = []
+monsters_killed = 0
 
 #Functions
 
@@ -261,6 +262,7 @@ def showPlayerStats():
     print("\n"*10)
 
 def FightMonster():
+        global monsters_killed
         try:
             enemy_health_check = 0
             monster_type = RandomMonster()
@@ -339,6 +341,8 @@ def FightMonster():
                         xp_to_earn = round(rand.randint(1, 5) * player.xp_multi, 1)
                         money_to_earn = rand.randint(10, 30)
 
+                    monsters_killed += 1
+
                     player.bank += money_to_earn
 
                     old_player_level = player.player_level
@@ -364,7 +368,7 @@ def FightMonster():
             time.sleep(1)
             input("Press Enter To Continue")
         except:
-            print("An Error Was Detected")
+            print("Use Numbers Between 1-3")
             time.sleep(1)
             input("Press Enter To Continue")
 
@@ -666,7 +670,7 @@ def blacksmith():
             item_menu_choice = int(input("-> "))
 
             if item_menu_choice == 1:
-                print("\n"*10)
+                print("\n"*45)
                 print("-"*30)
                 print()
                 print ("Welcome to the blacksmith")
@@ -722,11 +726,11 @@ def blacksmith():
 def item_shop():
     while True:
         try:
-            print("Look at the items to buy: 1, Leave: 2")
+            print("Look at the items to buy: 1, Talk to shopkeeper: 2, Go back: 3")
             item_menu_choice = int(input("-> "))
 
             if item_menu_choice == 1:
-                print("\n"*10)
+                print("\n"*45)
                 print("-"*30)
                 print()
                 print ("Welcome to the item shop")
@@ -752,7 +756,13 @@ def item_shop():
                     print("Your balance is now ",player.bank," coins!")
                 else:
                     print("Your bank balance is to low...")
+            
             elif item_menu_choice == 2:
+                print("\n"*45)
+                print("Hello there! How can I help ye?")
+                print("1: Ask about name, 2: Ask about town, 3: Nevermind")
+                player_dialouge_choice = int(input("-> "))
+            elif item_menu_choice == 3:
                 break
             else:         
                 print("Use Numbers Between 1-2")
@@ -801,43 +811,7 @@ def Play():
     ChooseCharacter()
     MovePlayer()
 
-def HowToPlay():
-    print ('''\n 
-    
-    The Start:
-    The game starts with a choice of three different charachters: A knighted Noblesman, a blacksmith or a farmer.    
-    Whichever charachter you choose has access to a house, were you can rest or manage your chest and inventory.
-    Each charachter also has a different background and life-experiences and therefore a different skillset. 
-    Each charachter is thereby given a set of uniqe boosts which you can read more about in the charachter selection page. 
-    Close to every charachters house you can go to the blacksmith for weapons and armor purchases and an item shop for item purchases.
 
-
-    In-game systems:
-    The game comes with a few systems to enhance gaming-experience. Among those are the Money-, XP- and the fighting-systems. 
-    
-    You can use money for buying weapons, armor and items in the blacksmith or the item shop and you can earn said money by defeating enemies in battle.
-    Or by taking your rich parents money *cough *cough the Knight *cough *cough. 
-
-    As for experience you can only gain it by defeating enemies in battle. 
-    By gaining experience you will level up and by leveling up you will get chances to fight bosses in battle. 
-        
-    The game itself is based on a turn based fighting system where you travel the world while fighting enemies 
-    by choosing one of the actions given by the game to progress further. 
-
-    ''')
-
-    input("Press Enter To Continue")
-
-def ShowCredits():
-    print('''
-                                                        Created by:
-
-                                                        Alvin Söderberg
-                                                        Marcus Broman
-                                                        Axel Österberg
-    ''')
-
-    input("Press Enter To Continue")
 
 def QuitGame():
     print("Game Shutting Down...")
