@@ -7,6 +7,7 @@ from Object import *
 
 
 # VAR
+is_game_won = False
 is_game_closed = False
 inventory_weapon = [DefaultDaggerWeapon]
 inventory_item = [potatoItem]
@@ -295,7 +296,7 @@ def getRandomWeapon():
 def RandomMonster():
     random_monster_int = rand.randint(1, 6)
 
-    if player.boss_spawn == 10:
+    if player.boss_spawn == 5:
         player.boss_spawn = 0
 
         if random_monster_int == 1:
@@ -345,6 +346,7 @@ def showPlayerStats():
     print("\n"*10)
 
 def FightMonster():
+        global is_game_won
         global is_game_closed
         global monsters_killed
         try:
@@ -455,6 +457,7 @@ def FightMonster():
                         pass
                     print("Your level is",player.player_level,", XP remaining to next level:",player.current_xp,"/",10,"")
                     time.sleep(2)
+                    is_game_won = True
                     break
 
         except ValueError:
@@ -526,6 +529,8 @@ def ChooseDirection():
         print("\n"*45)
         try:
             if is_game_closed == True:
+                break
+            if is_game_won == True:
                 break
             print("Where do you wanna go?")
             print('''
@@ -923,6 +928,8 @@ def MovePlayer():
     while True:
         if is_game_closed == True:
             break
+        if is_game_won == True:
+            break
         try:
             print(f"What Is Your Action {player.player_name}?")
             print('''
@@ -953,6 +960,8 @@ def MovePlayer():
 def Play():
     ChooseCharacter()
     MovePlayer()
+    if is_game_won == True:
+        youWonArt()
     exit()
 
 def QuitGame():
