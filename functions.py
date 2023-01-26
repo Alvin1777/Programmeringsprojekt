@@ -7,6 +7,7 @@ from Object import *
 
 
 # VAL
+is_game_closed = False
 inventory_weapon = [DefaultDaggerWeapon]
 inventory_item = [potatoItem]
 equippedItem = inventory_weapon[0]
@@ -407,7 +408,10 @@ def GenerateRoom():
 
 def ChooseDirection():
     while True:
+
         try:
+            if is_game_closed == True:
+                break
             print("Where do you wanna go?")
             print('''
                 1: Left 
@@ -473,6 +477,8 @@ def Home():
 
     while True:
             try:
+                if is_game_closed == True:
+                    break
                 print("\n"*40)
                 print("You are home at your",player.player_house)
                 print ("\n"*2)
@@ -513,6 +519,7 @@ def Home():
                 input("Press Enter To Continue")
                 
 def at_house():
+        global is_game_closed
         try:
             while True:
                 print("\n"*40)
@@ -524,7 +531,7 @@ def at_house():
                         2. Store items in chest
                         3. Open inventory
                         4. Go back
-                        5. Save and quit
+                        5. Quit game
                         ----------------------------------------
                 ''')
                 print("What do you want to do ",player_name,"?")
@@ -664,6 +671,8 @@ def at_house():
                     break
                 elif house_action_choice == 5:
                     QuitGame()
+                    is_game_closed = True
+                    break
         except:
             print ("Use numbers between 1-5")
             input("Press Enter To Continue")
@@ -784,6 +793,8 @@ def item_shop():
 
 def MovePlayer():
     while True:
+        if is_game_closed == True:
+            break
         try:
             print("What Is Your Action", player.player_name,"?")
             print('''
@@ -815,6 +826,7 @@ def MovePlayer():
 def Play():
     ChooseCharacter()
     MovePlayer()
+    exit()
 
 
 
@@ -822,7 +834,7 @@ def QuitGame():
     print("Game Shutting Down...")
     time.sleep(2)
     print("\n"*20)
-    exit()
+    
 
 
 def MainMenu():
