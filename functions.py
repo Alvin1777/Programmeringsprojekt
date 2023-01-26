@@ -139,22 +139,32 @@ def openInventory():
     global equippedItem
     while True:
         print("\n"*3)
-        print("Weapons:")
+        print('''
+--------------------------------------------------------------
+                        Weapons:
+    
+            ''')
         item_slot = 1
         for items in inventory_weapon:
             print(item_slot,", ",items.weapon_name,",")
             item_slot += 1
         print()
         item_slot = 1
-        print("Items:")
+        print('''
+                        Items:
+
+        ''')
         for items in inventory_item:
             print(item_slot,", ",items.item_name,",")
             item_slot += 1
+        print("--------------------------------------------------------------")
         print("Equipped weapon: ",equippedItem.weapon_name)
-        inventory_choice = int(input("1: Equip Item, 2: Use healing item, 3: Go Back -> "))
+        print("\n1: Equip Item, 2: Use healing item, 3: Go Back\n")
+        inventory_choice = int(input("->"))
+        print("\n"*45)
 
         if inventory_choice == 1:
-            print("This is your current equipped item: ",equippedItem.weapon_name)
+            print("This is your current equipped item: ",equippedItem.weapon_name, "\n")
             item_slot = 1
             for items in inventory_weapon:
                 print(item_slot,", ",items.weapon_name,",")
@@ -162,6 +172,7 @@ def openInventory():
             print()
             itemToEquip = int(input("Choose one of the slots, starting with 1 -> "))
             itemToEquip -= 1
+            print("\n"*45)
 
             equippedItem = inventory_weapon[itemToEquip]
 
@@ -182,11 +193,13 @@ def openInventory():
                     print("Health restored!")
                     print("You now have",player.player_health,"HP!")
                     inventory_item.pop(itemToEquip)
+                    print("\n"*45)
                     break
                 else: 
                     print("Please choose a healing item")
                     print("1. Try again, 2. Go back")
                     retry_equip_choice = int(input("-> "))
+                    print("\n"*45)
 
                     if retry_equip_choice == 2:
                         break
@@ -254,6 +267,7 @@ def showPlayerStats():
     print()
     print(player.current_xp,"/ 10")
     print("Level:",player.player_level)
+    print("Enemies Slain:",monsters_killed)
     print()
     print("Equipped:",equippedItem.weapon_name)
     print()
@@ -263,6 +277,7 @@ def showPlayerStats():
     print("\n"*10)
 
 def FightMonster():
+        global is_game_closed
         global monsters_killed
         try:
             enemy_health_check = 0
@@ -331,6 +346,7 @@ def FightMonster():
                     time.sleep(2)
                     print("\n"*10)
                     ShowCredits()
+                    is_game_closed = True
                     QuitGame()
 
                 elif monster_type.enemy_health <= 0:
