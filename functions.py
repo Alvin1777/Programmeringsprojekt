@@ -6,7 +6,7 @@ from classes import *
 from Object import *
 
 
-# VAL
+# VAR
 is_game_closed = False
 inventory_weapon = [DefaultDaggerWeapon]
 inventory_item = [potatoItem]
@@ -17,6 +17,7 @@ chest_list_item = [potatoItem, beefItem, healingPoitionItem]
 full_health = 30
 chest_list_weapon = []
 monsters_killed = 0
+trap_names = ["spike", "fire pit", "arrow", "explosive"]
 
 #Functions
 
@@ -165,7 +166,7 @@ def openInventory():
             print("This is your current equipped item: ",equippedItem.weapon_name, "\n")
             item_slot = 1
             for items in inventory_weapon:
-                print(item_slot,", ",items.weapon_name,",")
+                print(item_slot,",",items.weapon_name,",")
                 item_slot += 1
             print()
             itemToEquip = int(input("Choose one of the slots, starting with 1 -> "))
@@ -177,7 +178,7 @@ def openInventory():
         elif inventory_choice == 2:
             item_slot = 1
             for items in inventory_item:
-                print(item_slot,", ",items.item_name,",")
+                print(item_slot,",",items.item_name,",")
                 item_slot += 1
             print()
             while True:
@@ -262,6 +263,8 @@ def showPlayerStats():
     print("-"*20)
     print()
     player.printPlayerName()
+    print()
+    print(f"Player health: {player.player_health} hp")
     print()
     print(player.current_xp,"/ 10 XP")
     print("Level:",player.player_level)
@@ -395,6 +398,23 @@ def FightMonster():
             time.sleep(1)
             input("Press Enter To Continue")
 
+def generateTrapName():
+    random_trap_name_int = rand.randint(0, 3)
+    trap_name = trap_names[random_trap_name_int]
+    return trap_name
+
+
+def trapRoom():
+    trap_name = generateTrapName()
+    print("\n"*45)
+    print("You stumbled across a",trap_name,"trap!")
+    time.sleep(1.5)
+    print()
+    print("You took 5 damage!")
+    player.player_health -= 5
+    time.sleep(1)
+    print("\n"*45)
+
 def chestRoom():
     print("\n"*5)
     print("Chest Room")
@@ -420,13 +440,16 @@ def chestRoom():
     time.sleep(2)
 
 def GenerateRoom():
-    random_room_int = rand.randint(1, 3)
+    random_room_int = rand.randint(1, 6)
 
-    if random_room_int == 1:
+    if random_room_int in (1, 2):
         chestRoom()
             
-    elif random_room_int in (2, 3):
+    elif random_room_int in (3, 4, 5):
         FightMonster()
+
+    elif random_room_int == 6:
+        trapRoom()
 
 
 
