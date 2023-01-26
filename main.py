@@ -10,8 +10,6 @@ time.sleep(2)
 
 
 while True:
-    if is_game_closed == True:
-        break
     print("\n"*45)
     PrintTitleScreen()
     print("\n"*4)
