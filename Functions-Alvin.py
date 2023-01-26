@@ -6,6 +6,18 @@ from classes import *
 
 
 
+#332
+#64
+#88
+#112
+#
+
+
+
+
+
+
+
 def at_house():
         try:
             while True:
