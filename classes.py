@@ -1,5 +1,3 @@
-
-
 class Player():
     def __init__(self, player_name, player_character, player_house, character_name_title, character_name_surname, player_health, player_level, inventory_size, player_bank, player_xp_multiplier, player_damage_reduction, player_damage_multiplier, player_weapon_price_reduction, player_item_price_reduction):
         self.player_name = player_name
@@ -23,7 +21,7 @@ class Player():
     def print_info(self):
         print("Name: ",self.player_name,"Character Choice: ", self.character, "Player House: ",self.player_house,"Player Character Name: ", self.character_name_title,"Player Character Surname: ", self.character_name_surname,"Player Health: ", self.player_health,"Player Level: ", self.player_level)
 
-    def PrintPlayerName(self):
+    def printPlayerName(self):
         print(self.character_name_title, self.player_name, self.character_name_surname)
 
 class weapons():
@@ -45,6 +43,9 @@ class items():
         self.isHealingItem = isHealingItem
         self.healing_power = healing_power
         self.isWeapon = isWeapon
+
+    def showItemStats(self):
+        print(f"{self.item_name}, Healing: {self.healing_power}, Price: {self.item_value}")
 
 
 class enemy():

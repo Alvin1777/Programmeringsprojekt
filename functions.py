@@ -3,44 +3,8 @@ from texts import *
 from art import *
 import random as rand
 from classes import *
+from Object import *
 
-#Objects
-
-    #Enemies
-SkeletonEnemy = enemy("Skeleton", 20, 6, False)
-ZombieEnemy = enemy("Zombie", 30, 4, False)
-OrcEnemy = enemy("Orc", 10, 10, False)
-GoblinEnemy = enemy("Goblin", 15, 7, False)
-BatEnemy = enemy("Bat",2, 2, False)
-SpiderEnemy = enemy("Spider", 10, 4, False)
-
-SkeletonBoss = enemy("Skeleton King", 40, 10, True)
-ZombieBoss = enemy("Zombie king", 45, 6, True)
-OrcBoss = enemy("Orc Lord", 30, 10, True)
-DragonBoss = enemy("Dragon", 50, 12, True)
-BatBoss = enemy("Man Bat",20, 5, True)
-SpiderBoss = enemy("Large Spider", 35, 7, True)
-
-    #Weapons
-
-SteelSwordWeapon = weapons("Steel sword", 1, 5, 50, True)
-WoodSwordWeapon = weapons("Wooden sword", 0.5, 1, 10, True)
-AtgeirSpearWeapon = weapons("Atgeir spear", 3, 4, 75, True)
-YariSpearWeapon = weapons("Yari spear", 3, 3, 45, True)
-DanishAxeWeapon = weapons("Danish axe", 20, 0.1, 10, True)
-BattleAxeWeapon = weapons("Battle axe", 2, 6, 60, True)
-GolokSwordWeapon = weapons("Golok sword", 0.5, 5.5, 60, True)
-DaodacSwordWeapon = weapons("Daodac Sword", 1, 8, 95, True)
-DefaultDaggerWeapon = weapons("Rusty dagger", 3, 1, 1, True)
-
-    #Items
-
-potatoItem = items("Potato", 5, True, 2, False)
-beefItem = items("Beef", 10, True, 5, False)
-healingPoitionItem = items("Healing potion", 100, True, 100, False)
-bronzeArtifactItem = items("Bronze artifact", 50, False, 0, False)
-silverArtifactItem = items("Silver artifact", 100, False, 0, False)
-goldArtifactItem = items("Gold artifact", 200, False, 0, False)
 
 # VAL
 inventory_weapon = [DefaultDaggerWeapon]
@@ -51,6 +15,7 @@ item_shop_item_list = [potatoItem, beefItem, healingPoitionItem, bronzeArtifactI
 full_health = 30
 chest_list_item = [potatoItem, beefItem, healingPoitionItem]
 chest_list_weapon = []
+monsters_killed = 0
 
 #Functions
 
@@ -280,12 +245,29 @@ def RandomMonster():
         elif random_monster_int == 6:
             return SpiderEnemy
 
+def showPlayerStats():
+    global equippedItem
+    print("-"*20)
+    print()
+    player.printPlayerName()
+    print()
+    print(player.current_xp,"/ 10")
+    print("Level:",player.player_level)
+    print()
+    print("Equipped:",equippedItem.weapon_name)
+    print()
+    print("-"*20)
+    print()
+    input("Press Enter To Continue")
+    print("\n"*10)
+
 def FightMonster():
+        global monsters_killed
         try:
             enemy_health_check = 0
             monster_type = RandomMonster()
             print("\n"*6)
-            print("A ",monster_type.enemy_name," appeard!")
+            print("A",monster_type.enemy_name,"appeard!")
             
             if monster_type.enemy_health <= 0:
                 monster_type.enemy_health = 10
@@ -301,8 +283,8 @@ def FightMonster():
                     print("\n"*2)
                     print("What is action",player.player_name)
                     print("\n")
-                    print("Your health: ",player.player_health)
-                    print("Enemy health: ",monster_type.enemy_health)
+                    print("Your health:",player.player_health)
+                    print("Enemy health:",monster_type.enemy_health)
                     print("\n")
                     print("1. Strike, 2. Block, 3. Flee")
                     fight_input = int(input("-> "))
@@ -310,8 +292,8 @@ def FightMonster():
                     if fight_input == 1:
                         damage_dealt = round(equippedItem.weapon_damage * player.damage_multiplier, 1)
 
-                        print("You hit the enemy for ",damage_dealt,"HP!")
-                        monster_type.enemy_health -= equippedItem.weapon_damage * player.damage_multiplier
+                        print("You hit the enemy for",damage_dealt,"HP!")
+                        monster_type.enemy_health -= damage_dealt
                         monster_type.enemy_health = round(monster_type.enemy_health, 1)
 
                         enemy_strike_int = rand.randint(1,2)
@@ -355,37 +337,38 @@ def FightMonster():
                         xp_to_earn = round(rand.randint(5, 8) * player.xp_multi, 1)
                         money_to_earn = rand.randint(30, 50)
 
-                else:
-                    xp_to_earn = round(rand.randint(1, 5) * player.xp_multi, 1)
-                    money_to_earn = rand.randint(10, 30)
+                    else:
+                        xp_to_earn = round(rand.randint(1, 5) * player.xp_multi, 1)
+                        money_to_earn = rand.randint(10, 30)
 
-                
-                player.bank += money_to_earn
+                    monsters_killed += 1
 
-                old_player_level = player.player_level
-                player.current_xp += xp_to_earn
+                    player.bank += money_to_earn
 
-                if player.current_xp >= 20:
-                    player.current_xp -= 20
-                    player.player_level += 1
-                    player.boss_spawn += 1
+                    old_player_level = player.player_level
+                    player.current_xp += xp_to_earn
 
-                print("\n\nYou Slain The Enemy!")
-                print("You earned ",money_to_earn," coins and ",xp_to_earn," experience points!")
-                print("Your bank balance is now ",player.bank," coins!")
-                if player.player_level > old_player_level:
-                    print("You have leveled up!")
-                else:
-                    pass
-                print("Your level is",player.player_level,", XP remaining to next level: ",player.current_xp,"/",20,"")
-                time.sleep(2)
-                break
+                    if player.current_xp >= 10:
+                        player.current_xp -= 10
+                        player.player_level += 1
+                        player.boss_spawn += 1
+
+                    print("\n\nYou Slain The Enemy!")
+                    print("You earned ",money_to_earn," coins and ",xp_to_earn," experience points!")
+                    print("Your bank balance is now ",player.bank," coins!")
+                    if player.player_level > old_player_level:
+                        print("You have leveled up!")
+                    else:
+                        pass
+                    print("Your level is",player.player_level,", XP remaining to next level: ",player.current_xp,"/",10,"")
+                    time.sleep(2)
+                    break
         except ValueError:
             print("Use Numbers Between 1-3")
             time.sleep(1)
             input("Press Enter To Continue")
         except:
-            print("An Error Was Detected")
+            print("Use Numbers Between 1-3")
             time.sleep(1)
             input("Press Enter To Continue")
 
@@ -431,7 +414,8 @@ def ChooseDirection():
                 2: Forward
                 3: Right
                 4: Open inventory
-                5: Go back
+                5: See stats
+                6: Go back
                 ''')
 
             direction_choice = input("-> ")
@@ -452,11 +436,13 @@ def ChooseDirection():
                 print("\n"*2)
                 openInventory()
             elif direction_choice == "5":
+                showPlayerStats()
+            elif direction_choice == "6":
                 print("Your turn back...")
                 print("\n"*2)
                 break
             else:
-                print("Use Numbers Between 1-5")
+                print("Use Numbers Between 1-6")
                 time.sleep(1)
                 input("Press Enter To Continue")
         except ValueError:
@@ -488,14 +474,15 @@ def Home():
     while True:
             try:
                 print("\n"*40)
-                print("You are home at your", player.player_house)
+                print("You are home at your",player.player_house)
                 print ("\n"*2)
                 print('''You can now decide what to do at home...
                         ----------------------------------------
                         1. You can stay in your house and rest
                         2. You can go to the blacksmith
                         3. You can go to the item shop
-                        4. Go back out in the wild
+                        4. Show stats
+                        5. Go back out in the wild
                         ----------------------------------------        
                 ''')
                 home_action_choice = int(input('''Decide what to do -->  '''))
@@ -511,10 +498,13 @@ def Home():
                     item_shop()
 
                 elif home_action_choice == 4:
+                    showPlayerStats()
+
+                elif home_action_choice == 5:
                     print("Your going out")
                     break
             except ValueError:
-                print("Use Numbers Between 1-4")
+                print("Use Numbers Between 1-5")
                 time.sleep(1)
                 input("Press Enter To Continue")
             except:
@@ -680,16 +670,22 @@ def blacksmith():
             item_menu_choice = int(input("-> "))
 
             if item_menu_choice == 1:
+                print("\n"*45)
+                print("-"*30)
+                print()
                 print ("Welcome to the blacksmith")
+                print()
                 print("Your bank balance: ",player.bank," coins")
+                print()
                 print("All items that are available: ")
                 while True:
                     item_slot = 1
 
                     for items in blacksmith_item_list_all:
-                        print(item_slot,", ",items.weapon_name ," ",items.weapon_value,"")
+                        print(item_slot,",",items.weapon_name)
                         item_slot += 1
                     print()
+                    print("-"*30)
                     itemToBuy = int(input("Choose What Item To Buy -> "))
                     itemToBuy -= 1
                     itemToBuyObject = blacksmith_item_list_all[itemToBuy]
@@ -730,20 +726,26 @@ def blacksmith():
 def item_shop():
     while True:
         try:
-            print("Look at the items to buy: 1, Leave: 2")
+            print("Look at the items to buy: 1, Talk to shopkeeper: 2, Go back: 3")
             item_menu_choice = int(input("-> "))
 
             if item_menu_choice == 1:
+                print("\n"*45)
+                print("-"*30)
+                print()
                 print ("Welcome to the item shop")
+                print()
                 print("Your bank balance: ",player.bank," coins")
+                print()
                 print("All items that are available: ")
+                print()
                 item_slot = 1
                 for items in item_shop_item_list:
                     print(item_slot, items.item_name, end=":")
                     print(items.item_value, "Coins")
                     item_slot += 1
-
                 print()
+                print("-"*30)
                 itemToBuy = int(input("Choose What Item To Buy -> "))
                 itemToBuy -= 1
                 itemToBuyObject = item_shop_item_list[itemToBuy]
@@ -754,7 +756,13 @@ def item_shop():
                     print("Your balance is now ",player.bank," coins!")
                 else:
                     print("Your bank balance is to low...")
+            
             elif item_menu_choice == 2:
+                print("\n"*45)
+                print("Hello there! How can I help ye?")
+                print("1: Ask about name, 2: Ask about town, 3: Nevermind")
+                player_dialouge_choice = int(input("-> "))
+            elif item_menu_choice == 3:
                 break
             else:         
                 print("Use Numbers Between 1-2")
@@ -803,43 +811,7 @@ def Play():
     ChooseCharacter()
     MovePlayer()
 
-def HowToPlay():
-    print ('''\n 
-    
-    The Start:
-    The game starts with a choice of three different charachters: A knighted Noblesman, a blacksmith or a farmer.    
-    Whichever charachter you choose has access to a house, were you can rest or manage your chest and inventory.
-    Each charachter also has a different background and life-experiences and therefore a different skillset. 
-    Each charachter is thereby given a set of uniqe boosts which you can read more about in the charachter selection page. 
-    Close to every charachters house you can go to the blacksmith for weapons and armor purchases and an item shop for item purchases.
 
-
-    In-game systems:
-    The game comes with a few systems to enhance gaming-experience. Among those are the Money-, XP- and the fighting-systems. 
-    
-    You can use money for buying weapons, armor and items in the blacksmith or the item shop and you can earn said money by defeating enemies in battle.
-    Or by taking your rich parents money *cough *cough the Knight *cough *cough. 
-
-    As for experience you can only gain it by defeating enemies in battle. 
-    By gaining experience you will level up and by leveling up you will get chances to fight bosses in battle. 
-        
-    The game itself is based on a turn based fighting system where you travel the world while fighting enemies 
-    by choosing one of the actions given by the game to progress further. 
-
-    ''')
-
-    input("Press Enter To Continue")
-
-def ShowCredits():
-    print('''
-                                                        Created by:
-
-                                                        Alvin Söderberg
-                                                        Marcus Broman
-                                                        Axel Österberg
-    ''')
-
-    input("Press Enter To Continue")
 
 def QuitGame():
     print("Game Shutting Down...")
