@@ -595,23 +595,8 @@ def at_house():
                                 #Do you want to store an item or a weapon?
                                 chest_choice_item = int(input("1. Store Item, 2. Store Weapon -> "))
                                 
-                                #Store Weapon
-                                if chest_choice_item == 1:
-                                    item_slot = 1
-                                    print("\n"*10)
-                                    print("Weapons in inventory: ")
-                                    for items in inventory_weapon:
-                                        print(item_slot,",",  items.weapon_name)
-                                        item_slot += 1
-                                    print("\n"*5)
-                                    item_to_add_to_chest = int(input("Choose Item To add to chest: "))
-                                    item_to_add_to_chest -= 1
-
-                                    chest_list_weapon.append(inventory_weapon[item_to_add_to_chest])
-                                    inventory_weapon.pop(item_to_add_to_chest)
-                                
                                 #Store Item
-                                elif chest_choice_item == 2:
+                                if chest_choice_item == 1:
                                     item_slot = 1
                                     print("\n"*10)
                                     print("Items in inventory: ")
@@ -624,31 +609,29 @@ def at_house():
 
                                     chest_list_item.append(inventory_item[item_to_add_to_chest])
                                     inventory_item.pop(item_to_add_to_chest)
+                                
+                                #Store Weapon
+                                elif chest_choice_item == 2:
+                                    item_slot = 1
+                                    print("\n"*10)
+                                    print("Weapons in inventory: ")
+                                    for items in inventory_weapon:
+                                        print(item_slot,",",  items.weapon_name)
+                                        item_slot += 1
+                                    print("\n"*5)
+                                    item_to_add_to_chest = int(input("Choose weapon To add to chest: "))
+                                    item_to_add_to_chest -= 1
+
+                                    chest_list_weapon.append(inventory_weapon[item_to_add_to_chest])
+                                    inventory_weapon.pop(item_to_add_to_chest)
 
                             #Extract from chest
                             elif chest_choice == 2:
                                 #Do you want to store an item or a weapon?
-                                item_chest_choice = int(input("1. Take Weapons, 2. Take Items -> "))
+                                item_chest_choice = int(input("1. Take Items, 2. Take Weapons -> "))
                                 
                                 #Take weapons
                                 if item_chest_choice == 1:
-                                    print("\n"*10)
-                                    print("Weapons: ")
-                                    item_slot = 1
-                                    for items in chest_list_weapon:
-                                        print("",item_slot ,".", items.weapon_name,",")
-                                        item_slot += 1
-                                    item_slot = 1
-                                    print()
-
-                                    item_to_take_from_chest = int(input("Choose Item To take from the chest: "))
-                                    item_to_take_from_chest -= 1
-
-                                    inventory_weapon.append(chest_list_weapon[item_to_take_from_chest])
-                                    chest_list_weapon.pop(item_to_take_from_chest)
-                                
-                                #Take items
-                                elif item_chest_choice == 2:
                                     print("\n"*10)
                                     print("Items: ")
                                     item_slot = 1
@@ -663,6 +646,23 @@ def at_house():
 
                                     inventory_item.append(chest_list_item[item_to_take_from_chest])
                                     chest_list_item.pop(item_to_take_from_chest)
+                                
+                                #Take items
+                                elif item_chest_choice == 2:
+                                    print("\n"*10)
+                                    print("Weapons: ")
+                                    item_slot = 1
+                                    for items in chest_list_weapon:
+                                        print("",item_slot ,".", items.weapon_name,",")
+                                        item_slot += 1
+                                    item_slot = 1
+                                    print()
+
+                                    item_to_take_from_chest = int(input("Choose Weapon To take from the chest: "))
+                                    item_to_take_from_chest -= 1
+
+                                    inventory_weapon.append(chest_list_weapon[item_to_take_from_chest])
+                                    chest_list_weapon.pop(item_to_take_from_chest)
                         
                         elif home_chest_choice == 2:
                             print("You go back..")
