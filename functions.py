@@ -413,6 +413,8 @@ def chestRoom():
         player.bank += money_to_recive
         print("Player balance is ",player.bank," coins!")
 
+    time.sleep(2)
+
 def GenerateRoom():
     random_room_int = rand.randint(1, 2)
 
@@ -426,7 +428,7 @@ def GenerateRoom():
 
 def ChooseDirection():
     while True:
-
+        print("\n"*45)
         try:
             if is_game_closed == True:
                 break
