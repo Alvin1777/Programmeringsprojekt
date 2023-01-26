@@ -130,4 +130,7 @@ def print_backstory_3():
 
 #Dialoge 2:
 #I am the local blacksmith around. I don't know if you can here it on my accent but I come from Germany. 
-#From the great city of Bobritzsch-Hilbersdorf to exact. I moved here with my family to start a new life after a 
+#From the great city of Bobritzsch-Hilbersdorf to exact. I moved here with my family to start a new life 
+#after our hometown was burned down by the French.
+
+#Dialogue 3:
