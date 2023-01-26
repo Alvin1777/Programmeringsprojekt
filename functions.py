@@ -210,10 +210,77 @@ def openInventory():
             break
 
 def addItemToInventory(itemToAdd):
+    print("\n"*45)
     if itemToAdd.isWeapon == True:
-        inventory_weapon.append(itemToAdd)
+        if len(inventory_weapon) >= 3:
+            print("Your inventory is full!")
+            print()
+            print("Do you wish to replace a weapon? y/n")
+            replace_weapon_choice = input("-> ")
+            while True:
+                if replace_weapon_choice == "y":
+                    item_slot = 1
+                    for items in inventory_weapon:
+                        print(item_slot,",",items.weapon_name)
+                        item_slot += 1
+                    print()
+                    item_slot = 1
+                    print("What weapon do you wish to replace? 1-3")
+
+                    replace_weapon_slot = int(input("-> "))
+
+                    replace_weapon_slot -= 1
+
+                    inventory_weapon[replace_weapon_slot] = itemToAdd
+
+                    break
+
+                elif replace_item_choice == "n":
+                    break
+
+                else:
+                    print("Use y or n")
+                    time.sleep(1)
+                    input("Press enter to continue")
+
+        else:
+            inventory_weapon.append(itemToAdd)
+
     elif itemToAdd.isWeapon == False:
-        inventory_item.append(itemToAdd)
+        if len(inventory_item) >= 3:
+            print("Your inventory is full!")
+            print()
+            print("Do you wish to replace a item? y/n")
+            replace_item_choice = input("-> ")
+            while True:
+                if replace_item_choice == "y":
+                    item_slot = 1
+                    for items in inventory_item:
+                        print(item_slot,",",items.item_name)
+                        item_slot += 1
+                    print()
+                    item_slot = 1
+                    print("What item do you wish to replace? 1-3")
+
+                    replace_item_slot = int(input("-> "))
+
+                    replace_item_slot -= 1
+
+                    inventory_item[replace_item_slot] = itemToAdd
+
+                    break
+                
+                elif replace_item_choice == "n":
+                    break
+
+                else:
+                    print("Use y or n")
+                    time.sleep(1)
+                    input("Press enter to continue")
+
+        else:
+            inventory_item.append(itemToAdd)
+
 
 def getRandomItem():
     rand_item_int = rand.randint(0, 5)
@@ -286,6 +353,7 @@ def FightMonster():
             monster_type = RandomMonster()
             print("\n"*6)
             print("A",monster_type.enemy_name,"appeard!")
+            time.sleep(1)
             
             if monster_type.enemy_health <= 0:
                 monster_type.enemy_health = 10
@@ -312,7 +380,7 @@ def FightMonster():
                         damage_dealt = round(equippedItem.weapon_damage * player.damage_multiplier, 1)
 
                         print("You hit the enemy for",damage_dealt,"HP!")
-                        time.sleep(1.5)
+                        time.sleep(1)
                         monster_type.enemy_health -= damage_dealt
                         monster_type.enemy_health = round(monster_type.enemy_health, 1)
 
@@ -322,7 +390,7 @@ def FightMonster():
                             print("\n"*2)
                             damage_taken = round(monster_type.enemy_damage * player.damage_reduction, 1)
                             print("The enemy hit you for",damage_taken,"HP!")
-                            time.sleep(1.5)
+                            time.sleep(1)
                             player.player_health -= monster_type.enemy_damage * player.damage_reduction
                             player.player_health = round(player.player_health, 1)
                         
@@ -461,9 +529,9 @@ def ChooseDirection():
                 break
             print("Where do you wanna go?")
             print('''
-                1: Left 
-                2: Forward
-                3: Right
+                1: West 
+                2: North
+                3: East
                 4: Open inventory
                 5: See stats
                 6: Go back
