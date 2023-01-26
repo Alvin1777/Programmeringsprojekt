@@ -364,6 +364,7 @@ def FightMonster():
                     print("Your level is",player.player_level,", XP remaining to next level: ",player.current_xp,"/",10,"")
                     time.sleep(2)
                     break
+
         except ValueError:
             print("Use Numbers Between 1-3")
             time.sleep(1)
@@ -509,6 +510,10 @@ def Home():
                 elif home_action_choice == 5:
                     print("Your going out")
                     break
+                else:
+                    print("Use Numbers Between 1-5")
+                    time.sleep(1)
+                    input("Press Enter To Continue")
             except ValueError:
                 print("Use Numbers Between 1-5")
                 time.sleep(1)
@@ -673,8 +678,17 @@ def at_house():
                     QuitGame()
                     is_game_closed = True
                     break
+                else:          
+                    print("Use Numbers Between 1-5")
+                    time.sleep(1)
+                    input("Press Enter To Continue")
+        except ValueError:
+            print("Use Numbers Between 1-5")
+            time.sleep(1)
+            input("Press Enter To Continue")
         except:
-            print ("Use numbers between 1-5")
+            print("An Error Was Detected")
+            time.sleep(1)
             input("Press Enter To Continue")
 
 def blacksmith():
@@ -833,7 +847,7 @@ def Play():
 def QuitGame():
     print("Game Shutting Down...")
     time.sleep(2)
-    print("\n"*20)
+    print("\n"*45)
     
 
 
