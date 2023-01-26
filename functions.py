@@ -25,6 +25,7 @@ def ChooseCharacter():
     global player_name
     global player_house
     try:
+        print("\n"*45)
         print("What Is Your Name Explorer?")
         player_name = input("-> ")
     except:
@@ -297,7 +298,7 @@ def FightMonster():
                 if monster_type.enemy_health > 0:
                     enemy_health_check = 1
                     print("\n"*2)
-                    print("What is action",player.player_name)
+                    print(f"What is your action{player.player_name}?")
                     print("\n")
                     print("Your health:",player.player_health)
                     print("Enemy health:",monster_type.enemy_health)
@@ -826,7 +827,7 @@ def MovePlayer():
         if is_game_closed == True:
             break
         try:
-            print("What Is Your Action", player.player_name,"?")
+            print(f"What Is Your Action {player.player_name}?")
             print('''
                 1. Explore the world.
                 2. Go Home.
