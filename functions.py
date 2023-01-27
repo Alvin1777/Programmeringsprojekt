@@ -7,7 +7,7 @@ from Object import *
 from dialogues import*
 
 
-# VAR
+#Var
 is_game_won = False
 is_game_closed = False
 inventory_weapon = [DefaultDaggerWeapon]
@@ -20,7 +20,7 @@ full_health = 30
 chest_list_weapon = []
 monsters_killed = 0
 trap_names = ["spike", "fire pit", "arrow", "explosive"]
-player_start_health = 300000
+player_start_health = 30
 
 #Functions
 
@@ -38,7 +38,6 @@ def ChooseCharacter():
         input("Press Enter To Continue")
 
     while True:
-        
         print("\n"* 35)
         print("You May Choose Between Three Different Character With Three Different Backgrounds...\n")
         print("      ----------------------------------------\n")
@@ -49,8 +48,6 @@ def ChooseCharacter():
         try:
             character_choice = int(input("Choose Backstory -> "))
             
-
-
             print("\n"*3)
 
             if character_choice == 1:
@@ -58,7 +55,7 @@ def ChooseCharacter():
                 player_house = "Castle"
                 title = "Sir"
                 surname = "the Dragon Slayer"
-                bank = 1000
+                bank = 300
                 xp_multiplier = 1.2
                 damage_reduction = 0.9
                 damage_multiplier = 1.2
@@ -82,7 +79,7 @@ def ChooseCharacter():
                 player_house = "house"
                 title = ""
                 surname = "Ironhill"
-                bank = 700
+                bank = 200
                 xp_multiplier = 1.2
                 damage_reduction = 1
                 damage_multiplier = 1.2
@@ -105,7 +102,7 @@ def ChooseCharacter():
                 player_house = "Barn"
                 title = ""
                 surname = "Fairbairns"
-                bank = 300
+                bank = 100
                 xp_multiplier = 1
                 damage_reduction = 1
                 damage_multiplier = 1.1
