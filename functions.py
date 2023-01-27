@@ -484,6 +484,8 @@ def trapRoom():
     print()
     print("You took 5 damage!")
     player.player_health -= 5
+    print("")
+    print("You have",player.player_health,"Hp remaining!")
     time.sleep(1)
     print("\n"*45)
 
