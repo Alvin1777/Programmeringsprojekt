@@ -1,12 +1,12 @@
 class Player():
-    def __init__(self, player_name, player_character, player_house, character_name_title, character_name_surname, player_health, player_level, player_bank, player_xp_multiplier, player_damage_reduction, player_damage_multiplier, player_weapon_price_reduction, player_item_price_reduction):
+    def __init__(self, player_name, player_character, player_house, character_name_title, character_name_surname, player_health, player_bank, player_xp_multiplier, player_damage_reduction, player_damage_multiplier, player_weapon_price_reduction, player_item_price_reduction):
         self.player_name = player_name
         self.character = player_character
         self.player_house = player_house
         self.character_name_title = character_name_title
         self.character_name_surname = character_name_surname
         self.player_health = player_health
-        self.player_level = player_level
+        self.player_level = 0
         self.bank = player_bank
         self.xp_multi = player_xp_multiplier
         self.damage_reduction = player_damage_reduction

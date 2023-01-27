@@ -68,7 +68,7 @@ def ChooseCharacter():
 
                 confirm_character = input("Want To Use This Character? y/n -> ")
                 if confirm_character == "y":
-                    player = Player(player_name, character, player_house, title, surname, player_start_health, 0, bank, xp_multiplier, damage_reduction, damage_multiplier, weapon_price_reduction, item_price_reduction)
+                    player = Player(player_name, character, player_house, title, surname, player_start_health, bank, xp_multiplier, damage_reduction, damage_multiplier, weapon_price_reduction, item_price_reduction)
                     print("Character Confirmed...")
                     print("\n"*40)
                     break
@@ -91,7 +91,7 @@ def ChooseCharacter():
 
                 confirm_character = input("Want To Use This Character? y/n -> ")
                 if confirm_character == "y":
-                    player = Player(player_name, character, player_house, title, surname, player_start_health, 0, bank, xp_multiplier, damage_reduction, damage_multiplier, weapon_price_reduction, item_price_reduction)
+                    player = Player(player_name, character, player_house, title, surname, player_start_health, bank, xp_multiplier, damage_reduction, damage_multiplier, weapon_price_reduction, item_price_reduction)
                     print("Character Confirmed...")
                     print("\n"*40)
                     break
@@ -114,7 +114,7 @@ def ChooseCharacter():
 
                 confirm_character = input("Want To Use This Character? y/n -> ")
                 if confirm_character == "y":
-                    player = Player(player_name, character, player_house, title, surname, player_start_health, 0, bank, xp_multiplier, damage_reduction, damage_multiplier, weapon_price_reduction, item_price_reduction)
+                    player = Player(player_name, character, player_house, title, surname, player_start_health, bank, xp_multiplier, damage_reduction, damage_multiplier, weapon_price_reduction, item_price_reduction)
                     print("Character Confirmed...")
                     print("\n"*40)
                     break
@@ -667,7 +667,7 @@ def at_house():
             while True:
                 print("\n"*40)
                 print ("Welcome home to your", player.player_house)
-                print (f"Choose what to do at your {player_house},{player_name}")
+                print (f"Choose what to do at your {player_house}, {player_name}")
                 print ('''
                         ----------------------------------------
                         1. Eat and sleep
@@ -955,14 +955,7 @@ def item_shop():
                         print("Please use the letters y and n")
                         input("Press Enter To Continue")
 
-                
-            
             elif item_menu_choice == 2:
-                print("\n"*45)
-                print("Hello there! How can I help ye?")
-                print("1: Ask about name, 2: Ask about town, 3: Nevermind")
-                player_dialouge_choice = int(input("-> "))
-            elif item_menu_choice == 3:
                 break
             else:         
                 print("Use Numbers Between 1-3")
