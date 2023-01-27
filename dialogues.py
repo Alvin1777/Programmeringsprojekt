@@ -62,7 +62,7 @@ def blacksmith_dialogue():
                                                 
                                                 Choose what to say:
                                                 1. Can you tell me about all the monsters in the area?
-                                                2.                                                 
+                                                2. How did it all come to this? Why is the Kingdom under siege from so many mobs?                               
                                                 3. Not really (Go back)
                                                     
                                                     
@@ -73,10 +73,52 @@ def blacksmith_dialogue():
                                 print ('''
                                                 -Zee monsters in zee area? 
                                                 Ja zere ist ein lot of zem. 
-                                                TEXT PLACEHOLDER
+                                                
+                                                Zere are skeledons zey are ein grey mob zat schoots arrovs at vu. Arh ! Hosdile.
+
+                                                Zen zere are sbiters. Ein eight-legged mob zat can cravl up valls. Arh ! Hostile.
+
+                                                Ve alzo haffe zee sompies. Arh ! Ein green schteffe-looking mob zat tries to atdack vu. Hostile
+
+                                                Zere is Hanozer green ugly mob called Gkoplins. Arh ! Zey vill alzo attack vu Hoffcourze. Hosdile. 
+
+                                                Yet Hanozer dangerous ugly mob zat vill try to atdack vu is zee Orcs. Arh ! Fery ugly, alzo. Hostile.
+
+                                                Zen finally ve haffe zee pats. Arh ! Zey vill alzo try to attack vu aber zey are nicht zo dangerous zo it is Halright. 
+                                                Bretty Hannoying zough. 
                                 ''')
                             elif dialogue_3 == 2:
-                                print('''Text Placeholder''')
+                                print('''
+                                                - I do not know. It makes me fery zad. 
+
+
+                                                Let me zing you ein sehr gut zong!
+                                                
+                                                Like zee great CabdainSparklez once sang:
+
+                                                I uzed to rule zee vorld
+                                                Chunks vould load ven I kaffe zee vord
+                                                Now effery night I ko sdow avay
+                                                Hide from zee mops I uzed to slay
+                                                Zey once vere terrified
+                                                Effery time I looked into zeir eyes
+                                                Fillagers vould cheer mein vay
+                                                For ein hero I vas, zat's vat zey'd zay
+                                                One minute ve had it all
+                                                Next our vorld pekan to fall
+                                                Avay from all zat it had once pecome
+                                                Zey all cried for mein help, put I sdood zere numb
+                                                                                
+                                                I kase off into zee poundless skyline
+                                                Note plock choirs blaying in zee zunschine
+                                                Turn around, bick up mein svord und vield
+                                                Zee plade zat once forced effil mops to yield
+                                                Und hobe one day zat zis chaos und
+                                                Destruczion turns for zee petder
+                                                Neffer ein pow in hand
+                                                Zat vas ven I ruled zee land
+
+                                ''')
                             elif dialogue_3 == 3:                                
                                 print('''Okej
                                 ''')   
