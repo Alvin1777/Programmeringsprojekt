@@ -1,4 +1,5 @@
 import time
+from functions import *
 
 
 def blacksmith_dialogue():
@@ -133,7 +134,7 @@ def blacksmith_dialogue():
                                             ''')
                         break
                     else:
-                        print("Please choose options 1-4")
+                        print("Use Numbers Between 1-4")
             elif intro_dialogue == 2: 
                 print("")
                 break

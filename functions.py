@@ -866,26 +866,31 @@ def blacksmith():
                     for items in blacksmith_item_list_all:
                         print(item_slot,",",items.weapon_name)
                         item_slot += 1
+                    print("9, Go back")
                     print()
                     print("-"*30)
                     itemToBuy = int(input("Choose What Item To Buy -> "))
-                    itemToBuy -= 1
-                    itemToBuyObject = blacksmith_item_list_all[itemToBuy]
-
-                    itemToBuyObject.showWeaponStats()
-
-                    print("Do you wish to buy this weapon? y/n")
-                    buyItemChoice = input("-> ")
-
-                    if buyItemChoice == "y":
-                        if player.bank >=  itemToBuyObject.weapon_value:
-                            player.bank -= itemToBuyObject.weapon_value
-                            addItemToInventory(blacksmith_item_list_all[itemToBuy])
-                            print("Your balance is now ",player.bank," coins!")
-                        else:
-                            print("Your bank balance is to low...")
-                    elif buyItemChoice == "n":
+                    if itemToBuy == 9:
                         break
+                    elif itemToBuy <9 and itemToBuy>0:
+                        itemToBuy -= 1
+                        itemToBuyObject = blacksmith_item_list_all[itemToBuy]
+                        
+
+                        itemToBuyObject.showWeaponStats()
+
+                        print("Do you wish to buy this weapon? y/n")
+                        buyItemChoice = input("-> ")
+
+                        if buyItemChoice == "y":
+                            if player.bank >=  itemToBuyObject.weapon_value:
+                                player.bank -= itemToBuyObject.weapon_value
+                                addItemToInventory(blacksmith_item_list_all[itemToBuy])
+                                print("Your balance is now ",player.bank," coins!")
+                            else:
+                                print("Your bank balance is to low...")
+                        elif buyItemChoice == "n":
+                            break
                     else:
                         print("Please use the letters y and n")
                         input("Press Enter To Continue")
@@ -929,28 +934,32 @@ def item_shop():
                 while True:
                     item_slot = 1
                     for items in item_shop_item_list:
-                        print(item_slot, items.item_name)
+                        print(item_slot,",", items.item_name)
                         item_slot += 1
+                    print("7 , Go Back")
                     print()
                     print("-"*30)
                     itemToBuy = int(input("Choose What Item To Buy -> "))
-                    itemToBuy -= 1
-                    itemToBuyObject = item_shop_item_list[itemToBuy]
-
-                    itemToBuyObject.showItemStats()
-
-                    print("Do you wish to buy this item? y/n")
-                    buyItemChoice = input("-> ")
-
-                    if buyItemChoice == "y":
-                        if player.bank >=  itemToBuyObject.item_value:
-                            player.bank -= itemToBuyObject.item_value
-                            addItemToInventory(item_shop_item_list[itemToBuy])
-                            print("Your balance is now ",player.bank," coins!")
-                        else:
-                            print("Your bank balance is to low...")
-                    elif buyItemChoice == "n":
+                    if itemToBuy == 7:
                         break
+                    elif itemToBuy > 0 and itemToBuy < 7:
+                        itemToBuy -= 1
+                        itemToBuyObject = item_shop_item_list[itemToBuy]
+
+                        itemToBuyObject.showItemStats()
+
+                        print("Do you wish to buy this item? y/n")
+                        buyItemChoice = input("-> ")
+
+                        if buyItemChoice == "y":
+                            if player.bank >=  itemToBuyObject.item_value:
+                                player.bank -= itemToBuyObject.item_value
+                                addItemToInventory(item_shop_item_list[itemToBuy])
+                                print("Your balance is now ",player.bank," coins!")
+                            else:
+                                print("Your bank balance is to low...")
+                        elif buyItemChoice == "n":
+                            break
                     else:
                         print("Please use the letters y and n")
                         input("Press Enter To Continue")
@@ -977,6 +986,7 @@ def MovePlayer():
         if is_game_won == True:
             break
         try:
+            print("\n"*45)
             print(f"What Is Your Action {player.player_name}?")
             print('''
                 1. Explore the world.
