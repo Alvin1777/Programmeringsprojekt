@@ -140,7 +140,7 @@ def openInventory():
         try:
             print("\n"*3)
             print('''
-    --------------------------------------------------------------
+--------------------------------------------------------------
                             Weapons:
         
                 ''')
@@ -677,7 +677,7 @@ def at_house():
                         5. Quit game
                         ----------------------------------------
                 ''')
-                print("What do you want to do ",player_name,"?")
+                print(f"What do you want to do {player_name}?")
                 house_action_choice = int(input("-> "))
                 if house_action_choice == 1:
                     player.player_health = full_health
@@ -693,14 +693,6 @@ def at_house():
                             print ("Do you want to access the chest? 1. yes, 2. Go back")
                             home_chest_choice = int(input("-> "))
                             print("\n"*5)
-                        except ValueError:
-                            print("Use Numbers Between 1-2")
-                            time.sleep(1)
-                            input("Press Enter To Continue")
-                        except:
-                            print("An Error Was Detected")
-                            time.sleep(1)
-                            input("Press Enter To Continue")
 
                             if home_chest_choice == 1:
                                 item_slot = 1
@@ -734,7 +726,8 @@ def at_house():
                                 print()
                                 print()
                                 #Do you want to extract or insert something to the chest?
-                                chest_choice = int(input("1. Store to chest, 2. Extract from chest -> "))
+                                print("1. Store to chest, 2. Extract from chest, 3. Go back ")
+                                chest_choice = int(input("-> "))
                                 print("\n"*5)
                                 
                                 #Store in chest
@@ -810,7 +803,9 @@ def at_house():
 
                                         inventory_weapon.append(chest_list_weapon[item_to_take_from_chest])
                                         chest_list_weapon.pop(item_to_take_from_chest)
-                            
+                                elif chest_choice == 3:
+                                    break
+
                             elif home_chest_choice == 2:
                                 print("You go back..")
                                 break
@@ -818,6 +813,14 @@ def at_house():
                                 print("Use Numbers Between 1-2")
                                 time.sleep(1)
                                 input("Press Enter To Continue")
+                        except ValueError:
+                            print("Use Numbers Between 1-2")
+                            time.sleep(1)
+                            input("Press Enter To Continue")
+                        except:
+                            print("An Error Was Detected")
+                            time.sleep(1)
+                            input("Press Enter To Continue")
                         
                 elif house_action_choice == 3:
                     print("\n"*50)
@@ -844,13 +847,8 @@ def at_house():
 def blacksmith():
     while True:
         try:
-            print('''
-                            1. Look at the weapons/armour to buy 
-                            2. Talk to the blacksmith
-                            3. Leave
-                            
-            
-                            ''')
+            print("\n"*45)
+            print("1. Browse stock, 2. Talk to the blacksmith, 3. Go back")
             item_menu_choice = int(input("-> "))
 
             if item_menu_choice == 1:
@@ -880,18 +878,18 @@ def blacksmith():
                     buyItemChoice = input("-> ")
 
                     if buyItemChoice == "y":
-                        break
+                        if player.bank >=  itemToBuyObject.weapon_value:
+                            player.bank -= itemToBuyObject.weapon_value
+                            addItemToInventory(blacksmith_item_list_all[itemToBuy])
+                            print("Your balance is now ",player.bank," coins!")
+                        else:
+                            print("Your bank balance is to low...")
                     elif buyItemChoice == "n":
-                        pass
+                        break
                     else:
                         print("Please use the letters y and n")
                         input("Press Enter To Continue")
-                if player.bank >=  itemToBuyObject.weapon_value:
-                    player.bank -= itemToBuyObject.weapon_value
-                    addItemToInventory(blacksmith_item_list_all[itemToBuy])
-                    print("Your balance is now ",player.bank," coins!")
-                else:
-                    print("Your bank balance is to low...")
+
             elif item_menu_choice == 2:
                 blacksmith_dialogue()
             
@@ -914,7 +912,8 @@ def blacksmith():
 def item_shop():
     while True:
         try:
-            print("Look at the items to buy: 1, Talk to shopkeeper: 2, Go back: 3")
+            print("\n"*45)
+            print("1. Browse Stock, 2. Go back")
             item_menu_choice = int(input("-> "))
 
             if item_menu_choice == 1:
@@ -944,19 +943,19 @@ def item_shop():
                     buyItemChoice = input("-> ")
 
                     if buyItemChoice == "y":
-                        break
+                        if player.bank >=  itemToBuyObject.item_value:
+                            player.bank -= itemToBuyObject.item_value
+                            addItemToInventory(item_shop_item_list[itemToBuy])
+                            print("Your balance is now ",player.bank," coins!")
+                        else:
+                            print("Your bank balance is to low...")
                     elif buyItemChoice == "n":
-                        pass
+                        break
                     else:
                         print("Please use the letters y and n")
                         input("Press Enter To Continue")
 
-                if player.bank >=  itemToBuyObject.item_value:
-                    player.bank -= itemToBuyObject.item_value
-                    addItemToInventory(item_shop_item_list[itemToBuy])
-                    print("Your balance is now ",player.bank," coins!")
-                else:
-                    print("Your bank balance is to low...")
+                
             
             elif item_menu_choice == 2:
                 print("\n"*45)
