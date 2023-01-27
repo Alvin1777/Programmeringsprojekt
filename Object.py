@@ -19,21 +19,21 @@ SpiderBoss = enemy("Papa Spider", 35, 7, True)
 
     #Weapons
 
-SteelSwordWeapon = weapons("Steel sword", 1, 5, 50, True)
+SteelSwordWeapon = weapons("Steel sword", 1, 5, 70, True)
 WoodSwordWeapon = weapons("Wooden sword", 0.5, 1, 10, True)
 AtgeirSpearWeapon = weapons("Atgeir spear", 3, 4, 75, True)
 YariSpearWeapon = weapons("Yari spear", 3, 3, 45, True)
-DanishAxeWeapon = weapons("Danish axe", 20, 0.1, 10, True)
-BattleAxeWeapon = weapons("Battle axe", 2, 6, 60, True)
-GolokSwordWeapon = weapons("Golok sword", 0.5, 5.5, 60, True)
-DaodacSwordWeapon = weapons("Daodac Sword", 1, 8, 95, True)
+DanishAxeWeapon = weapons("Danish axe", 20, 0.1, 100, True)
+BattleAxeWeapon = weapons("Battle axe", 2, 6, 200, True)
+GolokSwordWeapon = weapons("Golok sword", 0.5, 5.5, 300, True)
+DaodacSwordWeapon = weapons("Daodac Sword", 1, 8, 400, True)
 DefaultDaggerWeapon = weapons("Rusty dagger", 3, 1, 1, True)
 
     #Items
 
-potatoItem = items("Potato", 5, True, 2, False)
-beefItem = items("Beef", 10, True, 5, False)
-healingPoitionItem = items("Healing potion", 100, True, 100, False)
+potatoItem = items("Potato", 10, True, 2, False)
+beefItem = items("Beef", 50, True, 5, False)
+healingPoitionItem = items("Healing potion", 100, True, 20, False)
 bronzeArtifactItem = items("Bronze artifact", 50, False, 0, False)
 silverArtifactItem = items("Silver artifact", 100, False, 0, False)
 goldArtifactItem = items("Gold artifact", 200, False, 0, False)
