@@ -1,11 +1,11 @@
-
+import time
 
 
 def blacksmith_dialogue():
     try:
         while True:
             print("\n")
-            intro_dialogue = int(input('''  
+            print('''  
                                             The blacksmith greets you....
 
 
@@ -19,7 +19,9 @@ def blacksmith_dialogue():
                                             
                                             
                                             
-                                            '''))
+                                            ''')
+            
+            intro_dialogue = int(input("->"))
             if intro_dialogue == 1:
                 while True:
                     print('''
@@ -32,7 +34,7 @@ def blacksmith_dialogue():
                                             
                                             ''')
                     print ("\n"*3)
-                    dialogue_option = int(input("-->"))
+                    dialogue_option = int(input("->"))
                     if dialogue_option == 1:
                         print('''           
                                             - I forge veabons und armor for all zee beople around. Arh ! 
@@ -66,7 +68,7 @@ def blacksmith_dialogue():
                                                     
                                                 ''')
                             print("\n"*3)
-                            dialogue_3 = int(input("-->"))
+                            dialogue_3 = int(input("->"))
                             if dialogue_3 == 1:
                                 print ('''
                                                 -Zee monsters in zee area? 
@@ -94,6 +96,13 @@ def blacksmith_dialogue():
                 print("")
                 break
             else:
-                print("")
+                print("Use Numbers Between 1 And 2")
+
+    except ValueError:
+        print("Use Numbers Between 1 And 2")
+        time.sleep(1)
+        input("Press Enter To Continue")
     except:
-        print("Please choose a number between 1 and 2")
+        print("An Error Was Detected")
+        time.sleep(1)
+        input("Press Enter To Continue")
