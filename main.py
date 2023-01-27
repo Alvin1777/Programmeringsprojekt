@@ -22,7 +22,10 @@ while True:
     elif main_menu_choice == 3:
         ShowCredits()
     elif main_menu_choice == 4:
-        QuitGame()
+        print("Game shutting down...")
+        time.sleep(2)
+        print("\n"*45)
+        exit()
     else:
         print("Use Numbers Between 1-4")
         time.sleep(1)

@@ -20,6 +20,7 @@ full_health = 30
 chest_list_weapon = []
 monsters_killed = 0
 trap_names = ["spike", "fire pit", "arrow", "explosive"]
+player_start_health = 300000
 
 #Functions
 
@@ -70,7 +71,7 @@ def ChooseCharacter():
 
                 confirm_character = input("Want To Use This Character? y/n -> ")
                 if confirm_character == "y":
-                    player = Player(player_name, character, player_house, title, surname, 300000, 0, bank, xp_multiplier, damage_reduction, damage_multiplier, weapon_price_reduction, item_price_reduction)
+                    player = Player(player_name, character, player_house, title, surname, player_start_health, 0, bank, xp_multiplier, damage_reduction, damage_multiplier, weapon_price_reduction, item_price_reduction)
                     print("Character Confirmed...")
                     print("\n"*40)
                     break
@@ -93,7 +94,7 @@ def ChooseCharacter():
 
                 confirm_character = input("Want To Use This Character? y/n -> ")
                 if confirm_character == "y":
-                    player = Player(player_name, character, player_house, title, surname, 30, 0, bank, xp_multiplier, damage_reduction, damage_multiplier, weapon_price_reduction, item_price_reduction)
+                    player = Player(player_name, character, player_house, title, surname, player_start_health, 0, bank, xp_multiplier, damage_reduction, damage_multiplier, weapon_price_reduction, item_price_reduction)
                     print("Character Confirmed...")
                     print("\n"*40)
                     break
@@ -116,7 +117,7 @@ def ChooseCharacter():
 
                 confirm_character = input("Want To Use This Character? y/n -> ")
                 if confirm_character == "y":
-                    player = Player(player_name, character, player_house, title, surname, 30, 0, bank, xp_multiplier, damage_reduction, damage_multiplier, weapon_price_reduction, item_price_reduction)
+                    player = Player(player_name, character, player_house, title, surname, player_start_health, 0, bank, xp_multiplier, damage_reduction, damage_multiplier, weapon_price_reduction, item_price_reduction)
                     print("Character Confirmed...")
                     print("\n"*40)
                     break
@@ -348,7 +349,6 @@ def showPlayerStats():
 
 def FightMonster():
         global is_game_won
-        global is_game_closed
         global monsters_killed
         try:
             print("\n"*45)
@@ -423,7 +423,6 @@ def FightMonster():
                     time.sleep(2)
                     print("\n"*10)
                     ShowCredits()
-                    is_game_closed = True
                     QuitGame()
 
                 elif monster_type.enemy_health <= 0:
@@ -653,7 +652,6 @@ def Home():
                 input("Press Enter To Continue")
                 
 def at_house():
-        global is_game_closed
         try:
             while True:
                 print("\n"*40)
@@ -805,7 +803,6 @@ def at_house():
                     break
                 elif house_action_choice == 5:
                     QuitGame()
-                    is_game_closed = True
                     break
                 else:          
                     print("Use Numbers Between 1-5")
@@ -985,6 +982,8 @@ def Play():
     exit()
 
 def QuitGame():
+    global is_game_closed
+    is_game_closed = True
     print("Game Shutting Down...")
     time.sleep(2)
     print("\n"*45)
