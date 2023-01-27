@@ -435,6 +435,7 @@ def FightMonster():
                     print("\n"*10)
                     ShowCredits()
                     QuitGame()
+                    break
 
                 elif monster_type.enemy_health <= 0:
                     if monster_type.enemy_is_boss == True:
