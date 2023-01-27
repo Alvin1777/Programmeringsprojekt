@@ -490,7 +490,7 @@ def trapRoom():
     print("\n"*45)
 
 def chestRoom():
-    print("\n"*5)
+    print("\n"*45)
     print("Chest Room")
     chest_recvie_item = rand.randint(1, 3)
 
@@ -498,11 +498,13 @@ def chestRoom():
         print("You found a weapon!")
         weapon_to_recive = getRandomWeapon()
         print("A ",weapon_to_recive.weapon_name,)
+        time.sleep(2)
         addItemToInventory(weapon_to_recive)
     elif chest_recvie_item == 2:
-        print("You found a item!")
+        print("You found an item!")
         item_to_recive = getRandomItem()
         print("A",item_to_recive.item_name)
+        time.sleep(2)
         addItemToInventory(item_to_recive)
     elif chest_recvie_item == 3:
         print("You found coins!")
@@ -510,8 +512,7 @@ def chestRoom():
         print("",money_to_recive," coins!")
         player.bank += money_to_recive
         print("Player balance is ",player.bank," coins!")
-
-    time.sleep(2)
+        time.sleep(2)
 
 def GenerateRoom():
     random_room_int = rand.randint(1, 6)
@@ -548,25 +549,30 @@ def ChooseDirection():
             direction_choice = input("-> ")
             print("\n"*2)
             if direction_choice == "1":
-                print("You choose to turn left...")
+                print("You choose to turn west...")
                 print("\n"*2)
+                time.sleep(0.75)
                 GenerateRoom()
             elif direction_choice == "2":
-                print("You choose to go forward...")
+                print("You choose to go north...")
                 print("\n"*2)
+                time.sleep(0.75)
                 GenerateRoom()
             elif direction_choice == "3":
-                print("You choose to turn right...")
+                print("You choose to turn east...")
                 print("\n"*2)
+                time.sleep(0.75)
                 GenerateRoom()
             elif direction_choice == "4":
                 print("\n"*2)
+                time.sleep(0.75)
                 openInventory()
             elif direction_choice == "5":
                 showPlayerStats()
             elif direction_choice == "6":
                 print("Your turn back...")
                 print("\n"*2)
+                time.sleep(0.75)
                 break
             else:
                 print("Use Numbers Between 1-6")
