@@ -457,7 +457,8 @@ def FightMonster():
                         pass
                     print("Your level is",player.player_level,", XP remaining to next level:",player.current_xp,"/",10,"")
                     time.sleep(2)
-                    is_game_won = True
+                    if player.player_level >= 10:
+                        is_game_won = True
                     break
 
         except ValueError:
