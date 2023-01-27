@@ -97,7 +97,3 @@ def blacksmith_dialogue():
                 print("")
     except:
         print("Please choose a number between 1 and 2")
-
-
-
-blacksmith_dialogue()

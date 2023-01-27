@@ -4,6 +4,7 @@ from art import *
 import random as rand
 from classes import *
 from Object import *
+from dialogues import*
 
 
 # VAR
@@ -819,7 +820,13 @@ def at_house():
 def blacksmith():
     while True:
         try:
-            print("Look at the weapons/armour to buy: 1, Leave: 2")
+            print('''
+                            1. Look at the weapons/armour to buy 
+                            2. Talk to the blacksmith
+                            3. Leave
+                            
+            
+                            ''')
             item_menu_choice = int(input("-> "))
 
             if item_menu_choice == 1:
@@ -862,6 +869,10 @@ def blacksmith():
                 else:
                     print("Your bank balance is to low...")
             elif item_menu_choice == 2:
+                blacksmith_dialogue()
+            
+            elif item_menu_choice == 3:
+                print("Goodbye")
                 break
             else:          
                 print("Use Numbers Between 1-2")
