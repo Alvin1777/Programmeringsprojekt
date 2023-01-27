@@ -655,7 +655,7 @@ def at_house():
             while True:
                 print("\n"*40)
                 print ("Welcome home to your", player.player_house)
-                print ("Choose what to do at your", player_house,",", player_name)
+                print (f"Choose what to do at your {player_house},{player_name}")
                 print ('''
                         ----------------------------------------
                         1. Eat and sleep
@@ -742,7 +742,7 @@ def at_house():
                                     print("\n"*10)
                                     print("Weapons in inventory: ")
                                     for items in inventory_weapon:
-                                        print(item_slot,",",  items.weapon_name)
+                                        print(item_slot,",",items.weapon_name)
                                         item_slot += 1
                                     print("\n"*5)
                                     item_to_add_to_chest = int(input("Choose weapon To add to chest: "))
@@ -892,16 +892,29 @@ def item_shop():
                 print()
                 print("All items that are available: ")
                 print()
-                item_slot = 1
-                for items in item_shop_item_list:
-                    print(item_slot, items.item_name, end=":")
-                    print(items.item_value, "Coins")
-                    item_slot += 1
-                print()
-                print("-"*30)
-                itemToBuy = int(input("Choose What Item To Buy -> "))
-                itemToBuy -= 1
-                itemToBuyObject = item_shop_item_list[itemToBuy]
+                while True:
+                    item_slot = 1
+                    for items in item_shop_item_list:
+                        print(item_slot, items.item_name)
+                        item_slot += 1
+                    print()
+                    print("-"*30)
+                    itemToBuy = int(input("Choose What Item To Buy -> "))
+                    itemToBuy -= 1
+                    itemToBuyObject = item_shop_item_list[itemToBuy]
+
+                    itemToBuyObject.showItemStats()
+
+                    print("Do you wish to buy this item? y/n")
+                    buyItemChoice = input("-> ")
+
+                    if buyItemChoice == "y":
+                        break
+                    elif buyItemChoice == "n":
+                        pass
+                    else:
+                        print("Please use the letters y and n")
+                        input("Press Enter To Continue")
 
                 if player.bank >=  itemToBuyObject.item_value:
                     player.bank -= itemToBuyObject.item_value
